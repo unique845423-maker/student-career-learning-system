@@ -1,0 +1,1331 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #07152f,
+                    #0b3b5f,
+                    #06283d
+                );
+
+            color: white;
+        }
+
+        .header {
+            height: 70px;
+            padding: 0 30px;
+
+            background: rgba(255,255,255,0.08);
+
+            border-bottom:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            backdrop-filter: blur(12px);
+        }
+
+        .logo {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .back-btn {
+            padding: 10px 18px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #00c6ff;
+            color: white;
+
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 900px;
+
+            margin: 40px auto;
+
+            padding: 20px;
+        }
+
+        .profile-card {
+            padding: 35px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(12px);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.25);
+        }
+
+        .profile-title {
+            text-align: center;
+
+            margin-bottom: 35px;
+        }
+
+        .profile-icon {
+            font-size: 65px;
+
+            margin-bottom: 10px;
+        }
+
+        .profile-title h1 {
+            font-size: 30px;
+
+            margin-bottom: 8px;
+        }
+
+        .profile-title p {
+            color: #b9d8e8;
+        }
+
+        .info-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 20px;
+        }
+
+        .info-box {
+            padding: 20px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+        }
+
+        .info-label {
+            color: #8fb5c7;
+
+            font-size: 14px;
+
+            margin-bottom: 8px;
+        }
+
+        .info-value {
+            font-size: 18px;
+
+            font-weight: bold;
+
+            word-break: break-word;
+        }
+
+        .buttons {
+            display: flex;
+
+            gap: 15px;
+
+            margin-top: 30px;
+        }
+
+        .button {
+            flex: 1;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background: #00c6ff;
+        }
+
+        .password-btn {
+            background: #6c63ff;
+        }
+
+        .button:hover {
+            opacity: 0.85;
+        }
+
+        #loadingMessage {
+            text-align: center;
+
+            color: #b9d8e8;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* ==========================================
+           COMMON FORM
+           ========================================== */
+
+        .profile-form {
+            display: none;
+
+            margin-top: 30px;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+        }
+
+        .profile-form h2 {
+            margin-bottom: 20px;
+
+            text-align: center;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        .form-group label {
+            display: block;
+
+            margin-bottom: 8px;
+
+            color: #b9d8e8;
+
+            font-size: 14px;
+        }
+
+        .form-group input {
+            width: 100%;
+
+            padding: 13px;
+
+            border: 1px solid
+                rgba(255,255,255,0.20);
+
+            border-radius: 9px;
+
+            outline: none;
+
+            background:
+                rgba(255,255,255,0.08);
+
+            color: white;
+
+            font-size: 15px;
+        }
+
+        .form-group input:focus {
+            border-color: #00c6ff;
+        }
+
+        .form-buttons {
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 20px;
+        }
+
+        .save-btn,
+        .cancel-btn {
+            flex: 1;
+
+            padding: 12px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .save-btn {
+            background: #00b894;
+        }
+
+        .cancel-btn {
+            background: #ff4d4d;
+        }
+
+        .save-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        #editMessage,
+        #passwordMessage {
+            text-align: center;
+
+            margin-top: 15px;
+
+            min-height: 20px;
+
+            font-size: 14px;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .header {
+                padding: 0 15px;
+            }
+
+            .logo {
+                font-size: 17px;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .buttons {
+                flex-direction: column;
+            }
+
+            .form-buttons {
+                flex-direction: column;
+            }
+
+        }
+
+    </style>
+
+<style>
+.logo {
+    display: flex;
+    align-items: center;`r`n    padding-top: 6px;`r`n    width: 290px;`r`n    height: 58px;
+}
+
+#profileLogo {
+    width: 280px;`r`n    height: 52px;
+    max-width: none;
+    object-fit: contain;
+    object-position: center;
+    display: block;
+    cursor: pointer;
+}
+</style>
+</head>
+
+
+<body>
+
+
+    <!-- ==========================================
+         HEADER
+         ========================================== -->
+
+    <div class="header">
+
+        <div class="logo"><img id="profileLogo" src="images/logo.png" alt="Student Career & Learning Management System Logo"></div>
+
+        <button
+            class="back-btn"
+            id="backBtn">
+
+            ← Dashboard
+
+        </button>
+
+    </div>
+
+
+    <!-- ==========================================
+         MAIN
+         ========================================== -->
+
+    <div class="container">
+
+        <div class="profile-card">
+
+
+            <!-- =====================================
+                 PROFILE TITLE
+                 ===================================== -->
+
+            <div class="profile-title">
+
+                <div class="profile-icon">
+                    👤
+                </div>
+
+                <h1>
+                    My Profile
+                </h1>
+
+                <p>
+                    Student Personal Information
+                </p>
+
+            </div>
+
+
+            <!-- =====================================
+                 LOADING
+                 ===================================== -->
+
+            <div id="loadingMessage">
+                Loading profile...
+            </div>
+
+
+            <!-- =====================================
+                 PROFILE INFORMATION
+                 ===================================== -->
+
+            <div class="info-grid">
+
+
+                <!-- NAME -->
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Full Name
+                    </div>
+
+                    <div
+                        class="info-value"
+                        id="studentName">
+
+                        Loading...
+
+                    </div>
+
+                </div>
+
+
+                <!-- EMAIL -->
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Email Address
+                    </div>
+
+                    <div
+                        class="info-value"
+                        id="studentEmail">
+
+                        Loading...
+
+                    </div>
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Phone Number
+                    </div>
+
+                    <div
+                        class="info-value"
+                        id="studentPhone">
+
+                        Loading...
+
+                    </div>
+
+                </div>
+
+
+                <!-- USERNAME -->
+
+                <div class="info-box">
+
+                    <div class="info-label">
+                        Username
+                    </div>
+
+                    <div
+                        class="info-value"
+                        id="studentUsername">
+
+                        Loading...
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <!-- =====================================
+                 MAIN BUTTONS
+                 ===================================== -->
+
+            <div class="buttons">
+
+                <button
+                    class="button edit-btn"
+                    id="editBtn">
+
+                    ✏️ Edit Profile
+
+                </button>
+
+
+                <button
+                    class="button password-btn"
+                    id="passwordBtn">
+
+                    🔐 Change Password
+
+                </button>
+
+            </div>
+
+
+            <!-- =====================================
+                 EDIT PROFILE FORM
+                 ===================================== -->
+
+            <div
+                id="editForm"
+                class="profile-form">
+
+                <h2>
+                    Edit Profile
+                </h2>
+
+
+                <!-- NAME -->
+
+                <div class="form-group">
+
+                    <label for="editName">
+                        Full Name
+                    </label>
+
+                    <input
+                        type="text"
+                        id="editName"
+                        placeholder="Enter your name"
+                    >
+
+                </div>
+
+
+                <!-- PHONE -->
+
+                <div class="form-group">
+
+                    <label for="editPhone">
+                        Phone Number
+                    </label>
+
+                    <input
+                        type="tel"
+                        id="editPhone"
+                        placeholder="Enter your phone number"
+                    >
+
+                </div>
+
+
+                <!-- BUTTONS -->
+
+                <div class="form-buttons">
+
+                    <button
+                        class="save-btn"
+                        id="saveBtn"
+                        type="button">
+
+                        💾 Save Changes
+
+                    </button>
+
+
+                    <button
+                        class="cancel-btn"
+                        id="cancelBtn"
+                        type="button">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+
+                <div id="editMessage"></div>
+
+            </div>
+
+
+            <!-- =====================================
+                 CHANGE PASSWORD FORM
+                 ===================================== -->
+
+            <div
+                id="passwordForm"
+                class="profile-form">
+
+                <h2>
+                    Change Password
+                </h2>
+
+
+                <!-- CURRENT PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="currentPassword">
+                        Current Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="currentPassword"
+                        placeholder="Enter current password"
+                    >
+
+                </div>
+
+
+                <!-- NEW PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="newPassword">
+                        New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="newPassword"
+                        placeholder="Enter new password"
+                    >
+
+                </div>
+
+
+                <!-- CONFIRM PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassword">
+                        Confirm New Password
+                    </label>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Confirm new password"
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD BUTTONS -->
+
+                <div class="form-buttons">
+
+                    <button
+                        class="save-btn"
+                        id="changePasswordBtn"
+                        type="button">
+
+                        🔐 Change Password
+
+                    </button>
+
+
+                    <button
+                        class="cancel-btn"
+                        id="cancelPasswordBtn"
+                        type="button">
+
+                        Cancel
+
+                    </button>
+
+                </div>
+
+
+                <div id="passwordMessage"></div>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+
+    <script>
+
+
+        // ==========================================
+        // BACK TO DASHBOARD
+        // ==========================================
+
+        document
+            .getElementById("backBtn")
+            .addEventListener("click", function() {
+
+                window.location.href =
+                    "dashboard.html";
+
+            });
+
+
+        // ==========================================
+        // LOAD PROFILE
+        // ==========================================
+
+        async function loadProfile() {
+
+            const username =
+                sessionStorage.getItem(
+                    "loggedInUsername"
+                );
+
+
+            if (!username) {
+
+                window.location.href =
+                    "login.html";
+
+                return;
+
+            }
+
+
+            try {
+
+                const response =
+                    await fetch(
+                        "/api/profile/"
+                        + encodeURIComponent(username)
+                    );
+
+
+                if (!response.ok) {
+
+                    throw new Error(
+                        "Profile could not be loaded"
+                    );
+
+                }
+
+
+                const student =
+                    await response.json();
+
+
+                // Display profile
+
+                document
+                    .getElementById("studentName")
+                    .textContent =
+                    student.name || "-";
+
+
+                document
+                    .getElementById("studentEmail")
+                    .textContent =
+                    student.email || "-";
+
+
+                document
+                    .getElementById("studentPhone")
+                    .textContent =
+                    student.phone || "-";
+
+
+                document
+                    .getElementById("studentUsername")
+                    .textContent =
+                    student.username || "-";
+
+
+                // Put current values into edit form
+
+                document
+                    .getElementById("editName")
+                    .value =
+                    student.name || "";
+
+
+                document
+                    .getElementById("editPhone")
+                    .value =
+                    student.phone || "";
+
+
+                document
+                    .getElementById("loadingMessage")
+                    .style.display =
+                    "none";
+
+
+            } catch (error) {
+
+                console.error(
+                    "Profile error:",
+                    error
+                );
+
+
+                document
+                    .getElementById("loadingMessage")
+                    .textContent =
+                    "Unable to load profile";
+
+            }
+
+        }
+
+
+        // ==========================================
+        // START
+        // ==========================================
+
+        loadProfile();
+
+
+        // ==========================================
+        // OPEN EDIT FORM
+        // ==========================================
+
+        document
+            .getElementById("editBtn")
+            .addEventListener("click", function() {
+
+                document
+                    .getElementById("editForm")
+                    .style.display =
+                    "block";
+
+                document
+                    .getElementById("passwordForm")
+                    .style.display =
+                    "none";
+
+                document
+                    .getElementById("editForm")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            });
+
+
+        // ==========================================
+        // CANCEL EDIT
+        // ==========================================
+
+        document
+            .getElementById("cancelBtn")
+            .addEventListener("click", function() {
+
+                document
+                    .getElementById("editForm")
+                    .style.display =
+                    "none";
+
+                document
+                    .getElementById("editMessage")
+                    .textContent =
+                    "";
+
+            });
+
+
+        // ==========================================
+        // SAVE PROFILE
+        // ==========================================
+
+        document
+            .getElementById("saveBtn")
+            .addEventListener("click", async function() {
+
+
+                const username =
+                    sessionStorage.getItem(
+                        "loggedInUsername"
+                    );
+
+
+                const name =
+                    document
+                        .getElementById("editName")
+                        .value
+                        .trim();
+
+
+                const phone =
+                    document
+                        .getElementById("editPhone")
+                        .value
+                        .trim();
+
+
+                const editMessage =
+                    document
+                        .getElementById("editMessage");
+
+
+                const saveBtn =
+                    document
+                        .getElementById("saveBtn");
+
+
+                // Validation
+
+                if (!name) {
+
+                    editMessage.textContent =
+                        "Please enter your name.";
+
+                    return;
+
+                }
+
+
+                if (!phone) {
+
+                    editMessage.textContent =
+                        "Please enter your phone number.";
+
+                    return;
+
+                }
+
+
+                try {
+
+                    saveBtn.disabled = true;
+
+                    saveBtn.textContent =
+                        "Saving...";
+
+
+                    // Send update request
+
+                    const response =
+                        await fetch(
+                            "/api/profile/"
+                            + encodeURIComponent(username),
+                            {
+                                method: "PUT",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    name: name,
+
+                                    phone: phone
+
+                                })
+
+                            }
+                        );
+
+
+                    const result =
+                        await response.json();
+
+
+                    if (!response.ok) {
+
+                        throw new Error(
+                            "Profile update failed"
+                        );
+
+                    }
+
+
+                    // Update displayed values
+
+                    document
+                        .getElementById("studentName")
+                        .textContent =
+                        result.name || "-";
+
+
+                    document
+                        .getElementById("studentPhone")
+                        .textContent =
+                        result.phone || "-";
+
+
+                    editMessage.textContent =
+                        "Profile updated successfully!";
+
+
+                    // Close form after short delay
+
+                    setTimeout(function() {
+
+                        document
+                            .getElementById("editForm")
+                            .style.display =
+                            "none";
+
+                        editMessage.textContent =
+                            "";
+
+                    }, 1000);
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Update error:",
+                        error
+                    );
+
+
+                    editMessage.textContent =
+                        "Unable to update profile.";
+
+                }
+
+
+                saveBtn.disabled = false;
+
+                saveBtn.textContent =
+                    "💾 Save Changes";
+
+            });
+
+
+        // ==========================================
+        // OPEN CHANGE PASSWORD FORM
+        // ==========================================
+
+        document
+            .getElementById("passwordBtn")
+            .addEventListener("click", function() {
+
+                document
+                    .getElementById("passwordForm")
+                    .style.display =
+                    "block";
+
+                document
+                    .getElementById("editForm")
+                    .style.display =
+                    "none";
+
+                document
+                    .getElementById("passwordForm")
+                    .scrollIntoView({
+                        behavior: "smooth"
+                    });
+
+            });
+
+
+        // ==========================================
+        // CANCEL CHANGE PASSWORD
+        // ==========================================
+
+        document
+            .getElementById("cancelPasswordBtn")
+            .addEventListener("click", function() {
+
+                document
+                    .getElementById("passwordForm")
+                    .style.display =
+                    "none";
+
+                document
+                    .getElementById("passwordMessage")
+                    .textContent =
+                    "";
+
+                document
+                    .getElementById("currentPassword")
+                    .value = "";
+
+                document
+                    .getElementById("newPassword")
+                    .value = "";
+
+                document
+                    .getElementById("confirmPassword")
+                    .value = "";
+
+            });
+
+
+        // ==========================================
+        // CHANGE PASSWORD
+        // ==========================================
+
+        document
+            .getElementById("changePasswordBtn")
+            .addEventListener("click", async function() {
+
+
+                const username =
+                    sessionStorage.getItem(
+                        "loggedInUsername"
+                    );
+
+
+                const currentPassword =
+                    document
+                        .getElementById("currentPassword")
+                        .value;
+
+
+                const newPassword =
+                    document
+                        .getElementById("newPassword")
+                        .value;
+
+
+                const confirmPassword =
+                    document
+                        .getElementById("confirmPassword")
+                        .value;
+
+
+                const message =
+                    document
+                        .getElementById("passwordMessage");
+
+
+                const button =
+                    document
+                        .getElementById("changePasswordBtn");
+
+
+                // ======================================
+                // VALIDATION
+                // ======================================
+
+                if (!currentPassword ||
+                    !newPassword ||
+                    !confirmPassword) {
+
+                    message.textContent =
+                        "Please fill all fields.";
+
+                    return;
+
+                }
+
+
+                if (newPassword !== confirmPassword) {
+
+                    message.textContent =
+                        "New passwords do not match.";
+
+                    return;
+
+                }
+
+
+                if (newPassword.length < 6) {
+
+                    message.textContent =
+                        "New password must be at least 6 characters.";
+
+                    return;
+
+                }
+
+
+                // ======================================
+                // SEND REQUEST
+                // ======================================
+
+                try {
+
+                    button.disabled = true;
+
+                    button.textContent =
+                        "Changing...";
+
+
+                    const response =
+                        await fetch(
+                            "/api/profile/"
+                            + encodeURIComponent(username)
+                            + "/change-password",
+                            {
+                                method: "POST",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+
+                                    currentPassword:
+                                        currentPassword,
+
+                                    newPassword:
+                                        newPassword,
+
+                                    confirmPassword:
+                                        confirmPassword
+
+                                })
+
+                            }
+                        );
+
+
+                    const result =
+                        await response.text();
+
+
+                    // ==================================
+                    // ERROR
+                    // ==================================
+
+                    if (!response.ok) {
+
+                        throw new Error(result);
+
+                    }
+
+
+                    // ==================================
+                    // SUCCESS
+                    // ==================================
+
+                    message.textContent =
+                        "Password changed successfully!";
+
+
+                    // Clear password fields
+
+                    document
+                        .getElementById("currentPassword")
+                        .value = "";
+
+                    document
+                        .getElementById("newPassword")
+                        .value = "";
+
+                    document
+                        .getElementById("confirmPassword")
+                        .value = "";
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Password change error:",
+                        error
+                    );
+
+
+                    message.textContent =
+                        error.message ||
+                        "Unable to change password.";
+
+                }
+
+
+                button.disabled = false;
+
+                button.textContent =
+                    "🔐 Change Password";
+
+            });
+
+
+    
+    const profileLogo =
+        document.getElementById("profileLogo");
+
+    if (profileLogo) {
+        profileLogo.style.cursor = "pointer";
+
+        profileLogo.addEventListener(
+            "click",
+            function () {
+                window.location.href = "profile.html";
+            }
+        );
+    }
+</script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+

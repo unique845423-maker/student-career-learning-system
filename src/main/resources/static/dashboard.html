@@ -1,0 +1,4200 @@
+﻿
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color"
+          content="#020617">
+
+    <meta name="description"
+          content="Student Career & Learning Management System Dashboard">
+
+    <title>
+        Student Dashboard | Student Career & Learning Management System
+    </title>
+
+
+    <style>
+
+        /* =========================================================
+           GLOBAL RESET
+        ========================================================== */
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            color: #ffffff;
+
+            background:
+                radial-gradient(
+                    circle at 8% 0%,
+                    rgba(37, 99, 235, 0.28),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 92% 5%,
+                    rgba(124, 58, 237, 0.24),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(14, 165, 233, 0.12),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #020617 0%,
+                    #071a31 48%,
+                    #061d34 100%
+                );
+
+            overflow-x: hidden;
+        }
+
+        body.loading {
+            overflow: hidden;
+        }
+
+        button,
+        input {
+            font-family: inherit;
+        }
+
+        button {
+            border: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+
+        /* =========================================================
+           SCROLLBAR
+        ========================================================== */
+
+        ::-webkit-scrollbar {
+            width: 9px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #020617;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background:
+                linear-gradient(
+                    #2563eb,
+                    #7c3aed
+                );
+
+            border-radius: 20px;
+        }
+
+
+        /* =========================================================
+           BACKGROUND EFFECTS
+        ========================================================== */
+
+        body::before,
+        body::after {
+            content: "";
+
+            position: fixed;
+
+            border-radius: 50%;
+
+            pointer-events: none;
+
+            z-index: -1;
+
+            filter: blur(3px);
+        }
+
+        body::before {
+            width: 360px;
+            height: 360px;
+
+            top: 12%;
+            left: -200px;
+
+            background:
+                rgba(59, 130, 246, 0.11);
+        }
+
+        body::after {
+            width: 430px;
+            height: 430px;
+
+            bottom: -230px;
+            right: -200px;
+
+            background:
+                rgba(139, 92, 246, 0.11);
+        }
+
+
+        /* =========================================================
+           PAGE LOADER
+        ========================================================== */
+
+        .page-loader {
+            position: fixed;
+
+            inset: 0;
+
+            display: flex;
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            background:
+                #020617;
+
+            z-index: 99999;
+
+            transition:
+                opacity 0.5s ease,
+                visibility 0.5s ease;
+        }
+
+        .page-loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-content {
+            text-align: center;
+        }
+
+        .loader-logo {
+            width: 82px;
+            height: 82px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            margin: auto;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            font-size: 35px;
+
+            box-shadow:
+                0 0 50px
+                rgba(59, 130, 246, 0.40);
+
+            animation:
+                loaderPulse 1.5s infinite;
+        }
+
+        .loader-text {
+            margin-top: 18px;
+
+            color: #cbd5e1;
+
+            font-size: 14px;
+
+            letter-spacing: 0.3px;
+        }
+
+        .loader-line {
+            width: 120px;
+            height: 3px;
+
+            margin: 15px auto 0;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,0.08);
+        }
+
+        .loader-line span {
+            display: block;
+
+            width: 45%;
+
+            height: 100%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #38bdf8,
+                    #8b5cf6
+                );
+
+            animation:
+                loaderLine 1.2s infinite ease-in-out;
+        }
+
+        @keyframes loaderPulse {
+
+            0% {
+                transform: scale(1);
+            }
+
+            50% {
+                transform: scale(1.08);
+            }
+
+            100% {
+                transform: scale(1);
+            }
+
+        }
+
+        @keyframes loaderLine {
+
+            0% {
+                transform: translateX(-120%);
+            }
+
+            100% {
+                transform: translateX(280%);
+            }
+
+        }
+
+
+        /* =========================================================
+           CONTAINER
+        ========================================================== */
+
+        .container {
+            width: 94%;
+
+            max-width: 1500px;
+
+            margin: auto;
+
+            padding:
+                22px 0 65px;
+        }
+
+
+        /* =========================================================
+           TOP BAR
+        ========================================================== */
+
+        .top-bar {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 15px;
+
+            margin-bottom: 22px;
+        }
+
+        .status-area {
+            display: flex;
+
+            align-items: center;
+
+            gap: 11px;
+
+            flex-wrap: wrap;
+        }
+
+        .top-logo {
+            width: 75px;
+            height: 75px;
+
+            object-fit: contain;
+
+            padding: 5px;
+
+            flex-shrink: 0;
+
+            border-radius: 16px;
+
+            background:
+                rgba(255,255,255,0.15);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.14);
+
+            box-shadow:
+                0 10px 30px
+                rgba(0,0,0,0.20);
+
+            transition:
+                transform 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .top-logo:hover {
+            transform:
+                translateY(-2px)
+                scale(1.03);
+
+            border-color:
+                rgba(96,165,250,0.45);
+
+            box-shadow:
+                0 12px 35px
+                rgba(59,130,246,0.16);
+        }
+
+        .online-status {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 9px;
+
+            padding:
+                10px 16px;
+
+            border-radius: 50px;
+
+            background:
+                rgba(34, 197, 94, 0.10);
+
+            border:
+                1px solid
+                rgba(34, 197, 94, 0.30);
+
+            color: #86efac;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            box-shadow:
+                0 8px 25px
+                rgba(0, 0, 0, 0.15);
+        }
+
+        .online-dot {
+            width: 9px;
+            height: 9px;
+
+            border-radius: 50%;
+
+            background:
+                #22c55e;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(34, 197, 94, 0.08),
+
+                0 0 14px
+                rgba(34, 197, 94, 0.8);
+
+            animation:
+                pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+            50% {
+                transform: scale(1.18);
+                opacity: 0.75;
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+
+        }
+
+        .secure-text {
+            color: #94a3b8;
+
+            font-size: 12px;
+        }
+
+        .top-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 10px;
+        }
+
+        .mini-btn {
+            padding:
+                10px 14px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            color: #cbd5e1;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .mini-btn:hover {
+            transform:
+                translateY(-2px);
+
+            border-color:
+                rgba(96,165,250,0.45);
+
+            background:
+                rgba(96,165,250,0.10);
+
+            box-shadow:
+                0 10px 25px
+                rgba(59,130,246,0.08);
+        }
+
+        .logout-btn {
+            padding:
+                11px 19px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(239, 68, 68, 0.10);
+
+            border:
+                1px solid
+                rgba(239, 68, 68, 0.30);
+
+            color: #fecaca;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .logout-btn:hover {
+            transform:
+                translateY(-2px);
+
+            background:
+                rgba(239, 68, 68, 0.22);
+
+            box-shadow:
+                0 10px 25px
+                rgba(239, 68, 68, 0.10);
+        }
+
+
+        /* =========================================================
+           HERO
+        ========================================================== */
+
+        .header {
+            position: relative;
+
+            overflow: hidden;
+
+            padding:
+                42px 45px;
+
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    rgba(2, 6, 23, 0.94),
+                    rgba(2, 6, 23, 0.78),
+                    rgba(2, 6, 23, 0.45)
+                ),
+                url("images/hero.jpg") center/cover no-repeat;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.13);
+
+            backdrop-filter:
+                blur(20px);
+
+            -webkit-backdrop-filter:
+                blur(20px);
+
+            box-shadow:
+                0 25px 70px
+                rgba(0,0,0,0.25);
+
+            margin-bottom: 25px;
+        }
+
+        .header::before {
+            content: "";
+
+            position: absolute;
+
+            width: 330px;
+            height: 330px;
+
+            right: -100px;
+            top: -155px;
+
+            border-radius: 50%;
+
+            background:
+                radial-gradient(
+                    circle,
+                    rgba(96,165,250,0.25),
+                    transparent 68%
+                );
+
+            pointer-events: none;
+        }
+
+        .header::after {
+            content: "";
+
+            position: absolute;
+
+            width: 190px;
+            height: 190px;
+
+            right: 180px;
+            bottom: -125px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(139,92,246,0.11);
+
+            pointer-events: none;
+        }
+
+        .hero-grid {
+            position: relative;
+
+            z-index: 2;
+
+            display: grid;
+
+            grid-template-columns:
+                1fr auto;
+
+            gap: 30px;
+
+            align-items: center;
+        }
+
+        .welcome-content {
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .welcome-small {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            padding:
+                8px 14px;
+
+            margin-bottom: 16px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(255,255,255,0.07);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            color: #bfdbfe;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            letter-spacing:
+                0.5px;
+        }
+
+        .header h1 {
+            font-size: 45px;
+
+            line-height: 1.15;
+
+            margin-bottom: 13px;
+
+            letter-spacing: -1.2px;
+        }
+
+        #usernameDisplay {
+            background:
+                linear-gradient(
+                    90deg,
+                    #60a5fa,
+                    #a78bfa,
+                    #c084fc
+                );
+
+            -webkit-background-clip:
+                text;
+
+            -webkit-text-fill-color:
+                transparent;
+
+            background-clip:
+                text;
+        }
+
+        .header p {
+            max-width: 790px;
+
+            font-size: 17px;
+
+            line-height: 1.7;
+
+            color: #cbd5e1;
+
+            margin-bottom: 16px;
+        }
+
+        .date {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 7px;
+
+            color: #93c5fd;
+
+            font-size: 13px;
+        }
+
+
+        /* =========================================================
+           HERO VISUAL
+        ========================================================== */
+
+        .hero-visual {
+            width: 190px;
+            height: 190px;
+
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: center;
+            justify-content: center;
+
+            gap: 7px;
+
+            border-radius: 43px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(59,130,246,0.20),
+                    rgba(124,58,237,0.18)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            box-shadow:
+                0 25px 60px
+                rgba(0,0,0,0.22);
+
+            transform:
+                rotate(3deg);
+
+            animation:
+                floatingHero 4s ease-in-out infinite;
+        }
+
+        .hero-visual-inner {
+            width: 132px;
+            height: 132px;
+
+            position: absolute;
+
+            top: 18px;
+            left: 50%;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            transform:
+                translateX(-50%)
+                rotate(-3deg);
+
+            border-radius: 36px;
+
+            background:
+                rgba(2,6,23,0.48);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            overflow: hidden;
+        }
+
+        .hero-visual-inner img {
+            width: 112px;
+            height: 112px;
+
+            object-fit: contain;
+
+            display: block;
+
+            filter:
+                drop-shadow(
+                    0 12px 25px
+                    rgba(0, 0, 0, 0.25)
+                );
+
+            transition:
+                transform 0.4s ease;
+        }
+
+        .hero-visual:hover
+        .hero-visual-inner img {
+            transform: scale(1.06);
+        }
+
+        .hero-name {
+            margin-top: 0;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            font-weight: 700;
+
+            color:
+                rgba(255,255,255,0.85);
+
+            letter-spacing: 0.5px;
+
+            transform:
+                rotate(-3deg);
+        }
+
+        @keyframes floatingHero {
+
+            0% {
+                transform: translateY(0) rotate(3deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(3deg);
+            }
+
+            100% {
+                transform: translateY(0) rotate(3deg);
+            }
+
+        }
+
+
+        /* =========================================================
+           QUICK ACTIONS
+        ========================================================== */
+
+        .quick-actions {
+            display: flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            flex-wrap: wrap;
+        }
+
+        .quick-action {
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            padding:
+                10px 15px;
+
+            border-radius: 12px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            color: #dbeafe;
+
+            font-size: 12px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+        }
+
+        .quick-action:hover {
+            transform:
+                translateY(-3px);
+
+            background:
+                rgba(59,130,246,0.13);
+
+            border-color:
+                rgba(96,165,250,0.35);
+
+            box-shadow:
+                0 10px 25px
+                rgba(59,130,246,0.08);
+        }
+
+
+        /* =========================================================
+           QUICK STATS
+        ========================================================== */
+
+        .quick-stats {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0,1fr));
+
+            gap: 14px;
+
+            margin-bottom: 34px;
+        }
+
+        .quick-stat {
+            position: relative;
+
+            overflow: hidden;
+
+            padding: 20px;
+
+            border-radius: 19px;
+
+            background:
+                rgba(255,255,255,0.055);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            backdrop-filter:
+                blur(15px);
+
+            transition:
+                transform 0.25s,
+                border-color 0.25s,
+                box-shadow 0.25s;
+        }
+
+        .quick-stat::before {
+            content: "";
+
+            position: absolute;
+
+            width: 120px;
+            height: 120px;
+
+            right: -55px;
+            top: -55px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(59,130,246,0.08);
+        }
+
+        .quick-stat:hover {
+            transform:
+                translateY(-5px);
+
+            border-color:
+                rgba(96,165,250,0.30);
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,0.18);
+        }
+
+        .quick-stat-top {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            margin-bottom: 12px;
+        }
+
+        .quick-stat-icon {
+            width: 42px;
+            height: 42px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 12px;
+
+            background:
+                rgba(59,130,246,0.12);
+
+            font-size: 20px;
+        }
+
+        .quick-stat-value {
+            font-size: 23px;
+
+            font-weight: bold;
+        }
+
+        .quick-stat-label {
+            color: #94a3b8;
+
+            font-size: 11px;
+        }
+
+        .stat-progress {
+            width: 100%;
+
+            height: 4px;
+
+            margin-top: 13px;
+
+            overflow: hidden;
+
+            border-radius: 10px;
+
+            background:
+                rgba(255,255,255,0.06);
+        }
+
+        .stat-progress span {
+            display: block;
+
+            height: 100%;
+
+            width: 55%;
+
+            border-radius: inherit;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #7c3aed
+                );
+        }
+
+
+        /* =========================================================
+           SECTION HEADING
+        ========================================================== */
+
+        .section-heading {
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: end;
+
+            gap: 15px;
+
+            margin-bottom: 18px;
+        }
+
+        .section-heading h2 {
+            font-size: 27px;
+
+            margin-bottom: 5px;
+        }
+
+        .section-heading p {
+            color: #64748b;
+
+            font-size: 12px;
+        }
+
+        .section-badge {
+            padding:
+                8px 12px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(59,130,246,0.09);
+
+            border:
+                1px solid
+                rgba(96,165,250,0.16);
+
+            color: #93c5fd;
+
+            font-size: 11px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           SEARCH BAR
+        ========================================================== */
+
+        .search-area {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin-bottom: 20px;
+        }
+
+        .search-box {
+            flex: 1;
+
+            position: relative;
+        }
+
+        .search-box span {
+            position: absolute;
+
+            left: 15px;
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            color: #64748b;
+
+            font-size: 16px;
+
+            pointer-events: none;
+        }
+
+        .search-box input {
+            width: 100%;
+
+            padding:
+                14px 16px 14px 43px;
+
+            border-radius: 14px;
+
+            outline: none;
+
+            background:
+                rgba(255,255,255,0.055);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.10);
+
+            color: #ffffff;
+
+            font-size: 13px;
+
+            transition: 0.25s;
+        }
+
+        .search-box input::placeholder {
+            color: #64748b;
+        }
+
+        .search-box input:focus {
+            border-color:
+                rgba(96,165,250,0.50);
+
+            box-shadow:
+                0 0 0 4px
+                rgba(59,130,246,0.08);
+        }
+
+        .search-count {
+            padding:
+                12px 15px;
+
+            border-radius: 13px;
+
+            color: #94a3b8;
+
+            background:
+                rgba(255,255,255,0.045);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            font-size: 12px;
+
+            white-space: nowrap;
+        }
+
+
+        /* =========================================================
+           CARDS GRID
+        ========================================================== */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(4, minmax(0,1fr));
+
+            gap: 20px;
+        }
+
+
+        /* =========================================================
+           CARD
+        ========================================================== */
+
+        .card {
+            min-height: 425px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            border-radius: 25px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.085),
+                    rgba(255,255,255,0.035)
+                );
+
+            border:
+                1px solid
+                rgba(255,255,255,0.12);
+
+            backdrop-filter:
+                blur(18px);
+
+            -webkit-backdrop-filter:
+                blur(18px);
+
+            cursor: pointer;
+
+            transition:
+                transform 0.28s ease,
+                box-shadow 0.28s ease,
+                border-color 0.28s ease;
+        }
+
+        .card::before {
+            content: "";
+
+            position: absolute;
+
+            left: -70%;
+            top: 0;
+
+            width: 55%;
+            height: 100%;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    transparent,
+                    rgba(255,255,255,0.07),
+                    transparent
+                );
+
+            transform:
+                skewX(-18deg);
+
+            transition:
+                left 0.65s ease;
+
+            pointer-events: none;
+
+            z-index: 5;
+        }
+
+        .card:hover::before {
+            left: 125%;
+        }
+
+        .card::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 3px;
+
+            opacity: 0;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #7c3aed
+                );
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform:
+                translateY(-8px);
+
+            border-color:
+                rgba(96,165,250,0.50);
+
+            box-shadow:
+                0 22px 55px
+                rgba(0,0,0,0.30),
+
+                0 0 30px
+                rgba(59,130,246,0.08);
+        }
+
+        .card:hover::after {
+            opacity: 1;
+        }
+
+        .card:focus {
+            outline:
+                2px solid #38bdf8;
+
+            outline-offset: 4px;
+        }
+
+        .card.hidden {
+            display: none;
+        }
+
+
+        /* =========================================================
+           IMAGE BANNER
+        ========================================================== */
+
+        .card-image {
+            width: 100%;
+            height: 190px;
+
+            position: relative;
+
+            overflow: hidden;
+
+            background: #0f172a;
+
+            border-radius: 20px 20px 0 0;
+        }
+
+        .card-image img {
+            width: 100%;
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            object-position: center;
+
+            transition:
+                transform 0.55s ease,
+                filter 0.55s ease;
+        }
+
+        .card:hover .card-image img {
+            transform: scale(1.05);
+        }
+
+        .card-image::after {
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+            right: 0;
+            bottom: 0;
+
+            height: 80%;
+
+            background:
+                linear-gradient(
+                    to top,
+                    rgba(2,6,23,0.94),
+                    rgba(2,6,23,0.25),
+                    transparent
+                );
+
+            pointer-events: none;
+
+            z-index: 1;
+        }
+
+        .image-label {
+            position: absolute;
+
+            left: 16px;
+            bottom: 13px;
+
+            z-index: 2;
+
+            padding:
+                6px 10px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(2,6,23,0.65);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            backdrop-filter:
+                blur(10px);
+
+            color: #e2e8f0;
+
+            font-size: 10px;
+
+            font-weight: bold;
+
+            letter-spacing:
+                0.5px;
+        }
+
+
+        /* =========================================================
+           CARD CONTENT
+        ========================================================== */
+
+        .card-content {
+            padding:
+                23px 25px 25px;
+        }
+
+        .card h2 {
+            font-size: 20px;
+
+            line-height: 1.35;
+
+            margin-bottom: 10px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .card p {
+            color: #aebfd2;
+
+            font-size: 13px;
+
+            line-height: 1.7;
+
+            min-height: 66px;
+
+            margin-bottom: 17px;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .card-footer {
+            display: flex;
+
+            align-items: center;
+
+            justify-content: space-between;
+
+            gap: 10px;
+        }
+
+        .card-link {
+            color: #60a5fa;
+
+            font-size: 13px;
+
+            font-weight: bold;
+
+            position: relative;
+
+            z-index: 2;
+        }
+
+        .card-arrow {
+            width: 31px;
+            height: 31px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+
+            background:
+                rgba(59,130,246,0.10);
+
+            border:
+                1px solid
+                rgba(96,165,250,0.14);
+
+            color: #93c5fd;
+
+            font-size: 18px;
+
+            transition: 0.25s;
+        }
+
+        .card:hover .card-arrow {
+            transform:
+                translateX(4px);
+
+            background:
+                rgba(59,130,246,0.18);
+        }
+
+
+        /* =========================================================
+           BADGES
+        ========================================================== */
+
+        .active-badge {
+            display: inline-flex;
+
+            align-items: center;
+
+            margin-left: 5px;
+
+            padding:
+                4px 8px;
+
+            border-radius: 20px;
+
+            font-size: 9px;
+
+            background:
+                rgba(34,197,94,0.11);
+
+            border:
+                1px solid
+                rgba(34,197,94,0.28);
+
+            color: #86efac;
+
+            vertical-align: middle;
+        }
+
+        .new-badge {
+            display: inline-block;
+
+            margin-left: 5px;
+
+            padding:
+                4px 8px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(245,158,11,0.12);
+
+            border:
+                1px solid
+                rgba(245,158,11,0.25);
+
+            color: #fcd34d;
+
+            font-size: 9px;
+
+            vertical-align: middle;
+        }
+
+        .coming-soon {
+            color: #94a3b8;
+        }
+
+
+        /* =========================================================
+           CARD THEMES
+        ========================================================== */
+
+        #profileCard {
+            border-color:
+                rgba(148,163,184,0.22);
+        }
+
+        #profileCard:hover {
+            border-color:
+                rgba(148,163,184,0.50);
+        }
+
+        #learningCard {
+            border-color:
+                rgba(56,189,248,0.30);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(14,165,233,0.11),
+                    rgba(255,255,255,0.045)
+                );
+        }
+
+        #learningCard:hover {
+            border-color:
+                rgba(56,189,248,0.70);
+
+            box-shadow:
+                0 20px 50px
+                rgba(14,165,233,0.15);
+        }
+
+        #careerCard {
+            border-color:
+                rgba(99,102,241,0.34);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(79,70,229,0.12),
+                    rgba(255,255,255,0.045)
+                );
+        }
+
+        #careerCard:hover {
+            border-color:
+                rgba(129,140,248,0.70);
+        }
+
+        #skillsCard {
+            border-color:
+                rgba(168,85,247,0.34);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(126,34,206,0.12),
+                    rgba(255,255,255,0.045)
+                );
+        }
+
+        #skillsCard:hover {
+            border-color:
+                rgba(192,132,252,0.75);
+        }
+
+        #progressCard {
+            border-color:
+                rgba(1, 80, 30, 0.882);
+        }
+
+        #progressCard:hover {
+            border-color:
+                rgba(74,222,128,0.60);
+        }
+
+        #resumeCard {
+            border-color:
+                rgba(168,85,247,0.25);
+        }
+
+        #resumeCard:hover {
+            border-color:
+                rgba(192,132,252,0.60);
+        }
+
+        #governmentCard {
+            border-color:
+                rgba(245,158,11,0.34);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(245,158,11,0.085),
+                    rgba(255,255,255,0.045)
+                );
+        }
+
+        #governmentCard:hover {
+            border-color:
+                rgba(251,191,36,0.75);
+
+            box-shadow:
+                0 20px 50px
+                rgba(245,158,11,0.13);
+        }
+
+        #resourcesCard {
+            border-color:
+                rgba(14,165,233,0.25);
+        }
+
+        #resourcesCard:hover {
+            border-color:
+                rgba(56,189,248,0.60);
+        }
+
+
+        /* =========================================================
+           INFORMATION PANEL
+        ========================================================== */
+
+        .info-panel {
+            margin-top: 27px;
+
+            padding:
+                23px 25px;
+
+            border-radius: 21px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(59,130,246,0.09),
+                    rgba(124,58,237,0.06)
+                );
+
+            border:
+                1px solid
+                rgba(96,165,250,0.18);
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 17px;
+        }
+
+        .info-icon {
+            width: 48px;
+            height: 48px;
+
+            min-width: 48px;
+
+            display: flex;
+
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 14px;
+
+            background:
+                rgba(59,130,246,0.13);
+
+            font-size: 22px;
+        }
+
+        .info-panel h3 {
+            font-size: 14px;
+
+            margin-bottom: 5px;
+        }
+
+        .info-panel p {
+            color: #94a3b8;
+
+            font-size: 12px;
+
+            line-height: 1.6;
+        }
+
+
+        /* =========================================================
+           EMPTY SEARCH STATE
+        ========================================================== */
+
+        .empty-state {
+            display: none;
+
+            padding:
+                45px 20px;
+
+            text-align: center;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.04);
+
+            border:
+                1px solid
+                rgba(255,255,255,0.08);
+
+            color: #94a3b8;
+        }
+
+        .empty-state.show {
+            display: block;
+        }
+
+        .empty-icon {
+            font-size: 40px;
+
+            margin-bottom: 12px;
+        }
+
+        .empty-state h3 {
+            color: #e2e8f0;
+
+            margin-bottom: 7px;
+        }
+
+        .empty-state p {
+            font-size: 12px;
+        }
+
+
+        /* =========================================================
+           TOAST MESSAGE
+        ========================================================== */
+
+        .message {
+            position: fixed;
+
+            left: 50%;
+            bottom: 28px;
+
+            transform:
+                translate(-50%,120px);
+
+            opacity: 0;
+
+            max-width: 90%;
+
+            padding:
+                13px 20px;
+
+            border-radius: 13px;
+
+            background:
+                rgba(15,23,42,0.96);
+
+            border:
+                1px solid
+                rgba(96,165,250,0.35);
+
+            color: #dbeafe;
+
+            font-size: 13px;
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,0,0,0.35);
+
+            transition: 0.3s;
+
+            z-index: 9999;
+
+            pointer-events: none;
+        }
+
+        .message.show {
+            transform:
+                translate(-50%,0);
+
+            opacity: 1;
+        }
+
+
+        /* =========================================================
+           FOOTER
+        ========================================================== */
+
+        .footer {
+            text-align: center;
+
+            margin-top: 30px;
+
+            padding-top: 20px;
+
+            border-top:
+                1px solid
+                rgba(255,255,255,0.06);
+
+            color: #475569;
+
+            font-size: 11px;
+        }
+
+        .footer strong {
+            color: #64748b;
+        }
+
+
+        /* =========================================================
+           RESPONSIVE - 1250px
+        ========================================================== */
+
+        @media (max-width: 1250px) {
+
+            .cards {
+                grid-template-columns:
+                    repeat(3,minmax(0,1fr));
+            }
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE - 950px
+        ========================================================== */
+
+        @media (max-width: 950px) {
+
+            .hero-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-visual {
+                display: none;
+            }
+
+            .quick-stats {
+                grid-template-columns:
+                    repeat(2,minmax(0,1fr));
+            }
+
+            .cards {
+                grid-template-columns:
+                    repeat(2,minmax(0,1fr));
+            }
+
+            .header h1 {
+                font-size: 37px;
+            }
+
+        }
+
+
+        /* =========================================================
+           RESPONSIVE - 650px
+        ========================================================== */
+
+        @media (max-width: 650px) {
+
+            .container {
+                width: 92%;
+
+                padding-top: 18px;
+            }
+
+            .top-bar {
+                align-items:
+                    flex-start;
+            }
+
+            .top-logo {
+                width: 44px;
+                height: 44px;
+
+                border-radius: 12px;
+
+                padding: 4px;
+            }
+
+            .secure-text {
+                display: none;
+            }
+
+            .top-actions .mini-btn {
+                display: none;
+            }
+
+            .logout-btn {
+                padding:
+                    10px 14px;
+            }
+
+            .header {
+                padding:
+                    28px 23px;
+
+                border-radius: 23px;
+            }
+
+            .header h1 {
+                font-size: 30px;
+            }
+
+            .header p {
+                font-size: 14px;
+            }
+
+            .quick-actions {
+                gap: 8px;
+            }
+
+            .quick-action {
+                padding:
+                    9px 12px;
+
+                font-size: 11px;
+            }
+
+            .quick-stats {
+                grid-template-columns:
+                    repeat(2,minmax(0,1fr));
+
+                gap: 10px;
+            }
+
+            .quick-stat {
+                padding: 14px;
+            }
+
+            .quick-stat-value {
+                font-size: 19px;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+
+                gap: 15px;
+            }
+
+            .card {
+                min-height: auto;
+            }
+
+            .card-image {
+                width: 100%;
+                height: 190px;
+                position: relative;
+                overflow: hidden;
+                background: #0f172a;
+                border-radius: 20px 20px 0 0;
+            }
+
+            .card-content {
+                padding:
+                    22px;
+            }
+
+            .section-heading {
+                align-items:
+                    flex-start;
+
+                flex-direction:
+                    column;
+            }
+
+            .search-area {
+                flex-direction:
+                    column;
+
+                align-items:
+                    stretch;
+            }
+
+            .search-count {
+                text-align:
+                    center;
+            }
+
+            .info-panel {
+                align-items:
+                    flex-start;
+            }
+
+        }
+
+
+        /* =========================================================
+           VERY SMALL PHONES
+        ========================================================== */
+
+        @media (max-width: 400px) {
+
+            .top-bar {
+                gap: 8px;
+            }
+
+            .status-area {
+                gap: 7px;
+            }
+
+            .online-status {
+                padding:
+                    8px 11px;
+
+                font-size: 11px;
+            }
+
+            .logout-btn {
+                padding:
+                    9px 11px;
+
+                font-size: 11px;
+            }
+
+            .header h1 {
+                font-size: 27px;
+            }
+
+            .quick-action {
+                flex: 1 1 100%;
+
+                justify-content:
+                    center;
+            }
+
+            .quick-stats {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .quick-stat-label {
+                font-size: 10px;
+            }
+
+        }
+
+        /* =========================================================
+   EXTRA MOBILE RESPONSIVE POLISH
+   ========================================================== */
+
+@media (max-width: 768px) {
+
+    .container {
+        width: 94%;
+        padding-bottom: 45px;
+    }
+
+    .top-bar {
+        flex-wrap: wrap;
+    }
+
+    .status-area {
+        min-width: 0;
+        flex: 1;
+    }
+
+    .online-status {
+        padding: 9px 13px;
+        font-size: 12px;
+    }
+
+    .top-actions {
+        flex-shrink: 0;
+    }
+
+    .header {
+        padding: 30px 24px;
+    }
+
+    .hero-grid {
+        width: 100%;
+    }
+
+    .welcome-content {
+        width: 100%;
+    }
+
+    .welcome-small {
+        font-size: 11px;
+        padding: 7px 11px;
+    }
+
+    .header h1 {
+        font-size: clamp(28px, 7vw, 37px);
+        word-break: break-word;
+    }
+
+    .header p {
+        max-width: 100%;
+        font-size: 14px;
+        line-height: 1.65;
+    }
+
+    .quick-actions {
+        width: 100%;
+        margin-top: 14px;
+    }
+
+    .quick-action {
+        min-height: 42px;
+        justify-content: center;
+    }
+
+    .quick-stats {
+        width: 100%;
+    }
+
+    .quick-stat {
+        min-width: 0;
+    }
+
+    .quick-stat-value {
+        white-space: nowrap;
+    }
+
+    .section-heading {
+        width: 100%;
+    }
+
+    .section-heading h2 {
+        font-size: 23px;
+        line-height: 1.3;
+    }
+
+    .section-heading p {
+        line-height: 1.5;
+    }
+
+    .section-badge {
+        align-self: flex-start;
+    }
+
+    .search-area {
+        width: 100%;
+    }
+
+    .search-box input {
+        min-height: 48px;
+        font-size: 14px;
+    }
+
+    .search-count {
+        min-height: 43px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .cards {
+        width: 100%;
+    }
+
+    .card {
+        width: 100%;
+        border-radius: 22px;
+    }
+
+    .card-image {
+        height: 200px;
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+
+    .card h2 {
+        font-size: 19px;
+    }
+
+    .card p {
+        min-height: auto;
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .card-footer {
+        min-height: 38px;
+    }
+
+    .card-link {
+        font-size: 12px;
+    }
+
+    .info-panel {
+        width: 100%;
+        padding: 20px;
+    }
+
+    .info-panel p {
+        line-height: 1.7;
+    }
+
+    .footer {
+        line-height: 1.7;
+        padding-bottom: 10px;
+    }
+
+}
+
+
+/* =========================================================
+   SMALL MOBILE PHONES
+   ========================================================== */
+
+@media (max-width: 480px) {
+
+    .container {
+        width: 93%;
+        padding-top: 14px;
+    }
+
+    .top-bar {
+        gap: 10px;
+        margin-bottom: 17px;
+    }
+
+    .status-area {
+        gap: 7px;
+    }
+
+    .top-logo {
+        width: 42px;
+        height: 42px;
+    }
+
+    .online-status {
+        padding: 8px 10px;
+        gap: 6px;
+        font-size: 10px;
+    }
+
+    .online-dot {
+        width: 7px;
+        height: 7px;
+    }
+
+    .logout-btn {
+        min-height: 40px;
+        padding: 9px 12px;
+        font-size: 11px;
+    }
+
+    .header {
+        padding: 25px 18px;
+        border-radius: 20px;
+        margin-bottom: 18px;
+    }
+
+    .header h1 {
+        font-size: 27px;
+        letter-spacing: -0.5px;
+    }
+
+    .header p {
+        font-size: 13px;
+        margin-bottom: 13px;
+    }
+
+    .date {
+        font-size: 11px;
+    }
+
+    .quick-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+    }
+
+    .quick-action {
+        width: 100%;
+        min-height: 43px;
+        padding: 9px 8px;
+        font-size: 10px;
+    }
+
+    .quick-stats {
+        gap: 8px;
+        margin-bottom: 25px;
+    }
+
+    .quick-stat {
+        padding: 12px;
+        border-radius: 16px;
+    }
+
+    .quick-stat-top {
+        margin-bottom: 9px;
+    }
+
+    .quick-stat-icon {
+        width: 35px;
+        height: 35px;
+        border-radius: 10px;
+        font-size: 17px;
+    }
+
+    .quick-stat-value {
+        font-size: 16px;
+    }
+
+    .quick-stat-label {
+        font-size: 9px;
+    }
+
+    .stat-progress {
+        margin-top: 10px;
+    }
+
+    .section-heading {
+        margin-bottom: 14px;
+    }
+
+    .section-heading h2 {
+        font-size: 21px;
+    }
+
+    .section-badge {
+        font-size: 10px;
+        padding: 7px 10px;
+    }
+
+    .search-area {
+        gap: 8px;
+        margin-bottom: 15px;
+    }
+
+    .search-box input {
+        padding-left: 40px;
+        min-height: 46px;
+    }
+
+    .search-count {
+        font-size: 11px;
+        padding: 10px;
+    }
+
+    .cards {
+        gap: 13px;
+    }
+
+    .card {
+        border-radius: 20px;
+    }
+
+    .card-image {
+        height: 175px;
+        border-radius: 17px 17px 0 0;
+    }
+
+    .image-label {
+        left: 12px;
+        bottom: 11px;
+        padding: 5px 8px;
+        font-size: 9px;
+    }
+
+    .card-content {
+        padding: 18px;
+    }
+
+    .card h2 {
+        font-size: 18px;
+        line-height: 1.4;
+    }
+
+    .card p {
+        font-size: 12px;
+        line-height: 1.65;
+        margin-bottom: 14px;
+    }
+
+    .card-link {
+        font-size: 11px;
+    }
+
+    .card-arrow {
+        width: 29px;
+        height: 29px;
+        font-size: 16px;
+    }
+
+    .info-panel {
+        margin-top: 20px;
+        padding: 17px;
+        gap: 12px;
+        border-radius: 18px;
+    }
+
+    .info-icon {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        font-size: 19px;
+        border-radius: 11px;
+    }
+
+    .info-panel h3 {
+        font-size: 13px;
+    }
+
+    .info-panel p {
+        font-size: 11px;
+        line-height: 1.65;
+    }
+
+}
+
+
+/* =========================================================
+   EXTRA SMALL PHONES
+   ========================================================== */
+
+@media (max-width: 360px) {
+
+    .container {
+        width: 94%;
+    }
+
+    .online-status {
+        display: none;
+    }
+
+    .top-logo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .logout-btn {
+        padding: 8px 10px;
+        font-size: 10px;
+    }
+
+    .header {
+        padding: 22px 15px;
+    }
+
+    .header h1 {
+        font-size: 24px;
+    }
+
+    .header p {
+        font-size: 12px;
+    }
+
+    .quick-actions {
+        grid-template-columns: 1fr;
+    }
+
+    .quick-action {
+        font-size: 11px;
+    }
+
+    .quick-stat {
+        padding: 10px;
+    }
+
+    .quick-stat-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+    .quick-stat-value {
+        font-size: 14px;
+    }
+
+    .quick-stat-label {
+        font-size: 8px;
+    }
+
+    .card-image {
+        height: 155px;
+    }
+
+    .card-content {
+        padding: 16px;
+    }
+
+    .card h2 {
+        font-size: 17px;
+    }
+
+    .card p {
+        font-size: 11px;
+    }
+
+}
+
+    </style>
+
+
+    <link rel="stylesheet" href="css/dashboard-banners.css">
+
+</head>
+
+
+<body class="loading">
+
+
+<!-- =========================================================
+     PAGE LOADER
+========================================================== -->
+
+<div class="page-loader"
+     id="pageLoader">
+
+    <div class="loader-content">
+
+        <div class="loader-logo">
+            &#127891;
+        </div>
+
+        <div class="loader-text">
+            Loading Student Dashboard...
+        </div>
+
+        <div class="loader-line">
+            <span></span>
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- =========================================================
+     MAIN CONTAINER
+========================================================== -->
+
+<div class="container">
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <div class="top-bar">
+
+        <div class="status-area">
+
+            <img id="dashboardLogo"
+                 class="top-logo"
+                 src="images/logo.png"
+                 alt="Student Career & Learning Management System Logo">
+
+            <div class="online-status">
+
+                <span class="online-dot"></span>
+
+                Online
+
+            </div>
+
+            <span class="secure-text">
+
+                Student Portal - Secure Session
+
+            </span>
+
+        </div>
+
+
+        <div class="top-actions">
+
+            <button
+                class="mini-btn"
+                type="button"
+                id="topHomeBtn">
+
+                &#127968; Home
+
+            </button>
+
+
+            <button
+                class="logout-btn"
+                id="logoutBtn"
+                type="button">
+
+                &#8618; Logout
+
+            </button>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         HERO
+    ====================================================== -->
+
+    <header class="header">
+
+        <div class="hero-grid">
+
+
+            <div class="welcome-content">
+
+                <div class="welcome-small">
+
+                    &#127891; STUDENT DASHBOARD
+
+                </div>
+
+
+                <h1>
+
+                    Welcome,
+
+                    <span id="usernameDisplay">
+                        Student
+                    </span>
+
+                </h1>
+
+
+                <p>
+
+                    Manage your learning, skills,
+                    and opportunities from one powerful
+                    student management system.
+
+                </p>
+
+
+                <div
+                    class="date"
+                    id="currentDate">
+
+                    Loading date...
+
+                </div>
+
+
+                <!-- QUICK ACTIONS -->
+
+                <div class="quick-actions">
+
+
+                    <button
+                        class="quick-action"
+                        type="button"
+                        data-page="profile.html">
+
+                        &#128100; My Profile
+
+                    </button>
+
+
+                    <button
+                        class="quick-action"
+                        type="button"
+                        data-page="skills.html">
+
+                        &#128187; My Skills
+
+                    </button>
+
+
+                    <button
+                        class="quick-action"
+                        type="button"
+                        data-page="career-guidance.html">
+
+                        &#127919; Career Guidance
+
+                    </button>
+
+
+                    <button
+                        class="quick-action"
+                        type="button"
+                        data-page="government.html">
+
+                        &#127470;&#127475; Opportunities
+
+                    </button>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- HERO VISUAL -->
+
+            <div class="hero-visual">
+
+                <div class="hero-visual-inner">
+
+                    <img
+                        src="images/logo.png"
+                        alt="Student Career & Learning Management System Logo">
+
+                </div>
+
+
+                <div
+                    style="
+                        position: absolute;
+                        bottom: 12px;
+                        left: 50%;
+                        transform: translateX(-50%) rotate(-3deg);
+                        font-size: 13px;
+                        font-weight: 700;
+                        color: rgba(255,255,255,0.90);
+                        white-space: nowrap;
+                        z-index: 20;
+                    "
+                >
+
+                    Mr. Unique
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         QUICK STATS
+    ====================================================== -->
+
+    <section class="quick-stats">
+
+
+        <!-- STUDENT ACCOUNT -->
+
+        <div class="quick-stat">
+
+            <div class="quick-stat-top">
+
+                <div class="quick-stat-icon">
+                    &#128100;
+                </div>
+
+                <div class="quick-stat-value">
+                    01
+                </div>
+
+            </div>
+
+            <div class="quick-stat-label">
+                Student Account
+            </div>
+
+            <div class="stat-progress">
+
+                <span style="width: 100%;"></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- LEARN -->
+
+        <div class="quick-stat">
+
+            <div class="quick-stat-top">
+
+                <div class="quick-stat-icon">
+                    &#128218;
+                </div>
+
+                <div class="quick-stat-value">
+                    Learn
+                </div>
+
+            </div>
+
+            <div class="quick-stat-label">
+                Learning Center
+            </div>
+
+            <div class="stat-progress">
+
+                <span style="width: 70%;"></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- BUILD -->
+
+        <div class="quick-stat">
+
+            <div class="quick-stat-top">
+
+                <div class="quick-stat-icon">
+                    &#128187;
+                </div>
+
+                <div class="quick-stat-value">
+                    Build
+                </div>
+
+            </div>
+
+            <div class="quick-stat-label">
+                Skills &amp; Projects
+            </div>
+
+            <div class="stat-progress">
+
+                <span style="width: 55%;"></span>
+
+            </div>
+
+        </div>
+
+
+        <!-- GROW -->
+
+        <div class="quick-stat">
+
+            <div class="quick-stat-top">
+
+                <div class="quick-stat-icon">
+                    &#128640;
+                </div>
+
+                <div class="quick-stat-value">
+                    Grow
+                </div>
+
+            </div>
+
+            <div class="quick-stat-label">
+                Career Development
+            </div>
+
+            <div class="stat-progress">
+
+                <span style="width: 40%;"></span>
+
+            </div>
+
+        </div>
+
+
+    </section>
+
+
+    <!-- =====================================================
+         SECTION HEADING
+    ====================================================== -->
+
+    <div class="section-heading">
+
+        <div>
+
+            <h2>
+                Your Student Management
+            </h2>
+
+            <p>
+                Select a section to continue your journey.
+            </p>
+
+        </div>
+
+        <div
+            class="section-badge"
+            id="featureBadge">
+
+            8 Student Features
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         SEARCH
+    ====================================================== -->
+
+    <div class="search-area">
+
+        <div class="search-box">
+
+            <span>
+                &#128269;
+            </span>
+
+            <input
+                type="text"
+                id="cardSearch"
+                placeholder="Search dashboard features..."
+                autocomplete="off">
+
+        </div>
+
+
+        <div
+            class="search-count"
+            id="searchCount">
+
+            Showing 8 features
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         CARDS
+    ====================================================== -->
+
+    <div
+        class="cards"
+        id="cardsContainer">
+
+
+        <!-- =================================================
+             PROFILE
+        ================================================== -->
+
+        <div
+            class="card"
+            id="profileCard"
+            tabindex="0"
+            role="button"
+            aria-label="Open My Profile"
+            data-title="profile personal student account">
+
+            <div class="card-image">
+
+                <img
+                    src="images/profile.jpg"
+                    alt="Student profile"
+                    onerror="this.src='images/career.jpg.webp';">
+
+                <div class="image-label">
+                    PERSONAL PROFILE
+                </div>
+
+            </div>
+
+
+            <div class="card-content">
+
+                <h2>
+                    &#128100; My Profile
+                </h2>
+
+                <p>
+                    View and manage your personal
+                    student information including
+                    name, email, phone number
+                    and username.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <span class="card-link">
+                        Open Profile &#8594;
+                    </span>
+
+                    <span class="card-arrow">
+                        &#8594;
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             LEARNING
+        ================================================== -->
+
+        <div
+            class="card"
+            id="learningCard"
+            tabindex="0"
+            role="button"
+            aria-label="Open Learning"
+            data-title="learning courses study education">
+
+            <div class="card-image">
+
+                <img
+                    src="images/learning.jpg"
+                    alt="Students learning"
+                    onerror="this.src='images/career.jpg.webp';">
+
+                <div class="image-label">
+                    LEARNING CENTER
+                </div>
+
+            </div>
+
+
+            <div class="card-content">
+
+                <h2>
+
+                    &#128218; Learning
+
+                    <span class="active-badge">
+                        ACTIVE
+                    </span>
+
+                </h2>
+
+                <p>
+                    Access courses, learning materials,
+                    educational resources and improve
+                    your knowledge step by step.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <span class="card-link">
+                        Explore Learning &#8594;
+                    </span>
+
+                    <span class="card-arrow">
+                        &#8594;
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             CAREER
+        ================================================== -->
+
+        <div
+            class="card"
+            id="careerCard"
+            tabindex="0"
+            role="button"
+            aria-label="Open Career and Course Guidance"
+            data-title="career course guidance job future">
+
+            <div class="card-image">
+
+                <img
+                    src="images/career.jpg.webp"
+                    alt="Career planning">
+
+                <div class="image-label">
+                    CAREER PLANNING
+                </div>
+
+            </div>
+
+
+            <div class="card-content">
+
+                <h2>
+                    &#127919; Career &amp; Course Guidance
+                </h2>
+
+                <p>
+                    Explore courses, career options,
+                    higher studies, skills and possible
+                    job roles based on your interests.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <span class="card-link">
+                        Explore Careers &#8594;
+                    </span>
+
+                    <span class="card-arrow">
+                        &#8594;
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             SKILLS
+        ================================================== -->
+
+        <div
+            class="card"
+            id="skillsCard"
+            tabindex="0"
+            role="button"
+            aria-label="Open Skills"
+            data-title="skills coding technical communication">
+
+            <div class="card-image">
+
+                <img
+                    src="images/skills.jpg"
+                    alt="Programming and coding"
+                    onerror="this.src='images/career.jpg.webp';">
+
+                <div class="image-label">
+                    SKILLS &amp; CODING
+                </div>
+
+            </div>
+
+
+            <div class="card-content">
+
+                <h2>
+                    &#128187; Skills
+                </h2>
+
+                <p>
+                    Add your technical, communication,
+                    creative and professional skills
+                    and track your skill progress.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <span class="card-link">
+                        Open Skills &#8594;
+                    </span>
+
+                    <span class="card-arrow">
+                        &#8594;
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             PROGRESS
+        ================================================== -->
+
+        <div
+            class="card"
+            id="progressCard"
+            tabindex="0"
+            role="button"
+            aria-label="Progress section"
+            data-title="progress analytics achievement milestones">
+
+            <div class="card-image">
+
+                <img
+                    src="images/progress.jpg"
+                    alt="Progress analytics"
+                    onerror="this.src='images/career.jpg.webp';">
+
+                <div class="image-label">
+                    YOUR PROGRESS
+                </div>
+
+            </div>
+
+
+            <div class="card-content">
+
+                <h2>
+                    &#128202; Progress
+                </h2>
+
+                <p>
+                    Monitor your learning progress,
+                    completed courses, achievements
+                    and future milestones.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <span class="card-link">
+                        Open Progress &#8594;
+                    </span>
+
+                    <span class="card-arrow">
+                        &#8594;
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RESUME
+        ================================================== -->
+
+        <div
+            class="card"
+            id="resumeCard"
+            tabindex="0"
+            role="button"
+            aria-label="Resume section"
+            data-title="resume cv professional career">
+
+            <div class="card-image">
+
+                <img
+                    src="images/resume.jpg"
+                    alt="Professional resume"
+                    onerror="this.src='images/career.jpg.webp';">
+
+                <div class="image-label">
+                    PROFESSIONAL RESUME
+                </div>
+
+            </div>
+
+
+            <div class="card-content">
+
+                <h2>
+                    &#128196; Resume
+                </h2>
+
+                <p>
+                    Create and manage your professional
+                    resume, projects, skills and
+                    career profile.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <span class="card-link">
+                        Open Resume &#8594;
+                    </span>
+
+                    <span class="card-arrow">
+                        &#8594;
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             GOVERNMENT
+        ================================================== -->
+
+        <div
+            class="card"
+            id="governmentCard"
+            tabindex="0"
+            role="button"
+            aria-label="Open Government Opportunities"
+            data-title="government exams scholarships opportunities internships">
+
+            <div class="card-image">
+
+                <img
+                    src="images/government.jpg"
+                    alt="Government opportunities"
+                    onerror="this.src='images/career.jpg.webp';">
+
+                <div class="image-label">
+                    &#127470;&#127475; Opportunities
+                </div>
+
+            </div>
+
+
+            <div class="card-content">
+
+                <h2>
+
+                    &#127470;&#127475; Opportunities
+
+                    <span class="new-badge">
+                        NEW
+                    </span>
+
+                </h2>
+
+                <p>
+                    Explore government exams,
+                    scholarships, internships
+                    and opportunities for students.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <span class="card-link">
+                        Explore Opportunities &#8594;
+                    </span>
+
+                    <span class="card-arrow">
+                        &#8594;
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- =================================================
+             RESOURCES
+        ================================================== -->
+
+        <div
+            class="card"
+            id="resourcesCard"
+            tabindex="0"
+            role="button"
+            aria-label="Learning Resources"
+            data-title="resources notes books practice projects roadmap">
+
+            <div class="card-image">
+
+                <img
+                    src="images/resources.jpg"
+                    alt="Learning resources and books"
+                    onerror="this.src='images/career.jpg.webp';">
+
+                <div class="image-label">
+                    STUDY RESOURCES
+                </div>
+
+            </div>
+
+
+            <div class="card-content">
+
+                <h2>
+                    &#128214; Learning Resources
+                </h2>
+
+                <p>
+                    Access useful notes, practice
+                    materials, projects, roadmaps
+                    and other learning resources.
+                </p>
+
+
+                <div class="card-footer">
+
+                    <span class="card-link">
+                        Open Resources &#8594;
+                    </span>
+
+                    <span class="card-arrow">
+                        &#8594;
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- =====================================================
+         EMPTY SEARCH
+    ====================================================== -->
+
+    <div
+        class="empty-state"
+        id="emptyState">
+
+        <div class="empty-icon">
+            &#128269;
+        </div>
+
+        <h3>
+            No feature found
+        </h3>
+
+        <p>
+            Try searching with another keyword.
+        </p>
+
+    </div>
+
+
+    <!-- =====================================================
+         INFORMATION PANEL
+    ====================================================== -->
+
+    <div class="info-panel">
+
+        <div class="info-icon">
+            &#128161;
+        </div>
+
+        <div>
+
+            <h3>
+                Build your future step by step
+            </h3>
+
+            <p>
+                Complete your profile, develop useful
+                skills, explore learning resources and
+                discover career opportunities. More
+                features will be added to your Student
+                Career &amp; Learning Management System.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <div class="footer">
+
+        Student Career &amp; Learning Management System
+
+        <br>
+
+        <strong>
+            Student Dashboard
+        </strong>
+
+        <br>
+
+        Built for learning, skills and career growth.
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     TOAST MESSAGE
+========================================================== -->
+
+<div
+    class="message"
+    id="messageBox">
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================== -->
+
+<script>
+
+
+    /* =========================================================
+       PAGE LOADER
+    ========================================================== */
+
+    window.addEventListener(
+        "load",
+        function () {
+
+            setTimeout(
+                function () {
+
+                    const loader =
+                        document.getElementById(
+                            "pageLoader"
+                        );
+
+                    if (loader) {
+
+                        loader.classList.add(
+                            "hidden"
+                        );
+
+                    }
+
+                    document.body.classList.remove(
+                        "loading"
+                    );
+
+                },
+                500
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       LOGIN CHECK
+    ========================================================== */
+
+    const loggedInUsername =
+        sessionStorage.getItem(
+            "loggedInUsername"
+        );
+
+
+    if (!loggedInUsername) {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    /* =========================================================
+       USERNAME
+    ========================================================== */
+
+    const usernameDisplay =
+        document.getElementById(
+            "usernameDisplay"
+        );
+
+
+    if (
+        usernameDisplay &&
+        loggedInUsername
+    ) {
+
+        usernameDisplay.textContent =
+            loggedInUsername;
+
+    }
+
+
+    /* =========================================================
+       CURRENT DATE
+    ========================================================== */
+
+    const currentDate =
+        document.getElementById(
+            "currentDate"
+        );
+
+
+    function updateDateTime() {
+
+        if (!currentDate) {
+            return;
+        }
+
+
+        currentDate.textContent =
+            "Today - " +
+            new Date().toLocaleDateString();
+
+    }
+
+
+    updateDateTime();
+
+
+    /* =========================================================
+       PAGE NAVIGATION
+    ========================================================== */
+
+    function openPage(page) {
+
+        if (!page) {
+
+            showMessage(
+                "This section will be available soon."
+            );
+
+            return;
+
+        }
+
+
+        window.location.href =
+            page;
+
+    }
+
+
+    /* =========================================================
+       CARD SETUP
+    ========================================================== */
+
+    function setupCard(
+        cardId,
+        page
+    ) {
+
+        const card =
+            document.getElementById(
+                cardId
+            );
+
+
+        if (!card) {
+            return;
+        }
+
+
+        card.addEventListener(
+            "click",
+            function () {
+
+                openPage(page);
+
+            }
+        );
+
+
+        card.addEventListener(
+            "keydown",
+            function (event) {
+
+                if (
+                    event.key === "Enter" ||
+                    event.key === " "
+                ) {
+
+                    event.preventDefault();
+
+                    openPage(page);
+
+                }
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       CONNECT PROFILE
+    ========================================================== */
+
+    setupCard(
+        "profileCard",
+        "profile.html"
+    );
+
+
+    /* =========================================================
+       CONNECT LEARNING
+    ========================================================== */
+
+    setupCard(
+        "learningCard",
+        "learning.html"
+    );
+
+
+    /* =========================================================
+       CONNECT CAREER
+    ========================================================== */
+
+    setupCard(
+        "careerCard",
+        "career-guidance.html"
+    );
+
+
+    /* =========================================================
+       CONNECT SKILLS
+    ========================================================== */
+
+    setupCard(
+        "skillsCard",
+        "skills.html"
+    );
+
+
+    /* =========================================================
+       CONNECT GOVERNMENT
+    ========================================================== */
+
+    setupCard(
+        "governmentCard",
+        "government.html"
+    );
+
+
+    /* =========================================================
+       PROGRESS
+    ========================================================== */
+
+    setupCard(
+        "progressCard",
+        "progress.html"
+    );
+
+
+    /* =========================================================
+       RESUME
+    ========================================================== */
+
+    setupCard(
+        "resumeCard",
+        "resume.html"
+    );
+
+
+    /* =========================================================
+       RESOURCES
+    ========================================================== */
+
+    setupCard(
+        "resourcesCard",
+        "learning-resources.html"
+    );
+
+
+    /* =========================================================
+       QUICK ACTION BUTTONS
+    ========================================================== */
+
+    const quickActions =
+        document.querySelectorAll(
+            ".quick-action"
+        );
+
+
+    quickActions.forEach(
+        function (button) {
+
+            button.addEventListener(
+                "click",
+                function (event) {
+
+                    event.stopPropagation();
+
+
+                    const page =
+                        button.getAttribute(
+                            "data-page"
+                        );
+
+
+                    openPage(page);
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       HOME BUTTON
+    ========================================================== */
+
+    const topHomeBtn =
+        document.getElementById(
+            "topHomeBtn"
+        );
+
+
+    if (topHomeBtn) {
+
+        topHomeBtn.addEventListener(
+            "click",
+            function () {
+
+                window.scrollTo({
+                    top: 0,
+                    behavior: "smooth"
+                });
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       SEARCH
+    ========================================================== */
+
+    const cardSearch =
+        document.getElementById(
+            "cardSearch"
+        );
+
+
+    const cards =
+        document.querySelectorAll(
+            ".card"
+        );
+
+
+    const searchCount =
+        document.getElementById(
+            "searchCount"
+        );
+
+
+    const emptyState =
+        document.getElementById(
+            "emptyState"
+        );
+
+
+    function filterCards() {
+
+        const searchValue =
+            cardSearch.value
+                .toLowerCase()
+                .trim();
+
+
+        let visibleCount = 0;
+
+
+        cards.forEach(
+            function (card) {
+
+                const title =
+                    card.getAttribute(
+                        "data-title"
+                    ) || "";
+
+
+                const heading =
+                    card
+                        .querySelector("h2")
+                        ?.textContent
+                        .toLowerCase() || "";
+
+
+                const description =
+                    card
+                        .querySelector("p")
+                        ?.textContent
+                        .toLowerCase() || "";
+
+
+                const searchableText =
+                    (
+                        title +
+                        " " +
+                        heading +
+                        " " +
+                        description
+                    ).toLowerCase();
+
+
+                if (
+                    searchableText.includes(
+                        searchValue
+                    )
+                ) {
+
+                    card.classList.remove(
+                        "hidden"
+                    );
+
+                    visibleCount++;
+
+                }
+                else {
+
+                    card.classList.add(
+                        "hidden"
+                    );
+
+                }
+
+            }
+        );
+
+
+        searchCount.textContent =
+            "Showing " +
+            visibleCount +
+            " of 8 features";
+
+
+        if (visibleCount === 0) {
+
+            emptyState.classList.add(
+                "show"
+            );
+
+        }
+        else {
+
+            emptyState.classList.remove(
+                "show"
+            );
+
+        }
+
+    }
+
+
+    if (cardSearch) {
+
+        cardSearch.addEventListener(
+            "input",
+            filterCards
+        );
+
+    }
+
+
+    /* =========================================================
+       TOAST MESSAGE
+    ========================================================== */
+
+    let messageTimer;
+
+
+    function showMessage(
+        message
+    ) {
+
+        const messageBox =
+            document.getElementById(
+                "messageBox"
+            );
+
+
+        if (!messageBox) {
+            return;
+        }
+
+
+        messageBox.textContent =
+            message;
+
+
+        messageBox.classList.add(
+            "show"
+        );
+
+
+        clearTimeout(
+            messageTimer
+        );
+
+
+        messageTimer =
+            setTimeout(
+                function () {
+
+                    messageBox.classList.remove(
+                        "show"
+                    );
+
+                },
+                3000
+            );
+
+    }
+
+
+    /* =========================================================
+       LOGOUT
+    ========================================================== */
+
+    const logoutBtn =
+        document.getElementById(
+            "logoutBtn"
+        );
+
+
+    if (logoutBtn) {
+
+        logoutBtn.addEventListener(
+            "click",
+            function () {
+
+                const confirmLogout =
+                    confirm(
+                        "Are you sure you want to logout?"
+                    );
+
+
+                if (!confirmLogout) {
+                    return;
+                }
+
+
+                sessionStorage.removeItem(
+                    "loggedInUsername"
+                );
+
+
+                window.location.href =
+                    "login.html";
+
+            }
+        );
+
+    }
+
+
+    /* =========================================================
+       IMAGE ERROR HANDLING
+    ========================================================== */
+
+    const allImages =
+        document.querySelectorAll(
+            ".card-image img"
+        );
+
+
+    allImages.forEach(
+        function (image) {
+
+            image.addEventListener(
+                "error",
+                function () {
+
+                    if (
+                        !image.src.endsWith(
+                            "career.jpg.webp"
+                        )
+                    ) {
+
+                        image.src =
+                            "images/career.jpg.webp";
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+    /* =========================================================
+       ESC KEY
+    ========================================================== */
+
+    document.addEventListener(
+        "keydown",
+        function (event) {
+
+            if (event.key === "Escape") {
+
+                if (cardSearch) {
+
+                    cardSearch.value = "";
+
+                    filterCards();
+
+                }
+
+            }
+
+        }
+    );
+
+
+    /* =========================================================
+       CONSOLE INFORMATION
+    ========================================================== */
+
+    console.log(
+        "Student Career & Learning Management System"
+    );
+
+    console.log(
+        "Dashboard loaded successfully."
+    );
+
+    console.log(
+        "Local dashboard images enabled."
+    );
+
+
+    /* =========================================================
+       DASHBOARD LOGO
+    ========================================================== */
+
+    const dashboardLogo =
+        document.getElementById(
+            "dashboardLogo"
+        );
+
+
+    if (dashboardLogo) {
+
+        dashboardLogo.addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    "profile.html";
+
+            }
+        );
+
+    }
+
+</script>
+
+</body>
+
+</html>
+```

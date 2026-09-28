@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Learning | Student Career & Learning Management System</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+
+        body {
+
+            font-family:
+                Arial,
+                Helvetica,
+                sans-serif;
+
+            min-height: 100vh;
+
+            color: white;
+
+            background:
+                radial-gradient(
+                    circle at top left,
+                    rgba(37, 99, 235, 0.25),
+                    transparent 35%
+                ),
+
+                radial-gradient(
+                    circle at bottom right,
+                    rgba(14, 165, 233, 0.16),
+                    transparent 35%
+                ),
+
+                #061d34;
+
+        }
+
+
+        /* =========================
+           CONTAINER
+        ========================== */
+
+        .container {
+
+            width: 94%;
+
+            max-width: 1500px;
+
+            margin: auto;
+
+            padding: 30px 0 60px;
+
+        }
+
+
+        /* =========================
+           TOP BAR
+        ========================== */
+
+        .top-bar {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            gap: 15px;
+
+            margin-bottom: 25px;
+
+            flex-wrap: wrap;
+
+        }
+
+
+        .back-btn {
+
+            border: 1px solid
+                rgba(56, 189, 248, 0.4);
+
+            background:
+                rgba(56, 189, 248, 0.10);
+
+            color: #7dd3fc;
+
+            padding: 11px 18px;
+
+            border-radius: 12px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.25s;
+
+        }
+
+
+        .back-btn:hover {
+
+            background:
+                rgba(56, 189, 248, 0.20);
+
+            transform:
+                translateY(-2px);
+
+        }
+
+
+        .status {
+
+            display: inline-flex;
+
+            align-items: center;
+
+            gap: 8px;
+
+            color: #86efac;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            padding: 10px 16px;
+
+            border-radius: 50px;
+
+            background:
+                rgba(34, 197, 94, 0.10);
+
+            border: 1px solid
+                rgba(34, 197, 94, 0.30);
+
+        }
+
+
+        .dot {
+
+            width: 9px;
+
+            height: 9px;
+
+            border-radius: 50%;
+
+            background: #22c55e;
+
+            box-shadow:
+                0 0 12px
+                rgba(34, 197, 94, 0.8);
+
+        }
+
+
+        /* =========================
+           HERO
+        ========================== */
+
+        .hero {
+
+            padding: 38px;
+
+            border-radius: 28px;
+
+            margin-bottom: 35px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37, 99, 235, 0.35),
+                    rgba(14, 165, 233, 0.10)
+                );
+
+            border: 1px solid
+                rgba(255,255,255,0.16);
+
+            backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 20px 50px
+                rgba(0,0,0,0.22);
+
+        }
+
+
+        .hero h1 {
+
+            font-size: 42px;
+
+            margin-bottom: 14px;
+
+        }
+
+
+        .hero p {
+
+            color: #c7dff5;
+
+            font-size: 19px;
+
+            line-height: 1.7;
+
+            max-width: 900px;
+
+        }
+
+
+        /* =========================
+           SECTION TITLE
+        ========================== */
+
+        .section-title {
+
+            display: inline-block;
+
+            font-size: 29px;
+
+            margin-bottom: 23px;
+
+            padding: 7px 12px;
+
+            background:
+                rgba(37, 99, 235, 0.80);
+
+        }
+
+
+        /* =========================
+           LEARNING GRID
+        ========================== */
+
+        .learning-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(3, minmax(0, 1fr));
+
+            gap: 25px;
+
+            margin-bottom: 40px;
+
+        }
+
+
+        /* =========================
+           LEARNING CARD
+        ========================== */
+
+        .learning-card {
+
+            min-height: 285px;
+
+            padding: 30px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.11),
+                    rgba(255,255,255,0.045)
+                );
+
+            border: 1px solid
+                rgba(255,255,255,0.15);
+
+            backdrop-filter: blur(16px);
+
+            position: relative;
+
+            overflow: hidden;
+
+            cursor: pointer;
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+
+        }
+
+
+        .learning-card::before {
+
+            content: "";
+
+            position: absolute;
+
+            width: 150px;
+
+            height: 150px;
+
+            right: -65px;
+
+            top: -65px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.07);
+
+        }
+
+
+        .learning-card:hover {
+
+            transform:
+                translateY(-8px);
+
+            border-color:
+                rgba(56,189,248,0.65);
+
+            box-shadow:
+                0 20px 45px
+                rgba(14,165,233,0.16);
+
+        }
+
+
+        .learning-card:focus {
+
+            outline: 2px solid #38bdf8;
+
+            outline-offset: 4px;
+
+        }
+
+
+        .card-icon {
+
+            width: 72px;
+
+            height: 72px;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            border-radius: 18px;
+
+            background:
+                rgba(255,255,255,0.10);
+
+            font-size: 38px;
+
+            margin-bottom: 22px;
+
+        }
+
+
+        .learning-card h2 {
+
+            font-size: 25px;
+
+            margin-bottom: 13px;
+
+        }
+
+
+        .learning-card p {
+
+            color: #c4d8e9;
+
+            line-height: 1.6;
+
+            font-size: 16px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .explore {
+
+            color: #5ddcff;
+
+            font-weight: bold;
+
+            font-size: 16px;
+
+        }
+
+
+        /* =========================
+           ACTIVE CARD
+        ========================== */
+
+        .active-card {
+
+            border-color:
+                rgba(56,189,248,0.50);
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(14,165,233,0.16),
+                    rgba(255,255,255,0.06)
+                );
+
+        }
+
+
+        .badge {
+
+            display: inline-block;
+
+            font-size: 10px;
+
+            padding: 4px 8px;
+
+            margin-left: 5px;
+
+            border-radius: 20px;
+
+            color: #86efac;
+
+            background:
+                rgba(34,197,94,0.12);
+
+            border: 1px solid
+                rgba(34,197,94,0.30);
+
+            vertical-align: middle;
+
+        }
+
+
+        /* =========================
+           ROADMAP
+        ========================== */
+
+        .roadmap {
+
+            padding: 30px;
+
+            border-radius: 24px;
+
+            background:
+                rgba(255,255,255,0.06);
+
+            border: 1px solid
+                rgba(255,255,255,0.13);
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .roadmap h2 {
+
+            font-size: 27px;
+
+            margin-bottom: 20px;
+
+        }
+
+
+        .roadmap-list {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(2, 1fr);
+
+            gap: 15px;
+
+        }
+
+
+        .roadmap-item {
+
+            padding: 17px;
+
+            border-radius: 15px;
+
+            background:
+                rgba(37,99,235,0.10);
+
+            border:
+                1px solid
+                rgba(56,189,248,0.18);
+
+            color: #d8e9f7;
+
+            line-height: 1.5;
+
+        }
+
+
+        .number {
+
+            display: inline-flex;
+
+            width: 30px;
+
+            height: 30px;
+
+            align-items: center;
+
+            justify-content: center;
+
+            margin-right: 8px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(37,99,235,0.40);
+
+            color: white;
+
+            font-weight: bold;
+
+        }
+
+
+        /* =========================
+           TIPS
+        ========================== */
+
+        .tips {
+
+            padding: 30px;
+
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(245,158,11,0.10),
+                    rgba(255,255,255,0.05)
+                );
+
+            border: 1px solid
+                rgba(245,158,11,0.25);
+
+        }
+
+
+        .tips h2 {
+
+            font-size: 27px;
+
+            margin-bottom: 18px;
+
+        }
+
+
+        .tips ul {
+
+            padding-left: 22px;
+
+        }
+
+
+        .tips li {
+
+            color: #d5e5f2;
+
+            line-height: 1.8;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        /* =========================
+           RESPONSIVE
+        ========================== */
+
+        @media (max-width: 1100px) {
+
+            .learning-grid {
+
+                grid-template-columns:
+                    repeat(2, 1fr);
+
+            }
+
+        }
+
+
+        @media (max-width: 700px) {
+
+            .container {
+
+                width: 92%;
+
+            }
+
+
+            .hero {
+
+                padding: 27px;
+
+            }
+
+
+            .hero h1 {
+
+                font-size: 31px;
+
+            }
+
+
+            .hero p {
+
+                font-size: 16px;
+
+            }
+
+
+            .learning-grid {
+
+                grid-template-columns: 1fr;
+
+            }
+
+
+            .roadmap-list {
+
+                grid-template-columns: 1fr;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="container">
+
+
+    <!-- =========================
+         TOP BAR
+    ========================== -->
+
+    <div class="top-bar">
+
+        <button
+            class="back-btn"
+            id="backBtn"
+            type="button">
+
+            ← Back to Dashboard
+
+        </button>
+
+
+        <div class="status">
+
+            <span class="dot"></span>
+
+            Learning Center Active
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         HERO
+    ========================== -->
+
+    <section class="hero">
+
+        <h1>
+            📚 Learning Center
+        </h1>
+
+        <p>
+            Learn programming, Artificial Intelligence,
+            web development, cybersecurity, databases
+            and other important technical skills.
+            Choose a subject and start learning step by step.
+        </p>
+
+    </section>
+
+
+    <!-- =========================
+         MAIN SUBJECTS
+    ========================== -->
+
+    <h2 class="section-title">
+        🎓 Choose Your Learning Path
+    </h2>
+
+
+    <div class="learning-grid">
+
+
+        <!-- =========================
+             PROGRAMMING
+        ========================== -->
+
+        <div
+            class="learning-card active-card"
+            id="programmingCard"
+            tabindex="0"
+            role="button"
+            aria-label="Open Programming">
+
+            <div class="card-icon">
+                💻
+            </div>
+
+            <h2>
+                Programming
+                <span class="badge">
+                    ACTIVE
+                </span>
+            </h2>
+
+            <p>
+                Learn C, C++, Java and Python
+                from basic concepts to practical
+                programming projects.
+            </p>
+
+            <span class="explore">
+                Start Programming →
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             AI
+        ========================== -->
+
+        <div
+            class="learning-card"
+            id="aiCard"
+            tabindex="0"
+            role="button"
+            aria-label="Artificial Intelligence and Machine Learning">
+
+            <div class="card-icon">
+                🤖
+            </div>
+
+            <h2>
+                AI &amp; Machine Learning
+            </h2>
+
+            <p>
+                Understand Artificial Intelligence,
+                Machine Learning, models, data and
+                the basics of modern AI.
+            </p>
+
+            <span class="explore">
+                Explore AI →
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             WEB DEVELOPMENT
+        ========================== -->
+
+        <div
+            class="learning-card"
+            id="webCard"
+            tabindex="0"
+            role="button"
+            aria-label="Web Development">
+
+            <div class="card-icon">
+                🌐
+            </div>
+
+            <h2>
+                Web Development
+            </h2>
+
+            <p>
+                Learn HTML, CSS, JavaScript,
+                frontend development and backend
+                concepts.
+            </p>
+
+            <span class="explore">
+                Explore Web Development →
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             CYBER SECURITY
+        ========================== -->
+
+        <div
+            class="learning-card"
+            id="cyberCard"
+            tabindex="0"
+            role="button"
+            aria-label="Cyber Security">
+
+            <div class="card-icon">
+                🔐
+            </div>
+
+            <h2>
+                Cyber Security
+            </h2>
+
+            <p>
+                Learn cybersecurity fundamentals,
+                networking, Linux and ethical
+                security concepts.
+            </p>
+
+            <span class="explore">
+                Explore Cyber Security →
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             DATABASE
+        ========================== -->
+
+        <div
+            class="learning-card"
+            id="databaseCard"
+            tabindex="0"
+            role="button"
+            aria-label="Database and DBMS">
+
+            <div class="card-icon">
+                🗄️
+            </div>
+
+            <h2>
+                Database &amp; DBMS
+            </h2>
+
+            <p>
+                Learn databases, SQL, DBMS,
+                MySQL, tables, queries and
+                database management.
+            </p>
+
+            <span class="explore">
+                Explore DBMS →
+            </span>
+
+        </div>
+
+
+        <!-- =========================
+             DSA
+        ========================== -->
+
+        <div
+            class="learning-card"
+            id="dsaCard"
+            tabindex="0"
+            role="button"
+            aria-label="Data Structures and Algorithms">
+
+            <div class="card-icon">
+                🧩
+            </div>
+
+            <h2>
+                Data Structures &amp; Algorithms
+            </h2>
+
+            <p>
+                Learn arrays, linked lists, stacks,
+                queues, trees, graphs and important
+                algorithms.
+            </p>
+
+            <span class="explore">
+                Explore DSA →
+            </span>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================
+         LEARNING ROADMAP
+    ========================== -->
+
+    <section class="roadmap">
+
+        <h2>
+            🛣️ Suggested Learning Roadmap
+        </h2>
+
+
+        <div class="roadmap-list">
+
+            <div class="roadmap-item">
+
+                <span class="number">
+                    1
+                </span>
+
+                Learn Programming Fundamentals
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span class="number">
+                    2
+                </span>
+
+                Practice Problem Solving
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span class="number">
+                    3
+                </span>
+
+                Learn Data Structures &amp; Algorithms
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span class="number">
+                    4
+                </span>
+
+                Build Small Projects
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span class="number">
+                    5
+                </span>
+
+                Learn Web / AI / Cybersecurity
+
+            </div>
+
+
+            <div class="roadmap-item">
+
+                <span class="number">
+                    6
+                </span>
+
+                Build Resume Projects
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================
+         STUDY TIPS
+    ========================== -->
+
+    <section class="tips">
+
+        <h2>
+            💡 Smart Study Tips
+        </h2>
+
+        <ul>
+
+            <li>
+                Learn one concept at a time.
+            </li>
+
+            <li>
+                Write and run code instead of only reading.
+            </li>
+
+            <li>
+                Practice small programs regularly.
+            </li>
+
+            <li>
+                Build projects after learning the basics.
+            </li>
+
+            <li>
+                Revise difficult topics regularly.
+            </li>
+
+            <li>
+                Keep your projects and notes organized.
+            </li>
+
+        </ul>
+
+    </section>
+
+
+</div>
+
+
+<script>
+
+
+    /* =========================================
+       LOGIN CHECK
+    ========================================== */
+
+    const loggedInUsername =
+        sessionStorage.getItem(
+            "loggedInUsername"
+        );
+
+
+    if (!loggedInUsername) {
+
+        window.location.href =
+            "login.html";
+
+    }
+
+
+    /* =========================================
+       BACK TO DASHBOARD
+    ========================================== */
+
+    document
+        .getElementById("backBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                window.location.href =
+                    "dashboard.html";
+
+            }
+        );
+
+
+    /* =========================================
+       PAGE NAVIGATION
+    ========================================== */
+
+    function openPage(page) {
+
+        window.location.href =
+            page;
+
+    }
+
+
+    /* =========================================
+       PROGRAMMING
+    ========================================== */
+
+    document
+        .getElementById("programmingCard")
+        .addEventListener(
+            "click",
+            function () {
+
+                openPage(
+                    "programming.html"
+                );
+
+            }
+        );
+
+
+    /* =========================================
+       AI
+    ========================================== */
+
+    document
+        .getElementById("aiCard")
+        .addEventListener(
+            "click",
+            function () {
+
+                openPage(
+                    "ai-ml.html"
+                );
+
+            }
+        );
+
+
+    /* =========================================
+       WEB DEVELOPMENT
+    ========================================== */
+
+    document
+        .getElementById("webCard")
+        .addEventListener(
+            "click",
+            function () {
+
+                openPage(
+                    "web-development.html"
+                );
+
+            }
+        );
+
+
+    /* =========================================
+       CYBER SECURITY
+    ========================================== */
+
+    document
+    .getElementById("cyberCard")
+    .addEventListener(
+        "click",
+        function () {
+
+            openPage(
+                "cyber-security.html"
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       DATABASE
+    ========================================== */
+
+    document
+    .getElementById("databaseCard")
+    .addEventListener(
+        "click",
+        function () {
+
+            openPage(
+                "database.html"
+            );
+
+        }
+    );
+
+
+    /* =========================================
+       DSA
+    ========================================== */
+
+    document
+        .getElementById("dsaCard")
+        .addEventListener(
+            "click",
+            function () {
+
+                openPage(
+                   "dsa.html"
+              );
+
+            }
+        );
+
+
+    /* =========================================
+       KEYBOARD SUPPORT
+    ========================================== */
+
+    const cards =
+        document.querySelectorAll(
+            ".learning-card"
+        );
+
+
+    cards.forEach(
+        function (card) {
+
+            card.addEventListener(
+                "keydown",
+                function (event) {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+                        card.click();
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+
+</script>
+
+
+</body>
+
+</html>
+
+
+
+
+
+
+

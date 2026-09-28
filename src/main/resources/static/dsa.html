@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Data Structures & Algorithms | Student Career & Learning Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            min-height: 100vh;
+            color: #ffffff;
+            background:
+                radial-gradient(circle at top left, #172554, transparent 35%),
+                radial-gradient(circle at bottom right, #312e81, transparent 35%),
+                linear-gradient(135deg, #020617, #0f172a 55%, #111827);
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        header {
+            padding: 22px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(15px);
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        .logo {
+            cursor: pointer;
+        }
+
+        .logo img {
+            width: 260px;
+            height: 58px;
+            object-fit: contain;
+        }
+
+        .back-btn {
+            padding: 12px 20px;
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.16);
+            transform: translateY(-2px);
+        }
+
+        /* HERO */
+
+        .hero {
+            text-align: center;
+            padding: 75px 20px 55px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 9px 18px;
+            border-radius: 30px;
+            background: rgba(139,92,246,0.15);
+            border: 1px solid rgba(167,139,250,0.3);
+            color: #c4b5fd;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+
+        .hero h1 {
+            font-size: clamp(38px, 6vw, 68px);
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #818cf8, #c084fc);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 780px;
+            margin: auto;
+            color: #cbd5e1;
+            font-size: 18px;
+            line-height: 1.7;
+        }
+
+        /* SECTIONS */
+
+        section {
+            margin-bottom: 65px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 32px;
+            margin-bottom: 30px;
+        }
+
+        .section-title span {
+            color: #a78bfa;
+        }
+
+        /* CARDS */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 22px;
+        }
+
+        .card {
+            padding: 28px;
+            border-radius: 20px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(16px);
+            transition: 0.35s;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(167,139,250,0.5);
+            background: rgba(255,255,255,0.10);
+        }
+
+        .icon {
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 21px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 15px;
+        }
+
+        /* ROADMAP */
+
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+        }
+
+        .step {
+            position: relative;
+            padding: 25px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #4f46e5, #9333ea);
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #cbd5e1;
+            line-height: 1.5;
+            font-size: 14px;
+        }
+
+        /* SKILLS */
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .skill {
+            padding: 11px 18px;
+            border-radius: 30px;
+            background: rgba(139,92,246,0.12);
+            border: 1px solid rgba(167,139,250,0.25);
+            color: #ddd6fe;
+            font-size: 14px;
+        }
+
+        /* PROJECTS */
+
+        .project-card {
+            padding: 25px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .project-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .project-card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+            padding: 35px 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        @media (max-width: 650px) {
+
+            .header-content {
+                flex-direction: column;
+            }
+
+            .logo img {
+                width: 220px;
+            }
+
+            .hero {
+                padding-top: 50px;
+            }
+
+            .hero p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="container header-content">
+
+        <div class="logo" onclick="goToProfile()">
+
+            <img
+                src="images/logo.png"
+                alt="Student Career & Learning Management System Logo"
+            >
+
+        </div>
+
+        <button class="back-btn" onclick="goBack()">
+            ← Learning
+        </button>
+
+    </div>
+
+</header>
+
+
+<main>
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-badge">
+            🧠 Data Structures & Algorithms
+        </div>
+
+        <h1>
+            Learn Data Structures & Algorithms
+        </h1>
+
+        <p>
+            Learn how data is organized, stored and processed,
+            and understand the algorithms used to solve programming
+            and real-world problems efficiently.
+        </p>
+
+    </section>
+
+
+    <div class="container">
+
+        <!-- CORE TOPICS -->
+
+        <section>
+
+            <h2 class="section-title">
+                Core <span>Topics</span>
+            </h2>
+
+            <div class="grid">
+
+                <div class="card">
+                    <div class="icon">📦</div>
+
+                    <h3>Arrays</h3>
+
+                    <p>
+                        Learn how arrays store multiple values,
+                        indexing, traversal and common array operations.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">🔗</div>
+
+                    <h3>Linked Lists</h3>
+
+                    <p>
+                        Understand nodes, pointers and different
+                        types of linked lists.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">📚</div>
+
+                    <h3>Stacks</h3>
+
+                    <p>
+                        Learn the LIFO concept and operations such
+                        as push, pop and peek.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">🚶</div>
+
+                    <h3>Queues</h3>
+
+                    <p>
+                        Understand FIFO, enqueue, dequeue and
+                        different types of queues.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">🌳</div>
+
+                    <h3>Trees</h3>
+
+                    <p>
+                        Learn binary trees, binary search trees,
+                        traversal and tree-based problem solving.
+                    </p>
+                </div>
+
+
+                <div class="card">
+                    <div class="icon">🕸️</div>
+
+                    <h3>Graphs</h3>
+
+                    <p>
+                        Understand vertices, edges, graph traversal,
+                        BFS and DFS.
+                    </p>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ALGORITHMS -->
+
+        <section>
+
+            <h2 class="section-title">
+                Important <span>Algorithms</span>
+            </h2>
+
+            <div class="grid">
+
+                <div class="card">
+
+                    <div class="icon">🔍</div>
+
+                    <h3>Searching</h3>
+
+                    <p>
+                        Learn Linear Search and Binary Search
+                        and understand their efficiency.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">🔃</div>
+
+                    <h3>Sorting</h3>
+
+                    <p>
+                        Learn Bubble Sort, Selection Sort,
+                        Insertion Sort, Merge Sort and Quick Sort.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">⚡</div>
+
+                    <h3>Recursion</h3>
+
+                    <p>
+                        Understand how a function calls itself
+                        and how recursion solves problems.
+                    </p>
+
+                </div>
+
+
+                <div class="card">
+
+                    <div class="icon">⏱️</div>
+
+                    <h3>Complexity</h3>
+
+                    <p>
+                        Learn time complexity, space complexity
+                        and Big-O notation.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ROADMAP -->
+
+        <section>
+
+            <h2 class="section-title">
+                DSA <span>Learning Roadmap</span>
+            </h2>
+
+            <div class="roadmap">
+
+                <div class="step">
+
+                    <div class="step-number">1</div>
+
+                    <h3>Programming Basics</h3>
+
+                    <p>
+                        Learn variables, loops, functions,
+                        conditions and basic programming logic.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">2</div>
+
+                    <h3>Arrays & Strings</h3>
+
+                    <p>
+                        Practice arrays, strings, searching,
+                        traversal and common problems.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">3</div>
+
+                    <h3>Linked Lists</h3>
+
+                    <p>
+                        Learn nodes, insertion, deletion,
+                        traversal and linked-list problems.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">4</div>
+
+                    <h3>Stack & Queue</h3>
+
+                    <p>
+                        Understand LIFO and FIFO data structures
+                        and their practical applications.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">5</div>
+
+                    <h3>Trees & Graphs</h3>
+
+                    <p>
+                        Learn tree traversal, graphs,
+                        BFS, DFS and related problems.
+                    </p>
+
+                </div>
+
+
+                <div class="step">
+
+                    <div class="step-number">6</div>
+
+                    <h3>Algorithms & Complexity</h3>
+
+                    <p>
+                        Learn sorting, searching, recursion,
+                        Big-O and efficient problem solving.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- IMPORTANT SKILLS -->
+
+        <section>
+
+            <h2 class="section-title">
+                Important <span>Skills</span>
+            </h2>
+
+            <div class="skills">
+
+                <div class="skill">Problem Solving</div>
+                <div class="skill">Logical Thinking</div>
+                <div class="skill">Arrays</div>
+                <div class="skill">Linked Lists</div>
+                <div class="skill">Stacks</div>
+                <div class="skill">Queues</div>
+                <div class="skill">Trees</div>
+                <div class="skill">Graphs</div>
+                <div class="skill">Searching</div>
+                <div class="skill">Sorting</div>
+                <div class="skill">Recursion</div>
+                <div class="skill">Big-O</div>
+                <div class="skill">Algorithms</div>
+                <div class="skill">Programming</div>
+
+            </div>
+
+        </section>
+
+
+        <!-- BEGINNER PROJECTS -->
+
+        <section>
+
+            <h2 class="section-title">
+                Beginner <span>Projects</span>
+            </h2>
+
+            <div class="grid">
+
+                <div class="project-card">
+
+                    <h3>📋 Student Record Manager</h3>
+
+                    <p>
+                        Build a simple program that stores,
+                        searches and manages student records
+                        using data structures.
+                    </p>
+
+                </div>
+
+
+                <div class="project-card">
+
+                    <h3>📚 Library Search System</h3>
+
+                    <p>
+                        Create a program that searches books
+                        and manages library records efficiently.
+                    </p>
+
+                </div>
+
+
+                <div class="project-card">
+
+                    <h3>🛒 Product Sorting System</h3>
+
+                    <p>
+                        Build a small application that sorts
+                        products according to price or name.
+                    </p>
+
+                </div>
+
+
+                <div class="project-card">
+
+                    <h3>🧩 Algorithm Practice App</h3>
+
+                    <p>
+                        Create a collection of small programming
+                        problems for practicing searching and sorting.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    Student Career & Learning Management System
+    <br>
+    Learn • Practice • Build • Grow
+
+</footer>
+
+
+<script>
+
+    const loggedInUsername =
+        sessionStorage.getItem("loggedInUsername");
+
+    if (!loggedInUsername) {
+        window.location.href = "login.html";
+    }
+
+
+    function goBack() {
+        window.location.href = "learning.html";
+    }
+
+
+    function goToProfile() {
+        window.location.href = "profile.html";
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Verify Email | Student Career & Learning</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+
+            background:
+                radial-gradient(circle at 15% 15%, rgba(59,130,246,.35), transparent 30%),
+                radial-gradient(circle at 85% 85%, rgba(6,182,212,.30), transparent 30%),
+                linear-gradient(135deg, #020617, #082044, #062d4f);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 440px;
+            padding: 40px;
+
+            background: rgba(255,255,255,.09);
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 26px;
+
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            box-shadow: 0 30px 70px rgba(0,0,0,.45);
+            color: white;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 20px;
+
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+
+            font-size: 32px;
+
+            box-shadow: 0 12px 30px rgba(6,182,212,.25);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #a9b8ce;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .email-box {
+            padding: 14px;
+            margin-bottom: 24px;
+
+            border-radius: 12px;
+
+            background: rgba(255,255,255,.08);
+            border: 1px solid rgba(255,255,255,.12);
+
+            text-align: center;
+
+            color: #67e8f9;
+            font-size: 14px;
+            word-break: break-word;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 9px;
+
+            color: #dbeafe;
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        input {
+            width: 100%;
+            height: 56px;
+
+            border: none;
+            outline: none;
+            border-radius: 13px;
+
+            background: rgba(255,255,255,.96);
+            color: #172033;
+
+            text-align: center;
+
+            font-size: 24px;
+            font-weight: 700;
+
+            letter-spacing: 8px;
+        }
+
+        input:focus {
+            box-shadow: 0 0 0 4px rgba(56,189,248,.15);
+        }
+
+        .verify-btn {
+            width: 100%;
+            height: 54px;
+
+            margin-top: 20px;
+
+            border: none;
+            border-radius: 13px;
+
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 750;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+        .verify-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .verify-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back {
+            display: block;
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            color: #9fb0c6;
+
+            font-size: 13px;
+
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: #67e8f9;
+        }
+
+        .security {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #8495ad;
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 500px) {
+            .card {
+                padding: 30px 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="card">
+
+        <div class="logo">
+            ✉️
+        </div>
+
+        <h1>
+            Verify Your Email
+        </h1>
+
+        <p class="subtitle">
+            We have sent a 6-digit OTP to your email address.
+        </p>
+
+        <div class="email-box" id="emailDisplay">
+            Loading email...
+        </div>
+
+        <form id="otpForm">
+
+            <label for="otp">
+                Enter OTP
+            </label>
+
+            <input
+                type="text"
+                id="otp"
+                maxlength="6"
+                inputmode="numeric"
+                autocomplete="one-time-code"
+                placeholder="000000"
+                required
+            >
+
+            <button
+                type="submit"
+                class="verify-btn"
+                id="verifyBtn"
+            >
+                Verify OTP →
+            </button>
+
+        </form>
+
+        <a
+            href="register.html"
+            class="back"
+        >
+            ← Back to Registration
+        </a>
+
+        <div class="security">
+            🔒 OTP is valid for 5 minutes
+        </div>
+
+    </div>
+
+
+    <script>
+
+        const email =
+            sessionStorage.getItem(
+                "registrationEmail"
+            );
+
+        const emailDisplay =
+            document.getElementById(
+                "emailDisplay"
+            );
+
+
+        // Check email
+        if (!email) {
+
+            emailDisplay.innerText =
+                "No email found";
+
+        } else {
+
+            emailDisplay.innerText =
+                email;
+
+        }
+
+
+        // Allow only numbers
+        document
+            .getElementById("otp")
+            .addEventListener(
+                "input",
+                function() {
+
+                    this.value =
+                        this.value
+                            .replace(/\D/g, "")
+                            .slice(0, 6);
+
+                }
+            );
+
+
+        // Verify OTP
+        document
+            .getElementById("otpForm")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    if (!email) {
+
+                        alert(
+                            "Email information is missing."
+                        );
+
+                        return;
+                    }
+
+
+                    const otp =
+                        document
+                            .getElementById("otp")
+                            .value
+                            .trim();
+
+
+                    if (!/^[0-9]{6}$/.test(otp)) {
+
+                        alert(
+                            "Please enter a valid 6-digit OTP."
+                        );
+
+                        return;
+                    }
+
+
+                    const button =
+                        document.getElementById(
+                            "verifyBtn"
+                        );
+
+
+                    button.disabled = true;
+
+                    button.innerText =
+                        "Verifying...";
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                "/api/otp/verify?email=" +
+                                encodeURIComponent(email) +
+                                "&otp=" +
+                                encodeURIComponent(otp),
+                                {
+                                    method: "POST"
+                                }
+                            );
+
+
+                        const message =
+                            await response.text();
+
+
+                        if (response.ok &&
+                            message.includes(
+                                "successfully"
+                            )) {
+
+                            sessionStorage.setItem(
+                                "emailVerified",
+                                "true"
+                            );
+
+
+                            alert(
+                                "Email verified successfully! ✅"
+                            );
+
+
+                            // Next page will be created later
+                            window.location.href =
+                                "create-account.html";
+
+
+                        } else {
+
+                            alert(
+                                "Invalid or expired OTP."
+                            );
+
+                        }
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        alert(
+                            "Server connection failed.\n\n" +
+                            "Please make sure Spring Boot is running."
+                        );
+
+                    } finally {
+
+                        button.disabled = false;
+
+                        button.innerText =
+                            "Verify OTP →";
+
+                    }
+
+                }
+            );
+
+    </script>
+
+</body>
+</html>

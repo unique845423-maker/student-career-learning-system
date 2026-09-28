@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Government Opportunities | Student Career & Learning Management System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background:
+                radial-gradient(circle at top left, #1e3a8a, transparent 35%),
+                radial-gradient(circle at bottom right, #581c87, transparent 35%),
+                #020617;
+
+            color: white;
+            padding: 25px;
+        }
+
+        .container {
+            max-width: 1250px;
+            margin: auto;
+        }
+
+        /* HEADER */
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+
+            padding: 20px 25px;
+            margin-bottom: 30px;
+
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+
+            border-radius: 20px;
+            backdrop-filter: blur(15px);
+        }
+
+        .header h1 {
+            font-size: 28px;
+        }
+
+        .header p {
+            color: #cbd5e1;
+            margin-top: 6px;
+        }
+
+        .back-btn {
+            padding: 12px 20px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: #2563eb;
+            color: white;
+
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
+            transform: translateY(-2px);
+        }
+
+        /* HERO */
+
+        .hero {
+            text-align: center;
+            padding: 45px 25px;
+
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            border-radius: 25px;
+
+            margin-bottom: 35px;
+
+            backdrop-filter: blur(15px);
+        }
+
+        .hero-icon {
+            font-size: 70px;
+            margin-bottom: 15px;
+        }
+
+        .hero h2 {
+            font-size: 36px;
+            margin-bottom: 12px;
+        }
+
+        .hero p {
+            max-width: 800px;
+            margin: auto;
+
+            color: #cbd5e1;
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        /* SECTION */
+
+        .section-title {
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(280px, 1fr));
+
+            gap: 22px;
+
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.08);
+
+            border: 1px solid rgba(255,255,255,0.14);
+
+            border-radius: 20px;
+
+            padding: 25px;
+
+            backdrop-filter: blur(15px);
+
+            transition: 0.3s;
+
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(96,165,250,0.7);
+
+            box-shadow:
+                0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        .card-icon {
+            font-size: 45px;
+            margin-bottom: 15px;
+        }
+
+        .card h3 {
+            font-size: 22px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            color: #cbd5e1;
+            line-height: 1.6;
+            font-size: 14px;
+        }
+
+        /* INFO */
+
+        .info-box {
+            margin-top: 18px;
+
+            background: rgba(0,0,0,0.2);
+
+            padding: 15px;
+
+            border-radius: 12px;
+
+            line-height: 1.7;
+
+            color: #e2e8f0;
+
+            font-size: 14px;
+        }
+
+        .info-box strong {
+            color: #93c5fd;
+        }
+
+        /* BUTTON */
+
+        .official-btn {
+            display: inline-block;
+
+            margin-top: 18px;
+
+            padding: 10px 16px;
+
+            border-radius: 10px;
+
+            background: #2563eb;
+
+            color: white;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            transition: 0.3s;
+        }
+
+        .official-btn:hover {
+            background: #1d4ed8;
+        }
+
+        /* APPLICATION STEPS */
+
+        .steps {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 20px;
+
+            margin-bottom: 40px;
+        }
+
+        .step {
+            background: rgba(255,255,255,0.07);
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            padding: 25px;
+
+            border-radius: 18px;
+
+            text-align: center;
+        }
+
+        .step-number {
+            width: 45px;
+            height: 45px;
+
+            margin: auto;
+            margin-bottom: 15px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: #2563eb;
+
+            font-weight: bold;
+            font-size: 18px;
+        }
+
+        .step h3 {
+            margin-bottom: 8px;
+        }
+
+        .step p {
+            color: #cbd5e1;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+
+        /* WARNING */
+
+        .warning {
+            background: rgba(234,179,8,0.12);
+
+            border: 1px solid rgba(234,179,8,0.4);
+
+            padding: 20px;
+
+            border-radius: 18px;
+
+            margin-bottom: 40px;
+
+            color: #fef3c7;
+
+            line-height: 1.7;
+        }
+
+        .warning strong {
+            color: #facc15;
+        }
+
+        /* FOOTER */
+
+        footer {
+            text-align: center;
+
+            padding: 25px;
+
+            margin-top: 30px;
+
+            color: #94a3b8;
+
+            font-size: 13px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:700px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .hero h2 {
+                font-size: 28px;
+            }
+
+            .hero-icon {
+                font-size: 55px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- HEADER -->
+
+    <div class="header">
+
+        <div>
+
+            <h1>
+                🏛️ Government Opportunities
+            </h1>
+
+            <p>
+                Explore government exams, scholarships and career pathways.
+            </p>
+
+        </div>
+
+
+        <button
+            class="back-btn"
+            onclick="goBack()">
+
+            ← Back to Dashboard
+
+        </button>
+
+    </div>
+
+
+
+    <!-- HERO -->
+
+    <div class="hero">
+
+        <div class="hero-icon">
+            🏛️
+        </div>
+
+        <h2>
+            Government Opportunities for Students
+        </h2>
+
+        <p>
+
+            Discover government examinations, scholarships,
+            education opportunities and career pathways.
+            Check eligibility, qualifications and official
+            application information before applying.
+
+        </p>
+
+    </div>
+
+
+
+    <!-- GOVERNMENT EXAMS -->
+
+    <h2 class="section-title">
+        📝 Government Exams & Career Pathways
+    </h2>
+
+
+    <div class="cards">
+
+
+        <!-- UPSC -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🇮🇳
+            </div>
+
+            <h3>
+                UPSC Examinations
+            </h3>
+
+            <p>
+                Explore examinations conducted by the
+                Union Public Service Commission for
+                different government career pathways.
+            </p>
+
+            <div class="info-box">
+
+                <strong>Eligibility:</strong>
+                Depends on the specific examination.
+
+                <br>
+
+                <strong>Qualification:</strong>
+                Depends on the examination and its
+                official notification.
+
+                <br>
+
+                <strong>How to Apply:</strong>
+                Read the official examination notification
+                and apply through the official UPSC portal.
+
+            </div>
+
+            <a
+                class="official-btn"
+                href="https://www.upsc.gov.in/examinations/active-exams"
+                target="_blank">
+
+                View Active UPSC Exams →
+
+            </a>
+
+        </div>
+
+
+
+        <!-- SCHOLARSHIP -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎓
+            </div>
+
+            <h3>
+                Government Scholarships
+            </h3>
+
+            <p>
+                Find scholarships and financial-support
+                schemes available through the National
+                Scholarship Portal.
+            </p>
+
+            <div class="info-box">
+
+                <strong>Eligibility:</strong>
+                Depends on the scholarship scheme.
+
+                <br>
+
+                <strong>Qualification:</strong>
+                Depends on the particular scheme.
+
+                <br>
+
+                <strong>How to Apply:</strong>
+                Check the scheme requirements and
+                complete the application on the official
+                scholarship portal.
+
+            </div>
+
+            <a
+                class="official-btn"
+                href="https://scholarships.gov.in/All-Scholarships"
+                target="_blank">
+
+                Explore Scholarships →
+
+            </a>
+
+        </div>
+
+
+
+        <!-- NCS -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                💼
+            </div>
+
+            <h3>
+                National Career Service
+            </h3>
+
+            <p>
+                Explore career-related schemes,
+                employment services and career
+                information.
+            </p>
+
+            <div class="info-box">
+
+                <strong>Eligibility:</strong>
+                Depends on the particular service or scheme.
+
+                <br>
+
+                <strong>Qualification:</strong>
+                Depends on the opportunity.
+
+                <br>
+
+                <strong>How to Apply:</strong>
+                Visit the official NCS portal and check
+                the relevant scheme or service.
+
+            </div>
+
+            <a
+                class="official-btn"
+                href="https://ncs.gov.in/careerSchemes"
+                target="_blank">
+
+                Explore Career Schemes →
+
+            </a>
+
+        </div>
+
+
+
+        <!-- UGC -->
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎓
+            </div>
+
+            <h3>
+                Higher Education Opportunities
+            </h3>
+
+            <p>
+                Explore student information and higher
+                education resources provided through
+                the University Grants Commission.
+            </p>
+
+            <div class="info-box">
+
+                <strong>Eligibility:</strong>
+                Depends on the university, programme
+                or specific opportunity.
+
+                <br>
+
+                <strong>Qualification:</strong>
+                Depends on the selected programme.
+
+                <br>
+
+                <strong>How to Apply:</strong>
+                Check the official information and
+                instructions provided for the opportunity.
+
+            </div>
+
+            <a
+                class="official-btn"
+                href="https://www.ugc.gov.in/Home/student_Corner"
+                target="_blank">
+
+                Visit Student Corner →
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- ELIGIBILITY -->
+
+    <h2 class="section-title">
+        🎯 Understanding Eligibility
+    </h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎂
+            </div>
+
+            <h3>
+                Age
+            </h3>
+
+            <p>
+                Government opportunities may have
+                minimum and maximum age requirements.
+                Always check the official notification.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📚
+            </div>
+
+            <h3>
+                Educational Qualification
+            </h3>
+
+            <p>
+                Required qualification can vary from
+                school-level education to diploma,
+                graduation or higher qualifications.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🪪
+            </div>
+
+            <h3>
+                Documents
+            </h3>
+
+            <p>
+                Applicants may need identity documents,
+                educational certificates, photographs
+                and other documents specified in the
+                official notification.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                📋
+            </div>
+
+            <h3>
+                Other Requirements
+            </h3>
+
+            <p>
+                Some opportunities may have additional
+                requirements. Read the complete official
+                notification before applying.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- REQUIRED QUALIFICATION -->
+
+    <h2 class="section-title">
+        📚 Required Qualification
+    </h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🏫
+            </div>
+
+            <h3>
+                School Level
+            </h3>
+
+            <p>
+                Some government scholarships and
+                student schemes are available for
+                school students.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                💻
+            </div>
+
+            <h3>
+                Diploma
+            </h3>
+
+            <p>
+                Some opportunities may accept diploma
+                qualifications. Eligibility depends on
+                the specific notification.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎓
+            </div>
+
+            <h3>
+                Graduation
+            </h3>
+
+            <p>
+                Many government examinations and
+                career opportunities specify graduation
+                or an equivalent qualification.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🚀
+            </div>
+
+            <h3>
+                Higher Qualification
+            </h3>
+
+            <p>
+                Certain specialised opportunities may
+                require postgraduate or professional
+                qualifications.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- HOW TO APPLY -->
+
+    <h2 class="section-title">
+        📝 How to Apply
+    </h2>
+
+
+    <div class="steps">
+
+
+        <div class="step">
+
+            <div class="step-number">
+                1
+            </div>
+
+            <h3>
+                Find an Opportunity
+            </h3>
+
+            <p>
+                Select an examination, scholarship
+                or government career opportunity.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                2
+            </div>
+
+            <h3>
+                Check Eligibility
+            </h3>
+
+            <p>
+                Read the official notification and
+                verify age, qualification and other
+                requirements.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                3
+            </div>
+
+            <h3>
+                Prepare Documents
+            </h3>
+
+            <p>
+                Keep the required educational and
+                identity documents ready.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                4
+            </div>
+
+            <h3>
+                Complete Application
+            </h3>
+
+            <p>
+                Fill in the official application form
+                carefully.
+            </p>
+
+        </div>
+
+
+        <div class="step">
+
+            <div class="step-number">
+                5
+            </div>
+
+            <h3>
+                Submit Application
+            </h3>
+
+            <p>
+                Submit the application before the
+                official deadline.
+            </p>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- IMPORTANT UPDATES -->
+
+    <h2 class="section-title">
+        📅 Important Updates
+    </h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🔔
+            </div>
+
+            <h3>
+                UPSC Updates
+            </h3>
+
+            <p>
+                Check the official UPSC website for
+                active examinations, notifications and
+                examination-related updates.
+            </p>
+
+            <a
+                class="official-btn"
+                href="https://www.upsc.gov.in/"
+                target="_blank">
+
+                Official UPSC Website →
+
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎓
+            </div>
+
+            <h3>
+                Scholarship Updates
+            </h3>
+
+            <p>
+                Check the National Scholarship Portal
+                for scholarship announcements,
+                applications and status information.
+            </p>
+
+            <a
+                class="official-btn"
+                href="https://scholarships.gov.in/student-announcements"
+                target="_blank">
+
+                Scholarship Updates →
+
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                💼
+            </div>
+
+            <h3>
+                Career Scheme Updates
+            </h3>
+
+            <p>
+                Check the National Career Service for
+                career-related schemes and services.
+            </p>
+
+            <a
+                class="official-btn"
+                href="https://ncs.gov.in/careerSchemes"
+                target="_blank">
+
+                Career Scheme Updates →
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- OFFICIAL SOURCES -->
+
+    <h2 class="section-title">
+        💻 Official Government Portals
+    </h2>
+
+
+    <div class="cards">
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🇮🇳
+            </div>
+
+            <h3>
+                UPSC
+            </h3>
+
+            <p>
+                Union Public Service Commission
+            </p>
+
+            <a
+                class="official-btn"
+                href="https://www.upsc.gov.in/"
+                target="_blank">
+
+                Open Official Website →
+
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎓
+            </div>
+
+            <h3>
+                National Scholarship Portal
+            </h3>
+
+            <p>
+                Government scholarship information
+                and application portal.
+            </p>
+
+            <a
+                class="official-btn"
+                href="https://scholarships.gov.in/"
+                target="_blank">
+
+                Open Official Website →
+
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                💼
+            </div>
+
+            <h3>
+                National Career Service
+            </h3>
+
+            <p>
+                Career and employment-related
+                government services.
+            </p>
+
+            <a
+                class="official-btn"
+                href="https://ncs.gov.in/"
+                target="_blank">
+
+                Open Official Website →
+
+            </a>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="card-icon">
+                🎓
+            </div>
+
+            <h3>
+                UGC Student Corner
+            </h3>
+
+            <p>
+                Student-related higher education
+                information.
+            </p>
+
+            <a
+                class="official-btn"
+                href="https://www.ugc.gov.in/Home/student_Corner"
+                target="_blank">
+
+                Open Student Corner →
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+
+    <!-- WARNING -->
+
+    <div class="warning">
+
+        <strong>
+            ⚠️ Important:
+        </strong>
+
+        Government examination and scholarship
+        eligibility, application dates, fees and
+        requirements can change.
+
+        Always verify the latest information from
+        the official government website or official
+        notification before applying.
+
+    </div>
+
+
+
+    <footer>
+
+        Student Career & Learning Management System
+        <br><br>
+
+        Government Opportunities Section
+
+    </footer>
+
+
+</div>
+
+
+
+<script>
+
+    function goBack() {
+
+        window.location.href = "dashboard.html";
+
+    }
+
+</script>
+
+
+</body>
+
+</html>

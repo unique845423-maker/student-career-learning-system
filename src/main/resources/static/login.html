@@ -1,0 +1,979 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Student Login | Student Career & Learning Management System</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        :root {
+            --primary: #00c6ff;
+            --primary-dark: #0072ff;
+            --text: #ffffff;
+            --muted: #a9c5d8;
+            --card: rgba(255, 255, 255, 0.09);
+            --border: rgba(255, 255, 255, 0.16);
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 25px;
+
+            color: var(--text);
+
+            background:
+                radial-gradient(circle at 15% 20%,
+                    rgba(0, 198, 255, 0.18),
+                    transparent 30%),
+
+                radial-gradient(circle at 85% 80%,
+                    rgba(0, 114, 255, 0.20),
+                    transparent 30%),
+
+                linear-gradient(
+                    135deg,
+                    #030b1c,
+                    #071d38,
+                    #06283d
+                );
+
+            overflow-x: hidden;
+        }
+
+        /* Background decorative circles */
+
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+
+            width: 220px;
+            height: 220px;
+
+            border-radius: 50%;
+
+            background: rgba(0, 198, 255, 0.06);
+
+            filter: blur(10px);
+
+            pointer-events: none;
+        }
+
+        body::before {
+            top: -80px;
+            left: -80px;
+        }
+
+        body::after {
+            right: -80px;
+            bottom: -80px;
+        }
+
+        .login-container {
+            width: 100%;
+            max-width: 440px;
+
+            position: relative;
+            z-index: 2;
+        }
+
+        .login-card {
+            padding: 38px;
+
+            border-radius: 26px;
+
+            background:
+                linear-gradient(
+                    145deg,
+                    rgba(255,255,255,0.12),
+                    rgba(255,255,255,0.055)
+                );
+
+            border: 1px solid var(--border);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.42),
+
+                inset 0 1px 0
+                rgba(255,255,255,0.08);
+
+            animation: cardEntry 0.7s ease;
+        }
+
+        @keyframes cardEntry {
+            from {
+                opacity: 0;
+                transform: translateY(25px) scale(0.98);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* Logo */
+
+        .logo-wrapper {
+            display: flex;
+            justify-content: center;
+
+            margin-bottom: 18px;
+        }
+
+        .logo {
+            width: 82px;
+            height: 82px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 24px;
+
+            font-size: 42px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(0,198,255,0.22),
+                    rgba(0,114,255,0.18)
+                );
+
+            border:
+                1px solid
+                rgba(0,198,255,0.30);
+
+            box-shadow:
+                0 15px 40px
+                rgba(0,198,255,0.16);
+
+            animation: floatLogo 3s ease-in-out infinite;
+        }
+
+        @keyframes floatLogo {
+            0%, 100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+
+        h1 {
+            text-align: center;
+
+            font-size: 30px;
+            line-height: 1.2;
+
+            margin-bottom: 10px;
+
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+        /* Form */
+
+        .form-group {
+            margin-bottom: 21px;
+        }
+
+        label {
+            display: block;
+
+            margin-bottom: 9px;
+
+            color: #c7ddeb;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        input {
+            width: 100%;
+
+            height: 50px;
+
+            padding: 0 15px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.17);
+
+            border-radius: 12px;
+
+            outline: none;
+
+            background:
+                rgba(0,0,0,0.18);
+
+            color: white;
+
+            font-size: 15px;
+
+            transition:
+                border-color 0.25s ease,
+                box-shadow 0.25s ease,
+                background 0.25s ease;
+        }
+
+        input::placeholder {
+            color: #7895a7;
+        }
+
+        input:focus {
+            border-color: var(--primary);
+
+            background:
+                rgba(0,198,255,0.05);
+
+            box-shadow:
+                0 0 0 3px
+                rgba(0,198,255,0.10);
+        }
+
+        /* Password */
+
+        #password {
+            padding-right: 52px;
+        }
+
+        .password-toggle {
+            position: absolute;
+
+            right: 10px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            width: 36px;
+            height: 36px;
+
+            border: none;
+
+            border-radius: 9px;
+
+            background: transparent;
+
+            color: #8faabb;
+
+            font-size: 17px;
+
+            cursor: pointer;
+
+            transition: 0.2s ease;
+        }
+
+        .password-toggle:hover {
+            background: rgba(255,255,255,0.08);
+
+            color: white;
+        }
+
+        /* Login button */
+
+        .login-btn {
+            width: 100%;
+
+            height: 52px;
+
+            margin-top: 4px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    var(--primary),
+                    var(--primary-dark)
+                );
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 12px 30px
+                rgba(0,153,255,0.22);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease,
+                opacity 0.2s ease;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 16px 36px
+                rgba(0,153,255,0.32);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .login-btn:disabled {
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        /* Loading */
+
+        .loading-content {
+            display: inline-flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 9px;
+        }
+
+        .spinner {
+            width: 17px;
+            height: 17px;
+
+            border:
+                2px solid
+                rgba(255,255,255,0.35);
+
+            border-top-color: white;
+
+            border-radius: 50%;
+
+            animation: spin 0.7s linear infinite;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /* Message */
+
+        #message {
+            min-height: 22px;
+
+            margin-top: 18px;
+
+            padding: 0 5px;
+
+            text-align: center;
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+            transition: 0.25s ease;
+        }
+
+        .success-message {
+            color: #6ff7b0;
+        }
+
+        .error-message {
+            color: #ff8f9d;
+        }
+
+        /* Divider */
+
+        .divider {
+            display: flex;
+
+            align-items: center;
+
+            gap: 12px;
+
+            margin: 26px 0 20px;
+
+            color: #7592a5;
+
+            font-size: 12px;
+        }
+
+        .divider::before,
+        .divider::after {
+            content: "";
+
+            flex: 1;
+
+            height: 1px;
+
+            background:
+                rgba(255,255,255,0.10);
+        }
+
+        /* Register */
+
+        .register-link {
+            text-align: center;
+
+            color: var(--muted);
+
+            font-size: 14px;
+
+            line-height: 1.6;
+        }
+
+        .register-link a {
+            color: var(--primary);
+
+            text-decoration: none;
+
+            font-weight: bold;
+
+            margin-left: 4px;
+        }
+
+        .register-link a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+
+        .secure-text {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #668497;
+
+            font-size: 11px;
+
+            letter-spacing: 0.2px;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 500px) {
+
+            body {
+                padding: 15px;
+            }
+
+            .login-card {
+                padding: 28px 22px;
+
+                border-radius: 22px;
+            }
+
+            h1 {
+                font-size: 26px;
+            }
+
+            .logo {
+                width: 72px;
+                height: 72px;
+
+                font-size: 36px;
+            }
+
+            .subtitle {
+                font-size: 13px;
+
+                margin-bottom: 25px;
+            }
+
+            input,
+            .login-btn {
+                height: 50px;
+            }
+        }
+
+        @media (max-width: 350px) {
+
+            .login-card {
+                padding: 24px 17px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="login-container">
+
+        <div class="login-card">
+
+            <!-- LOGO -->
+
+            <div class="logo-wrapper">
+
+                <div class="logo">
+                    🎓
+                </div>
+
+            </div>
+
+
+            <!-- TITLE -->
+
+            <h1>
+                Student Login
+            </h1>
+
+            <p class="subtitle">
+                Student Career & Learning Management System
+            </p>
+
+
+            <!-- LOGIN FORM -->
+
+            <form id="loginForm">
+
+                <!-- USERNAME -->
+
+                <div class="form-group">
+
+                    <label for="username">
+                        Username
+                    </label>
+
+                    <input
+                        type="text"
+                        id="username"
+                        name="username"
+                        placeholder="Enter your username"
+                        required
+                        autocomplete="username"
+                        maxlength="100"
+                    >
+
+                </div>
+
+
+                <!-- PASSWORD -->
+
+                <div class="form-group">
+
+                    <label for="password">
+                        Password
+                    </label>
+
+                    <div class="input-wrapper">
+
+                        <input
+                            type="password"
+                            id="password"
+                            name="password"
+                            placeholder="Enter your password"
+                            required
+                            autocomplete="current-password"
+                        >
+
+                        <button
+                            type="button"
+                            class="password-toggle"
+                            id="passwordToggle"
+                            aria-label="Show password"
+                            title="Show password">
+                            👁
+                        </button>
+
+                    </div>
+
+                </div>
+
+
+                <!-- LOGIN BUTTON -->
+
+                <button
+                    type="submit"
+                    class="login-btn"
+                    id="loginBtn">
+
+                    Login
+
+                </button>
+
+            </form>
+
+
+            <!-- MESSAGE -->
+
+            <div id="message"></div>
+
+
+            <!-- DIVIDER -->
+
+            <div class="divider">
+                New student?
+            </div>
+
+
+            <!-- REGISTER -->
+
+            <div class="register-link">
+
+                Don't have an account?
+
+                <a href="register.html">
+                    Create Account
+                </a>
+
+            </div>
+
+
+            <!-- SECURITY -->
+
+            <div class="secure-text">
+                🔒 Your student account session is protected
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <script>
+
+        // ==========================================
+        // ELEMENTS
+        // ==========================================
+
+        const loginForm =
+            document.getElementById("loginForm");
+
+        const usernameInput =
+            document.getElementById("username");
+
+        const passwordInput =
+            document.getElementById("password");
+
+        const passwordToggle =
+            document.getElementById("passwordToggle");
+
+        const loginBtn =
+            document.getElementById("loginBtn");
+
+        const message =
+            document.getElementById("message");
+
+
+        // ==========================================
+        // SHOW / HIDE PASSWORD
+        // ==========================================
+
+        passwordToggle.addEventListener(
+            "click",
+            function () {
+
+                const isPassword =
+                    passwordInput.type === "password";
+
+                passwordInput.type =
+                    isPassword
+                        ? "text"
+                        : "password";
+
+                passwordToggle.textContent =
+                    isPassword
+                        ? "🙈"
+                        : "👁";
+
+                passwordToggle.setAttribute(
+                    "aria-label",
+                    isPassword
+                        ? "Hide password"
+                        : "Show password"
+                );
+
+                passwordToggle.setAttribute(
+                    "title",
+                    isPassword
+                        ? "Hide password"
+                        : "Show password"
+                );
+            }
+        );
+
+
+        // ==========================================
+        // CLEAR MESSAGE
+        // ==========================================
+
+        function clearMessage() {
+
+            message.textContent = "";
+
+            message.className = "";
+        }
+
+
+        // ==========================================
+        // SHOW MESSAGE
+        // ==========================================
+
+        function showMessage(
+            text,
+            type
+        ) {
+
+            message.textContent = text;
+
+            message.className =
+                type === "success"
+                    ? "success-message"
+                    : "error-message";
+        }
+
+
+        // ==========================================
+        // LOGIN FORM
+        // ==========================================
+
+        loginForm.addEventListener(
+            "submit",
+            async function (event) {
+
+                event.preventDefault();
+
+                clearMessage();
+
+
+                // Get values
+
+                const username =
+                    usernameInput.value.trim();
+
+                const password =
+                    passwordInput.value;
+
+
+                // ==================================
+                // VALIDATION
+                // ==================================
+
+                if (!username) {
+
+                    showMessage(
+                        "Please enter your username.",
+                        "error"
+                    );
+
+                    usernameInput.focus();
+
+                    return;
+                }
+
+
+                if (!password) {
+
+                    showMessage(
+                        "Please enter your password.",
+                        "error"
+                    );
+
+                    passwordInput.focus();
+
+                    return;
+                }
+
+
+                // ==================================
+                // LOADING STATE
+                // ==================================
+
+                loginBtn.disabled = true;
+
+                loginBtn.innerHTML = `
+                    <span class="loading-content">
+                        <span class="spinner"></span>
+                        Logging in...
+                    </span>
+                `;
+
+
+                try {
+
+                    // ==================================
+                    // LOGIN REQUEST
+                    // ==================================
+
+                    const response =
+                        await fetch(
+                            "/api/auth/login",
+                            {
+                                method: "POST",
+
+                                /*
+                                 * Important:
+                                 * This allows the browser to
+                                 * keep the Spring Boot session
+                                 * cookie (JSESSIONID).
+                                 */
+
+                                credentials: "include",
+
+                                headers: {
+                                    "Content-Type":
+                                        "application/json"
+                                },
+
+                                body: JSON.stringify({
+                                    username: username,
+                                    password: password
+                                })
+                            }
+                        );
+
+
+                    // ==================================
+                    // SERVER RESPONSE
+                    // ==================================
+
+                    const result =
+                        await response.text();
+
+
+                    // ==================================
+                    // LOGIN FAILED
+                    // ==================================
+
+                    if (!response.ok) {
+
+                        showMessage(
+                            result ||
+                            "Invalid username or password.",
+                            "error"
+                        );
+
+                        loginBtn.disabled = false;
+
+                        loginBtn.textContent =
+                            "Login";
+
+                        return;
+                    }
+
+
+                    // ==================================
+                    // LOGIN SUCCESS
+                    // ==================================
+
+                    /*
+                     * Keep the username in browser
+                     * session storage because existing
+                     * profile/dashboard pages use it.
+                     */
+
+                    sessionStorage.setItem(
+                        "loggedInUsername",
+                        username
+                    );
+
+
+                    showMessage(
+                        "Login successful! Opening dashboard...",
+                        "success"
+                    );
+
+
+                    // ==================================
+                    // OPEN DASHBOARD
+                    // ==================================
+
+                    setTimeout(
+                        function () {
+
+                            window.location.href =
+                                "dashboard.html";
+
+                        },
+                        600
+                    );
+
+
+                } catch (error) {
+
+                    console.error(
+                        "Login error:",
+                        error
+                    );
+
+
+                    showMessage(
+                        "Unable to connect to server. Please try again.",
+                        "error"
+                    );
+
+
+                    loginBtn.disabled = false;
+
+                    loginBtn.textContent =
+                        "Login";
+                }
+
+            }
+        );
+
+
+        // ==========================================
+        // AUTO FOCUS
+        // ==========================================
+
+        window.addEventListener(
+            "load",
+            function () {
+
+                usernameInput.focus();
+
+            }
+        );
+
+    </script>
+
+</body>
+
+</html>
+```

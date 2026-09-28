@@ -1,0 +1,784 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cyber Security | Student Career & Learning Management System</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at top left, #1e1b4b, transparent 35%),
+                radial-gradient(circle at bottom right, #3f0f25, transparent 35%),
+                #020617;
+            color: #f8fafc;
+            min-height: 100vh;
+        }
+
+        /* ================= HEADER ================= */
+
+        header {
+            height: 82px;
+            padding: 0 7%;
+
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(2, 6, 23, 0.88);
+            border-bottom: 1px solid rgba(255,255,255,0.10);
+
+            backdrop-filter: blur(15px);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .logo img {
+            width: 210px;
+            height: 58px;
+            object-fit: contain;
+        }
+
+        .back-btn {
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.07);
+
+            color: white;
+
+            padding: 11px 20px;
+            border-radius: 12px;
+
+            font-size: 14px;
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.14);
+            transform: translateY(-2px);
+        }
+
+        /* ================= HERO ================= */
+
+        .hero {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 80px 7% 60px;
+
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-block;
+
+            padding: 8px 16px;
+            border-radius: 30px;
+
+            background: rgba(168,85,247,0.12);
+            border: 1px solid rgba(168,85,247,0.25);
+
+            color: #d8b4fe;
+
+            font-size: 13px;
+            margin-bottom: 22px;
+        }
+
+        .hero h1 {
+            font-size: clamp(36px, 6vw, 64px);
+            line-height: 1.1;
+
+            margin-bottom: 22px;
+
+            background: linear-gradient(
+                90deg,
+                #a78bfa,
+                #ec4899,
+                #f43f5e
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            max-width: 760px;
+            margin: auto;
+
+            color: #cbd5e1;
+
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        /* ================= CONTAINER ================= */
+
+        .container {
+            max-width: 1200px;
+            margin: auto;
+
+            padding: 20px 7% 80px;
+        }
+
+        .section-title {
+            font-size: 30px;
+            margin: 55px 0 25px;
+        }
+
+        .section-title span {
+            color: #c084fc;
+        }
+
+        /* ================= CARDS ================= */
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+
+            gap: 22px;
+        }
+
+        .card {
+            padding: 27px;
+
+            background: rgba(15,23,42,0.72);
+
+            border: 1px solid rgba(255,255,255,0.09);
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 15px 40px rgba(0,0,0,0.22);
+
+            transition:
+                transform 0.3s ease,
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-7px);
+
+            border-color: rgba(192,132,252,0.45);
+
+            box-shadow:
+                0 20px 50px rgba(0,0,0,0.35);
+        }
+
+        .icon {
+            width: 52px;
+            height: 52px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 15px;
+
+            background: rgba(168,85,247,0.13);
+
+            font-size: 25px;
+
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 11px;
+        }
+
+        .card p {
+            color: #94a3b8;
+
+            line-height: 1.7;
+
+            font-size: 14px;
+        }
+
+        /* ================= ROADMAP ================= */
+
+        .roadmap {
+            display: grid;
+            gap: 15px;
+        }
+
+        .roadmap-item {
+            display: flex;
+            align-items: center;
+
+            gap: 18px;
+
+            padding: 20px 22px;
+
+            background: rgba(15,23,42,0.72);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            border-radius: 17px;
+
+            transition: 0.3s;
+        }
+
+        .roadmap-item:hover {
+            transform: translateX(6px);
+
+            border-color:
+                rgba(192,132,252,0.35);
+        }
+
+        .step {
+            min-width: 43px;
+            height: 43px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 50%;
+
+            background: linear-gradient(
+                135deg,
+                #7c3aed,
+                #db2777
+            );
+
+            font-weight: bold;
+        }
+
+        .roadmap-item h3 {
+            margin-bottom: 5px;
+        }
+
+        .roadmap-item p {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* ================= SKILLS ================= */
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .skill {
+            padding: 10px 16px;
+
+            border-radius: 30px;
+
+            background:
+                rgba(168,85,247,0.10);
+
+            border:
+                1px solid rgba(192,132,252,0.20);
+
+            color: #e9d5ff;
+
+            font-size: 14px;
+        }
+
+        /* ================= PROJECTS ================= */
+
+        .project {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project::before {
+            content: "";
+
+            position: absolute;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 3px;
+
+            background: linear-gradient(
+                90deg,
+                #8b5cf6,
+                #ec4899,
+                #f43f5e
+            );
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+
+            padding: 35px 20px;
+
+            border-top:
+                1px solid rgba(255,255,255,0.08);
+
+            color: #64748b;
+
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 900px) {
+
+            .grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media (max-width: 600px) {
+
+            header {
+                padding: 0 20px;
+            }
+
+            .logo img {
+                width: 160px;
+            }
+
+            .hero {
+                padding-top: 55px;
+            }
+
+            .grid {
+                grid-template-columns: 1fr;
+            }
+
+            .roadmap-item {
+                align-items: flex-start;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<header>
+
+    <div class="logo" id="cyberLogo">
+
+        <img
+            src="images/logo.png"
+            alt="Student Career & Learning Management System Logo"
+        >
+
+    </div>
+
+    <button
+        class="back-btn"
+        id="backBtn"
+    >
+        ← Learning
+    </button>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-badge">
+        🔐 Cyber Security
+    </div>
+
+    <h1>
+        Learn Cyber Security
+    </h1>
+
+    <p>
+        Learn cybersecurity fundamentals, networking, Linux,
+        web security, ethical security concepts and the basics
+        of protecting systems and data.
+    </p>
+
+</section>
+
+
+<main class="container">
+
+
+    <!-- ================= CORE TOPICS ================= -->
+
+    <h2 class="section-title">
+        Core <span>Topics</span>
+    </h2>
+
+    <div class="grid">
+
+
+        <div class="card">
+
+            <div class="icon">🛡️</div>
+
+            <h3>Cyber Security Fundamentals</h3>
+
+            <p>
+                Understand cybersecurity concepts, common threats,
+                security principles and safe computing practices.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🌐</div>
+
+            <h3>Networking</h3>
+
+            <p>
+                Learn IP addresses, TCP/IP, DNS, HTTP, ports,
+                protocols and basic network security.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🐧</div>
+
+            <h3>Linux</h3>
+
+            <p>
+                Learn Linux commands, file systems, permissions,
+                processes and basic system administration.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🔒</div>
+
+            <h3>Web Security</h3>
+
+            <p>
+                Understand common web security concepts,
+                authentication, secure coding and application protection.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🔑</div>
+
+            <h3>Cryptography</h3>
+
+            <p>
+                Learn the basics of encryption, hashing,
+                digital signatures and secure communication.
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <div class="icon">🚨</div>
+
+            <h3>Security Monitoring</h3>
+
+            <p>
+                Understand logs, alerts, incident response
+                and the basic concepts of security monitoring.
+            </p>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= ROADMAP ================= -->
+
+    <h2 class="section-title">
+        Cyber Security <span>Roadmap</span>
+    </h2>
+
+    <div class="roadmap">
+
+
+        <div class="roadmap-item">
+
+            <div class="step">1</div>
+
+            <div>
+
+                <h3>Computer Fundamentals</h3>
+
+                <p>
+                    Understand operating systems, files,
+                    applications and basic computer concepts.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <div class="step">2</div>
+
+            <div>
+
+                <h3>Networking Basics</h3>
+
+                <p>
+                    Learn networks, IP addressing, protocols,
+                    DNS, ports and network devices.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <div class="step">3</div>
+
+            <div>
+
+                <h3>Linux Fundamentals</h3>
+
+                <p>
+                    Practice Linux commands, permissions,
+                    processes and system administration.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <div class="step">4</div>
+
+            <div>
+
+                <h3>Security Fundamentals</h3>
+
+                <p>
+                    Learn authentication, authorization,
+                    encryption, threats and security principles.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <div class="step">5</div>
+
+            <div>
+
+                <h3>Web & Application Security</h3>
+
+                <p>
+                    Understand secure web development and
+                    common application security concepts.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="roadmap-item">
+
+            <div class="step">6</div>
+
+            <div>
+
+                <h3>Security Projects</h3>
+
+                <p>
+                    Build safe educational projects and
+                    practice security analysis in authorized environments.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= SKILLS ================= -->
+
+    <h2 class="section-title">
+        Important <span>Skills</span>
+    </h2>
+
+    <div class="skills">
+
+        <div class="skill">Networking</div>
+        <div class="skill">Linux</div>
+        <div class="skill">Python</div>
+        <div class="skill">Cyber Security</div>
+        <div class="skill">Web Security</div>
+        <div class="skill">Cryptography</div>
+        <div class="skill">Operating Systems</div>
+        <div class="skill">SQL</div>
+        <div class="skill">Problem Solving</div>
+        <div class="skill">Log Analysis</div>
+        <div class="skill">Security Awareness</div>
+        <div class="skill">Git & GitHub</div>
+
+    </div>
+
+
+    <!-- ================= PROJECTS ================= -->
+
+    <h2 class="section-title">
+        Beginner <span>Projects</span>
+    </h2>
+
+    <div class="grid">
+
+
+        <div class="card project">
+
+            <div class="icon">🔐</div>
+
+            <h3>Password Strength Checker</h3>
+
+            <p>
+                Build an educational tool that checks password
+                strength and explains basic password security practices.
+            </p>
+
+        </div>
+
+
+        <div class="card project">
+
+            <div class="icon">📊</div>
+
+            <h3>Security Log Analyzer</h3>
+
+            <p>
+                Create a simple program that reads sample logs
+                and identifies predefined security-related patterns.
+            </p>
+
+        </div>
+
+
+        <div class="card project">
+
+            <div class="icon">🌐</div>
+
+            <h3>Network Information Tool</h3>
+
+            <p>
+                Build a safe educational tool that displays
+                information about your own computer's network configuration.
+            </p>
+
+        </div>
+
+
+        <div class="card project">
+
+            <div class="icon">🛡️</div>
+
+            <h3>Security Awareness Website</h3>
+
+            <p>
+                Create a website explaining phishing awareness,
+                strong passwords, privacy and safe browsing.
+            </p>
+
+        </div>
+
+    </div>
+
+</main>
+
+
+<footer>
+
+    Student Career & Learning Management System<br>
+
+    Learn • Build • Practice • Grow
+
+</footer>
+
+
+<script>
+
+    /* ================= LOGIN CHECK ================= */
+
+    const loggedInUsername =
+        sessionStorage.getItem("loggedInUsername");
+
+    if (!loggedInUsername) {
+
+        window.location.href = "login.html";
+
+    }
+
+
+    /* ================= BACK BUTTON ================= */
+
+    document
+        .getElementById("backBtn")
+        .addEventListener(
+            "click",
+            function () {
+
+                window.location.href = "learning.html";
+
+            }
+        );
+
+
+    /* ================= LOGO ================= */
+
+    document
+        .getElementById("cyberLogo")
+        .addEventListener(
+            "click",
+            function () {
+
+                window.location.href = "profile.html";
+
+            }
+        );
+
+</script>
+
+</body>
+</html>

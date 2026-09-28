@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>TEST REGISTER PAGE</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 30px;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(59,130,246,0.35),
+                    transparent 30%
+                ),
+
+                radial-gradient(
+                    circle at 90% 90%,
+                    rgba(6,182,212,0.30),
+                    transparent 30%
+                ),
+
+                linear-gradient(
+                    135deg,
+                    #020617,
+                    #071b3a,
+                    #0b315b,
+                    #03152d
+                );
+
+            overflow-x: hidden;
+        }
+
+
+        /* Background circles */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            width: 300px;
+            height: 300px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(59,130,246,0.12);
+
+            top: -120px;
+            right: -100px;
+
+            filter: blur(20px);
+
+            pointer-events: none;
+        }
+
+
+        body::after {
+
+            content: "";
+
+            position: fixed;
+
+            width: 260px;
+            height: 260px;
+
+            border-radius: 50%;
+
+            background:
+                rgba(6,182,212,0.12);
+
+            bottom: -100px;
+            left: -80px;
+
+            filter: blur(20px);
+
+            pointer-events: none;
+        }
+
+
+        /* Main Card */
+
+        .register-card {
+
+            width: 100%;
+
+            max-width: 470px;
+
+            padding: 42px;
+
+            position: relative;
+
+            background:
+                rgba(255,255,255,0.09);
+
+            border:
+                1px solid rgba(255,255,255,0.18);
+
+            border-radius: 28px;
+
+            backdrop-filter: blur(25px);
+
+            -webkit-backdrop-filter: blur(25px);
+
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.45);
+
+            color: white;
+
+            animation:
+                cardAppear 0.6s ease;
+        }
+
+
+        @keyframes cardAppear {
+
+            from {
+
+                opacity: 0;
+
+                transform:
+                    translateY(20px)
+                    scale(0.98);
+            }
+
+            to {
+
+                opacity: 1;
+
+                transform:
+                    translateY(0)
+                    scale(1);
+            }
+        }
+
+
+        /* Top Logo */
+
+        .logo {
+
+            width: 72px;
+            height: 72px;
+
+            margin:
+                0 auto 20px;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #3b82f6,
+                    #06b6d4
+                );
+
+            font-size: 34px;
+
+            box-shadow:
+                0 15px 35px
+                rgba(6,182,212,0.28);
+        }
+
+
+        /* Heading */
+
+        h1 {
+
+            text-align: center;
+
+            font-size: 29px;
+
+            font-weight: 750;
+
+            letter-spacing: -0.5px;
+
+            margin-bottom: 8px;
+        }
+
+
+        .subtitle {
+
+            text-align: center;
+
+            color: #a9b8ce;
+
+            font-size: 14px;
+
+            line-height: 1.6;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* Progress */
+
+        .progress {
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 8px;
+
+            margin-bottom: 28px;
+        }
+
+
+        .progress-step {
+
+            height: 7px;
+
+            width: 55px;
+
+            border-radius: 20px;
+
+            background:
+                rgba(255,255,255,0.12);
+        }
+
+
+        .progress-step.active {
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #3b82f6,
+                    #06b6d4
+                );
+
+            box-shadow:
+                0 0 12px
+                rgba(6,182,212,0.35);
+        }
+
+
+        /* Form */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 13px;
+
+            font-weight: 650;
+
+            color: #dbeafe;
+        }
+
+
+        .input-box {
+
+            position: relative;
+        }
+
+
+        .input-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            font-size: 17px;
+
+            z-index: 2;
+        }
+
+
+        input {
+
+            width: 100%;
+
+            height: 52px;
+
+            padding:
+                0 15px 0 45px;
+
+            border:
+                1px solid
+                rgba(255,255,255,0.15);
+
+            border-radius: 14px;
+
+            outline: none;
+
+            background:
+                rgba(255,255,255,0.96);
+
+            color: #172033;
+
+            font-size: 15px;
+
+            transition:
+                0.25s ease;
+        }
+
+
+        input::placeholder {
+
+            color: #94a3b8;
+        }
+
+
+        input:hover {
+
+            border-color:
+                rgba(56,189,248,0.45);
+        }
+
+
+        input:focus {
+
+            border-color:
+                #38bdf8;
+
+            box-shadow:
+                0 0 0 4px
+                rgba(56,189,248,0.13);
+        }
+
+
+        /* Continue Button */
+
+        .continue-btn {
+
+            width: 100%;
+
+            height: 54px;
+
+            margin-top: 7px;
+
+            border: none;
+
+            border-radius: 14px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #2563eb,
+                    #06b6d4
+                );
+
+            color: white;
+
+            font-size: 15px;
+
+            font-weight: 750;
+
+            cursor: pointer;
+
+            transition:
+                0.25s ease;
+
+            box-shadow:
+                0 12px 30px
+                rgba(6,182,212,0.22);
+        }
+
+
+        .continue-btn:hover {
+
+            transform:
+                translateY(-2px);
+
+            box-shadow:
+                0 17px 35px
+                rgba(6,182,212,0.32);
+        }
+
+
+        .continue-btn:active {
+
+            transform:
+                scale(0.98);
+        }
+
+
+        .continue-btn:disabled {
+
+            opacity: 0.65;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+
+        /* Login */
+
+        .login-text {
+
+            text-align: center;
+
+            margin-top: 24px;
+
+            color: #9fb0c6;
+
+            font-size: 14px;
+        }
+
+
+        .login-text a {
+
+            color: #67e8f9;
+
+            text-decoration: none;
+
+            font-weight: 700;
+
+            margin-left: 4px;
+        }
+
+
+        .login-text a:hover {
+
+            text-decoration:
+                underline;
+        }
+
+
+        /* Security */
+
+        .security {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            gap: 6px;
+
+            margin-top: 22px;
+
+            color: #8495ad;
+
+            font-size: 12px;
+
+            text-align: center;
+        }
+
+
+        /* Small note */
+
+        .verification-note {
+
+            margin-top: 10px;
+
+            color: #7f91aa;
+
+            font-size: 11px;
+
+            line-height: 1.5;
+
+            text-align: center;
+        }
+
+
+        /* Mobile */
+
+        @media (max-width: 520px) {
+
+            body {
+
+                padding: 15px;
+            }
+
+
+            .register-card {
+
+                padding:
+                    30px 22px;
+
+                border-radius: 22px;
+            }
+
+
+            h1 {
+
+                font-size: 25px;
+            }
+
+
+            .logo {
+
+                width: 64px;
+                height: 64px;
+
+                font-size: 29px;
+            }
+
+
+            .progress-step {
+
+                width: 45px;
+            }
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <div class="register-card">
+
+
+        <!-- Logo -->
+
+        <div class="logo">
+            🎓
+        </div>
+
+
+        <!-- Heading -->
+
+        <h1>
+            Create Student Account
+        </h1>
+
+
+        <p class="subtitle">
+
+            Start your journey with the
+            Student Career & Learning System.
+
+        </p>
+
+
+        <!-- Progress -->
+
+        <div class="progress">
+
+            <div class="progress-step active"></div>
+
+            <div class="progress-step"></div>
+
+            <div class="progress-step"></div>
+
+        </div>
+
+
+        <form id="registrationForm">
+
+
+            <!-- Full Name -->
+
+            <div class="form-group">
+
+                <label for="name">
+                    Full Name
+                </label>
+
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        👤
+                    </span>
+
+
+                    <input
+                        type="text"
+                        id="name"
+                        placeholder="Enter your full name"
+                        autocomplete="name"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        ✉️
+                    </span>
+
+
+                    <input
+                        type="email"
+                        id="email"
+                        placeholder="Enter your Gmail address"
+                        autocomplete="email"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Phone -->
+
+            <div class="form-group">
+
+                <label for="phone">
+                    Phone Number
+                </label>
+
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        📱
+                    </span>
+
+
+                    <input
+                        type="tel"
+                        id="phone"
+                        placeholder="Enter 10-digit phone number"
+                        maxlength="10"
+                        inputmode="numeric"
+                        autocomplete="tel"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Button -->
+
+            <button
+                type="submit"
+                class="continue-btn"
+                id="continueBtn"
+            >
+
+                Continue to Verification
+                →
+
+            </button>
+
+
+        </form>
+
+
+        <!-- Login -->
+
+        <div class="login-text">
+
+            Already have an account?
+
+            <a href="#">
+                Login
+            </a>
+
+        </div>
+
+
+        <!-- Security -->
+
+        <div class="security">
+
+            🔒
+            <span>
+                Your information is securely protected
+            </span>
+
+        </div>
+
+
+        <div class="verification-note">
+
+            Your email will be verified with a
+            one-time password (OTP).
+
+        </div>
+
+
+    </div>
+
+
+
+    <script>
+
+
+        const form =
+            document.getElementById(
+                "registrationForm"
+            );
+
+
+        const button =
+            document.getElementById(
+                "continueBtn"
+            );
+
+
+        form.addEventListener(
+            "submit",
+            async function(event) {
+
+
+                event.preventDefault();
+
+
+                const name =
+                    document
+                        .getElementById("name")
+                        .value
+                        .trim();
+
+
+                const email =
+                    document
+                        .getElementById("email")
+                        .value
+                        .trim();
+
+
+                const phone =
+                    document
+                        .getElementById("phone")
+                        .value
+                        .trim();
+
+
+                /* Name validation */
+
+                if (name.length < 2) {
+
+                    alert(
+                        "Please enter your full name."
+                    );
+
+                    return;
+                }
+
+
+                /* Email validation */
+
+                if (!email) {
+
+                    alert(
+                        "Please enter your email address."
+                    );
+
+                    return;
+                }
+
+
+                /* Phone validation */
+
+                if (!/^[0-9]{10}$/.test(phone)) {
+
+                    alert(
+                        "Please enter a valid 10-digit phone number."
+                    );
+
+                    return;
+                }
+
+
+                /* Button loading */
+
+                button.disabled = true;
+
+                button.innerText = "Sending OTP...";
+                alert("Button click ho gaya");
+                                  
+
+
+                try {
+
+
+                    const response =
+                        await fetch(
+                            "/api/otp/send?email=" +
+                            encodeURIComponent(email),
+                            {
+                                method: "POST"
+                            }
+                        );
+
+
+                    const message =
+                        await response.text();
+
+
+                    
+                     if (response.ok) {
+
+                        alert(
+                            "OTP sent successfully! 📧\n\n" +
+                            "Please check your Gmail inbox."
+                        );
+
+
+                        /*
+                         * Temporary storage.
+                         * Next step will use these details
+                         * on the OTP verification screen.
+                         */
+
+                        sessionStorage.setItem(
+                            "registrationName",
+                            name
+                        );
+
+
+                        sessionStorage.setItem(
+                            "registrationEmail",
+                            email
+                        );
+
+
+                        sessionStorage.setItem(
+                            "registrationPhone",
+                            phone
+                        );
+
+                        alert("OTP page open ho raha hai");
+
+                        window.location.href = "/otp.html";
+
+
+                    } else {
+
+
+                        alert(
+                            "Unable to send OTP.\n\n" +
+                            message
+                        );
+
+                    }
+
+
+                } catch (error) {
+
+
+                    console.error(
+                        "OTP Error:",
+                        error
+                    );
+
+
+                    alert(
+                        "Server connection failed.\n\n" +
+                        "Please make sure Spring Boot is running."
+                    );
+
+
+                } finally {
+
+
+                    button.disabled = false;
+
+                    button.innerText =
+                        "Continue to Verification →";
+
+                }
+
+            }
+        );
+
+
+        /* Allow only numbers in phone field */
+
+        document
+            .getElementById("phone")
+            .addEventListener(
+                "input",
+                function() {
+
+                    this.value =
+                        this.value
+                            .replace(/\D/g, "")
+                            .slice(0, 10);
+
+                }
+            );
+
+            alert("JavaScript working");
+
+    </script>
+
+
+</body>
+
+</html>

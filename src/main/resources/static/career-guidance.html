@@ -1,0 +1,2687 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+```
+<title>Career & Course Guidance | Student Career & Learning Management System</title>
+
+<style>
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: Inter, Arial, sans-serif;
+    }
+
+    :root {
+        --bg: #07111f;
+        --bg2: #0d1728;
+        --card: rgba(18, 31, 52, 0.82);
+        --card2: rgba(25, 42, 68, 0.75);
+        --text: #f8fafc;
+        --muted: #a9b8cc;
+        --blue: #3b82f6;
+        --cyan: #22d3ee;
+        --purple: #8b5cf6;
+        --green: #22c55e;
+        --border: rgba(148, 163, 184, 0.16);
+    }
+
+    html {
+        scroll-behavior: smooth;
+    }
+
+    body {
+        min-height: 100vh;
+        color: var(--text);
+        background:
+            radial-gradient(circle at 10% 10%, rgba(59, 130, 246, .18), transparent 30%),
+            radial-gradient(circle at 90% 15%, rgba(139, 92, 246, .17), transparent 28%),
+            radial-gradient(circle at 50% 100%, rgba(34, 211, 238, .10), transparent 30%),
+            linear-gradient(135deg, #050b15, #091426 55%, #07111f);
+    }
+
+    button,
+    select,
+    input {
+        font: inherit;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    .page {
+        width: min(1200px, 94%);
+        margin: auto;
+    }
+
+    /* =========================
+       TOP NAV
+    ========================= */
+
+    .topbar {
+        padding: 18px 0;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 15px;
+        padding: 14px 18px;
+        border: 1px solid var(--border);
+        background: rgba(8, 18, 34, .72);
+        backdrop-filter: blur(18px);
+        border-radius: 18px;
+        box-shadow: 0 15px 50px rgba(0, 0, 0, .25);
+    }
+
+    .brand {
+        display: flex;
+        align-items: center;
+        gap: 11px;
+        font-weight: 800;
+    }
+
+    .brand-icon {
+        width: 42px;
+        height: 42px;
+        display: grid;
+        place-items: center;
+        border-radius: 13px;
+        background: linear-gradient(135deg, var(--blue), var(--purple));
+        box-shadow: 0 8px 25px rgba(59, 130, 246, .28);
+        font-size: 21px;
+    }
+
+    .brand-text span {
+        display: block;
+        font-size: 11px;
+        color: #8fa4bd;
+        font-weight: 500;
+        margin-top: 2px;
+    }
+
+    .home-btn {
+        border: 1px solid rgba(255,255,255,.12);
+        background: rgba(255,255,255,.06);
+        color: white;
+        padding: 10px 15px;
+        border-radius: 11px;
+        transition: .25s;
+    }
+
+    .home-btn:hover {
+        background: rgba(59,130,246,.18);
+        transform: translateY(-2px);
+    }
+
+    /* =========================
+       HERO
+    ========================= */
+
+    .hero {
+        position: relative;
+        overflow: hidden;
+        margin: 15px 0 28px;
+        padding: 55px 45px;
+        border: 1px solid var(--border);
+        border-radius: 30px;
+        background:
+            linear-gradient(135deg, rgba(37,99,235,.25), rgba(124,58,237,.19)),
+            rgba(10, 22, 40, .78);
+        backdrop-filter: blur(20px);
+        box-shadow: 0 25px 80px rgba(0,0,0,.28);
+    }
+
+    .hero::before {
+        content: "";
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        right: -100px;
+        top: -130px;
+        border-radius: 50%;
+        background: rgba(34,211,238,.14);
+        filter: blur(8px);
+    }
+
+    .hero-content {
+        position: relative;
+        z-index: 2;
+        max-width: 780px;
+    }
+
+    .hero-badge {
+        display: inline-flex;
+        padding: 8px 13px;
+        border-radius: 999px;
+        background: rgba(59,130,246,.13);
+        border: 1px solid rgba(96,165,250,.28);
+        color: #93c5fd;
+        font-size: 12px;
+        font-weight: 800;
+        letter-spacing: 1px;
+        margin-bottom: 18px;
+    }
+
+    .hero h1 {
+        font-size: clamp(35px, 6vw, 66px);
+        line-height: 1.03;
+        letter-spacing: -2px;
+        margin-bottom: 18px;
+    }
+
+    .hero h1 span {
+        background: linear-gradient(90deg, #60a5fa, #22d3ee, #a78bfa);
+        -webkit-background-clip: text;
+        color: transparent;
+    }
+
+    .hero p {
+        color: #b7c5d8;
+        line-height: 1.75;
+        max-width: 720px;
+        font-size: 16px;
+    }
+
+    .search-box {
+        display: flex;
+        gap: 10px;
+        margin-top: 28px;
+        max-width: 760px;
+    }
+
+    .search-box input {
+        flex: 1;
+        min-width: 0;
+        padding: 16px 18px;
+        border-radius: 14px;
+        border: 1px solid rgba(148,163,184,.2);
+        outline: none;
+        background: rgba(2,8,23,.62);
+        color: white;
+    }
+
+    .search-box input::placeholder {
+        color: #71839b;
+    }
+
+    .search-box input:focus {
+        border-color: rgba(59,130,246,.65);
+        box-shadow: 0 0 0 4px rgba(59,130,246,.10);
+    }
+
+    .search-btn,
+    .primary-btn {
+        border: none;
+        color: white;
+        font-weight: 700;
+        padding: 14px 20px;
+        border-radius: 13px;
+        background: linear-gradient(135deg, #2563eb, #7c3aed);
+        box-shadow: 0 10px 25px rgba(37,99,235,.25);
+        transition: .25s;
+    }
+
+    .search-btn:hover,
+    .primary-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 14px 30px rgba(37,99,235,.34);
+    }
+
+    /* =========================
+       STATS
+    ========================= */
+
+    .stats {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 14px;
+        margin-bottom: 28px;
+    }
+
+    .stat {
+        padding: 20px;
+        border: 1px solid var(--border);
+        border-radius: 18px;
+        background: var(--card);
+        backdrop-filter: blur(14px);
+    }
+
+    .stat-number {
+        font-size: 27px;
+        font-weight: 800;
+        margin-bottom: 5px;
+    }
+
+    .stat-label {
+        color: var(--muted);
+        font-size: 13px;
+    }
+
+    /* =========================
+       SECTION
+    ========================= */
+
+    .section {
+        margin: 30px 0;
+    }
+
+    .section-heading {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        gap: 15px;
+        margin-bottom: 18px;
+    }
+
+    .section-heading h2 {
+        font-size: 27px;
+    }
+
+    .section-heading p {
+        color: var(--muted);
+        font-size: 14px;
+        line-height: 1.6;
+        margin-top: 5px;
+    }
+
+    /* =========================
+       CATEGORY GRID
+    ========================= */
+
+    .category-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+    }
+
+    .category {
+        position: relative;
+        overflow: hidden;
+        padding: 22px;
+        min-height: 155px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        background: linear-gradient(145deg, rgba(20,35,58,.9), rgba(10,20,35,.8));
+        transition: .28s;
+    }
+
+    .category:hover {
+        transform: translateY(-6px);
+        border-color: rgba(96,165,250,.35);
+        box-shadow: 0 18px 40px rgba(0,0,0,.25);
+    }
+
+    .category-icon {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: rgba(59,130,246,.13);
+        font-size: 23px;
+        margin-bottom: 14px;
+    }
+
+    .category h3 {
+        margin-bottom: 7px;
+        font-size: 17px;
+    }
+
+    .category p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.55;
+    }
+
+    /* =========================
+       ROADMAP
+    ========================= */
+
+    .roadmap {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        gap: 8px;
+    }
+
+    .road-step {
+        position: relative;
+        padding: 20px 12px;
+        text-align: center;
+        border: 1px solid var(--border);
+        background: var(--card);
+        border-radius: 16px;
+    }
+
+    .road-step:not(:last-child)::after {
+        content: "→";
+        position: absolute;
+        right: -15px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #60a5fa;
+        font-size: 20px;
+        z-index: 4;
+    }
+
+    .road-number {
+        width: 34px;
+        height: 34px;
+        display: grid;
+        place-items: center;
+        margin: 0 auto 10px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--blue), var(--purple));
+        font-weight: 800;
+    }
+
+    .road-step h4 {
+        font-size: 13px;
+        margin-bottom: 5px;
+    }
+
+    .road-step p {
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.45;
+    }
+
+    /* =========================
+       EXPLORER
+    ========================= */
+
+    .explorer {
+        padding: 25px;
+        border-radius: 22px;
+        background: var(--card);
+        border: 1px solid var(--border);
+        backdrop-filter: blur(15px);
+    }
+
+    .filter-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 13px;
+        margin-bottom: 18px;
+    }
+
+    .filter-grid select {
+        width: 100%;
+        padding: 13px;
+        border-radius: 11px;
+        border: 1px solid rgba(148,163,184,.18);
+        color: white;
+        background: #101e32;
+        outline: none;
+    }
+
+    .filter-grid select:focus {
+        border-color: #3b82f6;
+    }
+
+    .interest-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 10px;
+    }
+
+    .interest {
+        padding: 13px;
+        text-align: center;
+        border: 1px solid rgba(148,163,184,.17);
+        background: rgba(255,255,255,.035);
+        border-radius: 12px;
+        color: #cbd5e1;
+        cursor: pointer;
+        transition: .2s;
+    }
+
+    .interest:hover,
+    .interest.selected {
+        border-color: #3b82f6;
+        background: rgba(59,130,246,.16);
+        color: white;
+        transform: translateY(-2px);
+    }
+
+    .action-row {
+        display: flex;
+        gap: 10px;
+        margin-top: 18px;
+    }
+
+    .reset-btn {
+        border: 1px solid rgba(148,163,184,.2);
+        background: rgba(255,255,255,.05);
+        color: white;
+        padding: 13px 19px;
+        border-radius: 12px;
+    }
+
+    /* =========================
+       COURSE RESULTS
+    ========================= */
+
+    #courseSection,
+    #detailsSection {
+        display: none;
+    }
+
+    .course-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 17px;
+    }
+
+    .course-card {
+        border: 1px solid var(--border);
+        border-radius: 19px;
+        padding: 21px;
+        background: linear-gradient(145deg, rgba(21,38,63,.92), rgba(10,20,35,.82));
+        transition: .25s;
+    }
+
+    .course-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(96,165,250,.35);
+        box-shadow: 0 18px 35px rgba(0,0,0,.25);
+    }
+
+    .course-icon {
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+
+    .course-card h3 {
+        font-size: 19px;
+        margin-bottom: 10px;
+    }
+
+    .course-card p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+        margin: 7px 0;
+    }
+
+    .course-card strong {
+        color: #dbeafe;
+    }
+
+    .view-btn {
+        width: 100%;
+        margin-top: 13px;
+    }
+
+    /* =========================
+       CAREER CARDS
+    ========================= */
+
+    .career-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .career-card {
+        padding: 23px;
+        border: 1px solid var(--border);
+        border-radius: 19px;
+        background: rgba(15,29,49,.82);
+        transition: .25s;
+    }
+
+    .career-card:hover {
+        transform: translateY(-5px);
+        border-color: rgba(139,92,246,.38);
+    }
+
+    .career-top {
+        display: flex;
+        align-items: center;
+        gap: 13px;
+        margin-bottom: 13px;
+    }
+
+    .career-icon {
+        width: 48px;
+        height: 48px;
+        display: grid;
+        place-items: center;
+        border-radius: 14px;
+        background: rgba(139,92,246,.14);
+        font-size: 22px;
+    }
+
+    .career-card h3 {
+        font-size: 17px;
+    }
+
+    .career-card p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.6;
+        margin-bottom: 12px;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 7px;
+    }
+
+    .tag {
+        padding: 5px 9px;
+        border-radius: 999px;
+        background: rgba(59,130,246,.11);
+        border: 1px solid rgba(59,130,246,.17);
+        color: #93c5fd;
+        font-size: 11px;
+    }
+
+    /* =========================
+       INFO CARDS
+    ========================= */
+
+    .info-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+    }
+
+    .info-card {
+        padding: 23px;
+        border-radius: 19px;
+        border: 1px solid var(--border);
+        background: var(--card);
+    }
+
+    .info-card h3 {
+        margin-bottom: 10px;
+    }
+
+    .info-card p {
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.65;
+    }
+
+    .info-list {
+        margin-top: 13px;
+        padding-left: 17px;
+        color: #c5d1df;
+    }
+
+    .info-list li {
+        margin: 7px 0;
+        font-size: 13px;
+    }
+
+    /* =========================
+       DETAILS
+    ========================= */
+
+    .details-box {
+        overflow: hidden;
+        border: 1px solid var(--border);
+        border-radius: 22px;
+        background: var(--card);
+    }
+
+    .details-header {
+        padding: 30px;
+        background: linear-gradient(135deg, rgba(37,99,235,.82), rgba(124,58,237,.78));
+    }
+
+    .details-header h2 {
+        font-size: 31px;
+        margin-bottom: 8px;
+    }
+
+    .details-header p {
+        color: #e0e7ff;
+    }
+
+    .details-content {
+        padding: 25px;
+    }
+
+    .info-item {
+        padding: 17px 0;
+        border-bottom: 1px solid var(--border);
+    }
+
+    .info-item:last-child {
+        border-bottom: none;
+    }
+
+    .info-item h3 {
+        color: #93c5fd;
+        margin-bottom: 8px;
+        font-size: 17px;
+    }
+
+    .info-item p {
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 14px;
+    }
+
+    .related-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+        margin-top: 15px;
+    }
+
+    .related-card {
+        padding: 16px;
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: rgba(255,255,255,.035);
+    }
+
+    .related-card h4 {
+        font-size: 14px;
+        margin-bottom: 7px;
+    }
+
+    .related-card p {
+        color: var(--muted);
+        font-size: 12px;
+        line-height: 1.5;
+    }
+
+    /* =========================
+       FAQ
+    ========================= */
+
+    .faq {
+        display: grid;
+        gap: 10px;
+    }
+
+    .faq-item {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        background: var(--card);
+        overflow: hidden;
+    }
+
+    .faq-question {
+        width: 100%;
+        text-align: left;
+        padding: 17px 18px;
+        border: none;
+        background: transparent;
+        color: white;
+        font-weight: 700;
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+    }
+
+    .faq-answer {
+        display: none;
+        padding: 0 18px 18px;
+        color: var(--muted);
+        line-height: 1.7;
+        font-size: 13px;
+    }
+
+    .faq-item.open .faq-answer {
+        display: block;
+    }
+
+    /* =========================
+       CTA
+    ========================= */
+
+    .cta {
+        text-align: center;
+        padding: 45px 25px;
+        border: 1px solid rgba(96,165,250,.2);
+        border-radius: 25px;
+        background:
+            linear-gradient(135deg, rgba(37,99,235,.17), rgba(139,92,246,.15)),
+            var(--card);
+    }
+
+    .cta h2 {
+        font-size: 30px;
+        margin-bottom: 10px;
+    }
+
+    .cta p {
+        color: var(--muted);
+        max-width: 650px;
+        margin: auto;
+        line-height: 1.7;
+    }
+
+    /* =========================
+       LOADING / EMPTY
+    ========================= */
+
+    .loading,
+    .empty {
+        padding: 35px;
+        text-align: center;
+        border-radius: 15px;
+        border: 1px dashed rgba(148,163,184,.22);
+        color: var(--muted);
+    }
+
+    /* =========================
+       FOOTER
+    ========================= */
+
+    footer {
+        text-align: center;
+        padding: 35px 10px;
+        color: #70839c;
+        font-size: 12px;
+    }
+
+    /* =========================
+       RESPONSIVE
+    ========================= */
+
+    @media (max-width: 950px) {
+        .category-grid,
+        .career-grid,
+        .course-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+
+        .info-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .roadmap {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .road-step:nth-child(3)::after,
+        .road-step:nth-child(6)::after {
+            display: none;
+        }
+
+        .interest-grid {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .related-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+
+    @media (max-width: 650px) {
+        .page {
+            width: 94%;
+        }
+
+        .nav {
+            padding: 12px;
+        }
+
+        .brand-text {
+            font-size: 13px;
+        }
+
+        .hero {
+            padding: 35px 22px;
+            border-radius: 23px;
+        }
+
+        .hero h1 {
+            font-size: 38px;
+            letter-spacing: -1.5px;
+        }
+
+        .search-box {
+            flex-direction: column;
+        }
+
+        .stats {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .category-grid,
+        .career-grid,
+        .course-grid,
+        .info-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .roadmap {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .road-step::after {
+            display: none !important;
+        }
+
+        .interest-grid {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .filter-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .related-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .section-heading {
+            display: block;
+        }
+
+        .details-header h2 {
+            font-size: 25px;
+        }
+    }
+
+    @media (max-width: 400px) {
+        .stats {
+            grid-template-columns: 1fr;
+        }
+
+        .interest-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .roadmap {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>
+```
+
+</head>
+
+<body>
+
+<div class="page">
+
+```
+<!-- TOP NAV -->
+<div class="topbar">
+    <div class="nav">
+
+        <div class="brand">
+            <div class="brand-icon">🎓</div>
+
+            <div class="brand-text">
+                Career Explorer
+                <span>Student Career & Learning Management System</span>
+            </div>
+        </div>
+
+        <button class="home-btn" onclick="goDashboard()">
+            🏠 Dashboard
+        </button>
+
+    </div>
+</div>
+
+
+<!-- HERO -->
+<section class="hero">
+
+    <div class="hero-content">
+
+        <div class="hero-badge">
+            ✨ EXPLORE • PLAN • GROW
+        </div>
+
+        <h1>
+            Explore Your
+            <span>Future Career</span>
+        </h1>
+
+        <p>
+            Discover education pathways, courses, skills and career
+            opportunities based on your education level, stream,
+            interests and goals.
+        </p>
+
+        <div class="search-box">
+
+            <input
+                type="search"
+                id="careerSearch"
+                placeholder="Search careers, courses, skills, AI, coding, medical, law..."
+                oninput="searchCareers()"
+            >
+
+            <button class="search-btn" onclick="searchCareers()">
+                🔍 Search
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- STATS -->
+<section class="stats">
+
+    <div class="stat">
+        <div class="stat-number">10+</div>
+        <div class="stat-label">Education Pathways</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-number">50+</div>
+        <div class="stat-label">Career Areas</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-number">100+</div>
+        <div class="stat-label">Skills & Options</div>
+    </div>
+
+    <div class="stat">
+        <div class="stat-number">1</div>
+        <div class="stat-label">Complete Career Explorer</div>
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+<section class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>Explore Career Areas</h2>
+            <p>
+                Explore major education and career domains from one place.
+            </p>
+        </div>
+    </div>
+
+    <div class="category-grid">
+
+        <div class="category" onclick="filterCareer('technology')">
+            <div class="category-icon">💻</div>
+            <h3>Technology & IT</h3>
+            <p>
+                Software, AI, data, cybersecurity, cloud, web, apps and more.
+            </p>
+        </div>
+
+        <div class="category" onclick="filterCareer('science')">
+            <div class="category-icon">🔬</div>
+            <h3>Science & Research</h3>
+            <p>
+                Physics, chemistry, mathematics, biology and research pathways.
+            </p>
+        </div>
+
+        <div class="category" onclick="filterCareer('healthcare')">
+            <div class="category-icon">🩺</div>
+            <h3>Healthcare</h3>
+            <p>
+                Medicine, pharmacy, nursing, biotechnology and allied fields.
+            </p>
+        </div>
+
+        <div class="category" onclick="filterCareer('business')">
+            <div class="category-icon">📊</div>
+            <h3>Commerce & Finance</h3>
+            <p>
+                Accounting, banking, finance, economics and management.
+            </p>
+        </div>
+
+        <div class="category" onclick="filterCareer('arts')">
+            <div class="category-icon">🎨</div>
+            <h3>Arts & Humanities</h3>
+            <p>
+                Psychology, history, sociology, languages, media and more.
+            </p>
+        </div>
+
+        <div class="category" onclick="filterCareer('law')">
+            <div class="category-icon">⚖️</div>
+            <h3>Law & Legal Studies</h3>
+            <p>
+                Legal education, law degrees and related professional areas.
+            </p>
+        </div>
+
+        <div class="category" onclick="filterCareer('design')">
+            <div class="category-icon">🏛️</div>
+            <h3>Design & Architecture</h3>
+            <p>
+                Architecture, UI/UX, graphic design and creative technology.
+            </p>
+        </div>
+
+        <div class="category" onclick="filterCareer('government')">
+            <div class="category-icon">🏛️</div>
+            <h3>Government & Public</h3>
+            <p>
+                Government exams, public services, scholarships and opportunities.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ROADMAP -->
+<section class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>Your Career Roadmap</h2>
+            <p>
+                A simple way to understand the journey from education to career.
+            </p>
+        </div>
+    </div>
+
+    <div class="roadmap">
+
+        <div class="road-step">
+            <div class="road-number">1</div>
+            <h4>Education</h4>
+            <p>Know your current level.</p>
+        </div>
+
+        <div class="road-step">
+            <div class="road-number">2</div>
+            <h4>Stream</h4>
+            <p>Understand your academic path.</p>
+        </div>
+
+        <div class="road-step">
+            <div class="road-number">3</div>
+            <h4>Interests</h4>
+            <p>Identify areas you enjoy.</p>
+        </div>
+
+        <div class="road-step">
+            <div class="road-number">4</div>
+            <h4>Course</h4>
+            <p>Explore suitable courses.</p>
+        </div>
+
+        <div class="road-step">
+            <div class="road-number">5</div>
+            <h4>Skills</h4>
+            <p>Build useful abilities.</p>
+        </div>
+
+        <div class="road-step">
+            <div class="road-number">6</div>
+            <h4>Career</h4>
+            <p>Plan your next steps.</p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CAREER EXPLORER -->
+<section class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>🎯 Career Explorer</h2>
+            <p>
+                Select your education details and interests to explore courses.
+            </p>
+        </div>
+    </div>
+
+    <div class="explorer">
+
+        <div class="filter-grid">
+
+            <select id="educationLevel">
+                <option value="">Education Level</option>
+                <option value="Class 9">Class 9</option>
+                <option value="Class 10">Class 10</option>
+                <option value="Class 11">Class 11</option>
+                <option value="Class 12">Class 12</option>
+                <option value="Diploma">Diploma / Polytechnic</option>
+                <option value="ITI">ITI / Skill Pathway</option>
+                <option value="Undergraduate">Undergraduate</option>
+                <option value="Postgraduate">Postgraduate</option>
+            </select>
+
+            <select id="stream">
+
+                <option value="">Select Stream</option>
+
+                <option value="Science">Science</option>
+                <option value="Commerce">Commerce</option>
+                <option value="Arts">Arts / Humanities</option>
+                <option value="Computer">Computer</option>
+                <option value="Diploma">Diploma</option>
+                <option value="ITI">ITI</option>
+
+            </select>
+
+            <select id="subjects">
+
+                <option value="">
+                    First select your stream
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <div class="interest-grid">
+
+            <div class="interest" data-interest="Technology">
+                💻 Technology
+            </div>
+
+            <div class="interest" data-interest="AI">
+                🤖 AI & Data
+            </div>
+
+            <div class="interest" data-interest="Cybersecurity">
+                🔐 Cybersecurity
+            </div>
+
+            <div class="interest" data-interest="Medical">
+                🩺 Medical
+            </div>
+
+            <div class="interest" data-interest="Science">
+                🔬 Science
+            </div>
+
+            <div class="interest" data-interest="Business">
+                💼 Business
+            </div>
+
+            <div class="interest" data-interest="Finance">
+                💰 Finance
+            </div>
+
+            <div class="interest" data-interest="Law">
+                ⚖️ Law
+            </div>
+
+            <div class="interest" data-interest="Design">
+                🎨 Design
+            </div>
+
+            <div class="interest" data-interest="Media">
+                🎬 Media
+            </div>
+
+            <div class="interest" data-interest="Government">
+                🏛️ Government
+            </div>
+
+            <div class="interest" data-interest="Research">
+                🧪 Research
+            </div>
+
+        </div>
+
+
+        <div class="action-row">
+
+            <button class="primary-btn" onclick="findCourses()">
+                🔍 Find Courses
+            </button>
+
+            <button class="reset-btn" onclick="resetPage()">
+                Reset
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- COURSE RESULTS -->
+<section id="courseSection" class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>📚 Recommended Courses</h2>
+            <p>
+                Courses available for your selected pathway.
+            </p>
+        </div>
+    </div>
+
+    <div id="courseResults"></div>
+
+</section>
+
+
+<!-- COURSE DETAILS -->
+<section id="detailsSection" class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>📖 Complete Course Information</h2>
+            <p>
+                Explore the course before planning your next step.
+            </p>
+        </div>
+    </div>
+
+    <div id="courseDetails"></div>
+
+</section>
+
+
+<!-- POPULAR CAREERS -->
+<section class="section" id="careerSection">
+
+    <div class="section-heading">
+        <div>
+            <h2>⭐ Career Areas to Explore</h2>
+            <p>
+                Learn about different career directions and the skills they involve.
+            </p>
+        </div>
+    </div>
+
+    <div class="career-grid" id="careerGrid">
+
+        <div class="career-card" data-category="technology">
+            <div class="career-top">
+                <div class="career-icon">💻</div>
+                <h3>Software Development</h3>
+            </div>
+            <p>
+                Build websites, applications, software systems and digital products.
+            </p>
+            <div class="tags">
+                <span class="tag">Programming</span>
+                <span class="tag">Problem Solving</span>
+                <span class="tag">Development</span>
+            </div>
+        </div>
+
+        <div class="career-card" data-category="technology">
+            <div class="career-top">
+                <div class="career-icon">🤖</div>
+                <h3>AI & Machine Learning</h3>
+            </div>
+            <p>
+                Explore artificial intelligence, machine learning, data and intelligent systems.
+            </p>
+            <div class="tags">
+                <span class="tag">Python</span>
+                <span class="tag">Math</span>
+                <span class="tag">Data</span>
+            </div>
+        </div>
+
+        <div class="career-card" data-category="technology">
+            <div class="career-top">
+                <div class="career-icon">🔐</div>
+                <h3>Cybersecurity</h3>
+            </div>
+            <p>
+                Learn about protecting systems, networks, applications and information.
+            </p>
+            <div class="tags">
+                <span class="tag">Networking</span>
+                <span class="tag">Linux</span>
+                <span class="tag">Security</span>
+            </div>
+        </div>
+
+        <div class="career-card" data-category="healthcare">
+            <div class="career-top">
+                <div class="career-icon">🩺</div>
+                <h3>Healthcare</h3>
+            </div>
+            <p>
+                Explore medical, pharmacy, nursing, biotechnology and allied healthcare pathways.
+            </p>
+            <div class="tags">
+                <span class="tag">Biology</span>
+                <span class="tag">Healthcare</span>
+                <span class="tag">Science</span>
+            </div>
+        </div>
+
+        <div class="career-card" data-category="business">
+            <div class="career-top">
+                <div class="career-icon">📊</div>
+                <h3>Finance & Accounting</h3>
+            </div>
+            <p>
+                Explore accounting, financial analysis, banking and business-related careers.
+            </p>
+            <div class="tags">
+                <span class="tag">Commerce</span>
+                <span class="tag">Finance</span>
+                <span class="tag">Analysis</span>
+            </div>
+        </div>
+
+        <div class="career-card" data-category="arts">
+            <div class="career-top">
+                <div class="career-icon">🧠</div>
+                <h3>Psychology & Social Sciences</h3>
+            </div>
+            <p>
+                Explore human behaviour, society, research and social science pathways.
+            </p>
+            <div class="tags">
+                <span class="tag">Psychology</span>
+                <span class="tag">Research</span>
+                <span class="tag">Communication</span>
+            </div>
+        </div>
+
+        <div class="career-card" data-category="design">
+            <div class="career-top">
+                <div class="career-icon">🎨</div>
+                <h3>Design & UI/UX</h3>
+            </div>
+            <p>
+                Combine creativity and technology to design digital and visual experiences.
+            </p>
+            <div class="tags">
+                <span class="tag">Creativity</span>
+                <span class="tag">UI/UX</span>
+                <span class="tag">Design</span>
+            </div>
+        </div>
+
+        <div class="career-card" data-category="law">
+            <div class="career-top">
+                <div class="career-icon">⚖️</div>
+                <h3>Law & Legal Studies</h3>
+            </div>
+            <p>
+                Explore legal education, legal research, advocacy and related fields.
+            </p>
+            <div class="tags">
+                <span class="tag">Law</span>
+                <span class="tag">Research</span>
+                <span class="tag">Communication</span>
+            </div>
+        </div>
+
+        <div class="career-card" data-category="government">
+            <div class="career-top">
+                <div class="career-icon">🏛️</div>
+                <h3>Government & Public Services</h3>
+            </div>
+            <p>
+                Explore public-sector career pathways, examinations and preparation areas.
+            </p>
+            <div class="tags">
+                <span class="tag">Aptitude</span>
+                <span class="tag">GK</span>
+                <span class="tag">Preparation</span>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- PATHWAY INFORMATION -->
+<section class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>🧭 Understand Your Pathway</h2>
+            <p>
+                Different students can follow different routes toward higher education and careers.
+            </p>
+        </div>
+    </div>
+
+    <div class="info-grid">
+
+        <div class="info-card">
+            <h3>🎓 Class 9–10</h3>
+            <p>
+                Focus on strong fundamentals and explore different subjects and career areas.
+            </p>
+            <ul class="info-list">
+                <li>Build basic academic skills</li>
+                <li>Explore interests</li>
+                <li>Understand future streams</li>
+                <li>Develop communication and digital skills</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>🔬 Class 11–12</h3>
+            <p>
+                Choose an appropriate academic pathway and start exploring higher-study options.
+            </p>
+            <ul class="info-list">
+                <li>Science / Commerce / Arts</li>
+                <li>PCM / PCB / PCMB</li>
+                <li>Entrance preparation where relevant</li>
+                <li>Course and college research</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>🛠️ Diploma / ITI</h3>
+            <p>
+                Technical and skill-based pathways can provide practical learning and further-study opportunities.
+            </p>
+            <ul class="info-list">
+                <li>Technical skills</li>
+                <li>Practical training</li>
+                <li>Industry-oriented learning</li>
+                <li>Higher-study options</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>💻 Technology</h3>
+            <p>
+                Technology careers require continuous learning and practical skill development.
+            </p>
+            <ul class="info-list">
+                <li>Programming</li>
+                <li>Data and databases</li>
+                <li>Networks and systems</li>
+                <li>Projects and portfolios</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>💼 Business</h3>
+            <p>
+                Business pathways combine financial, analytical, communication and management skills.
+            </p>
+            <ul class="info-list">
+                <li>Accounting</li>
+                <li>Finance</li>
+                <li>Economics</li>
+                <li>Management</li>
+            </ul>
+        </div>
+
+        <div class="info-card">
+            <h3>🎨 Creative Fields</h3>
+            <p>
+                Creative careers can combine design, communication, technology and visual thinking.
+            </p>
+            <ul class="info-list">
+                <li>Graphic design</li>
+                <li>UI/UX</li>
+                <li>Media</li>
+                <li>Architecture and design</li>
+            </ul>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SKILLS -->
+<section class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>🛠️ Skills That Help Across Careers</h2>
+            <p>
+                Build a combination of technical, academic and professional skills.
+            </p>
+        </div>
+    </div>
+
+    <div class="category-grid">
+
+        <div class="category">
+            <div class="category-icon">💻</div>
+            <h3>Technical Skills</h3>
+            <p>
+                Programming, databases, networking, software tools, data and digital technologies.
+            </p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🗣️</div>
+            <h3>Communication</h3>
+            <p>
+                English, writing, speaking, presentation, teamwork and professional communication.
+            </p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🧠</div>
+            <h3>Problem Solving</h3>
+            <p>
+                Logical thinking, analytical reasoning, decision making and structured thinking.
+            </p>
+        </div>
+
+        <div class="category">
+            <div class="category-icon">🎨</div>
+            <h3>Creative Skills</h3>
+            <p>
+                Design thinking, visual communication, creativity and content development.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FAQ -->
+<section class="section">
+
+    <div class="section-heading">
+        <div>
+            <h2>❓ Career Guidance FAQ</h2>
+            <p>
+                Quick answers to common career-planning questions.
+            </p>
+        </div>
+    </div>
+
+    <div class="faq">
+
+        <div class="faq-item">
+
+            <button class="faq-question" onclick="toggleFaq(this)">
+                What should I do after Class 10?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                Compare available education pathways, understand your interests and strengths,
+                and research the subjects and courses connected with the fields you are considering.
+            </div>
+
+        </div>
+
+        <div class="faq-item">
+
+            <button class="faq-question" onclick="toggleFaq(this)">
+                What can I do after PCM?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                PCM can lead to several areas including engineering, computer science,
+                mathematics, physical sciences, architecture and other technology-related pathways.
+            </div>
+
+        </div>
+
+        <div class="faq-item">
+
+            <button class="faq-question" onclick="toggleFaq(this)">
+                What can I do after PCB?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                PCB can lead to healthcare, life sciences, biotechnology, pharmacy,
+                nursing and several other biology-related higher-education pathways.
+            </div>
+
+        </div>
+
+        <div class="faq-item">
+
+            <button class="faq-question" onclick="toggleFaq(this)">
+                Can Commerce students enter technology?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                Yes. Students can explore technology through appropriate degree programs,
+                certifications, programming practice and skill development, depending on
+                the eligibility requirements of the chosen course.
+            </div>
+
+        </div>
+
+        <div class="faq-item">
+
+            <button class="faq-question" onclick="toggleFaq(this)">
+                Can Arts students study technology or design?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                Many technology and design learning routes are skill-based, while formal
+                degree programs have their own eligibility requirements. Always check the
+                requirements of the specific course or institution.
+            </div>
+
+        </div>
+
+        <div class="faq-item">
+
+            <button class="faq-question" onclick="toggleFaq(this)">
+                What is more important: course or skills?
+                <span>+</span>
+            </button>
+
+            <div class="faq-answer">
+                Both can matter. A course can provide structured academic learning,
+                while practical skills, projects, communication and continuous learning
+                can help students apply what they study.
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+<section class="section">
+
+    <div class="cta">
+
+        <h2>🚀 Your Career Journey Starts Here</h2>
+
+        <p>
+            Explore your options, understand the requirements,
+            build useful skills and make your next education decision
+            with better information.
+        </p>
+
+        <br>
+
+        <button class="primary-btn" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+            🔍 Explore Again
+        </button>
+
+    </div>
+
+</section>
+
+
+<footer>
+    Student Career & Learning Management System • Career & Course Guidance
+</footer>
+```
+
+</div>
+
+<script>
+
+    /* =========================
+       ELEMENTS
+    ========================= */
+
+    const streamSelect =
+        document.getElementById("stream");
+
+    const subjectsSelect =
+        document.getElementById("subjects");
+
+    const courseSection =
+        document.getElementById("courseSection");
+
+    const detailsSection =
+        document.getElementById("detailsSection");
+
+    const courseResults =
+        document.getElementById("courseResults");
+
+    const courseDetails =
+        document.getElementById("courseDetails");
+
+    const careerSearch =
+        document.getElementById("careerSearch");
+
+
+    /* =========================
+       VARIABLES
+    ========================= */
+
+    let allCourses = [];
+    let selectedInterest = "";
+
+
+    /* =========================
+       DASHBOARD
+       No dashboard.html edit needed
+    ========================= */
+
+    function goDashboard() {
+        window.location.href = "dashboard.html";
+    }
+
+
+    /* =========================
+       STREAM -> SUBJECTS
+    ========================= */
+
+    streamSelect.addEventListener("change", function () {
+
+        const stream = this.value;
+
+        subjectsSelect.innerHTML =
+            '<option value="">-- Select Subject Combination --</option>';
+
+        if (stream === "Science") {
+
+            addSubject("PCM");
+            addSubject("PCB");
+            addSubject("PCMB");
+
+        } else if (stream === "Commerce") {
+
+            addSubject("Commerce");
+            addSubject("Commerce + Mathematics");
+
+        } else if (stream === "Arts") {
+
+            addSubject("Arts");
+
+        } else if (stream === "Computer") {
+
+            addSubject("Computer");
+            addSubject("Computer Science");
+
+        } else if (stream === "Diploma") {
+
+            addSubject("Diploma CSE");
+            addSubject("Diploma Mechanical");
+            addSubject("Diploma Electrical");
+            addSubject("Diploma Electronics");
+
+        } else if (stream === "ITI") {
+
+            addSubject("ITI Computer");
+            addSubject("ITI Electrician");
+            addSubject("ITI Fitter");
+            addSubject("ITI Electronics");
+
+        }
+
+    });
+
+
+    /* =========================
+       ADD SUBJECT
+    ========================= */
+
+    function addSubject(value) {
+
+        const option =
+            document.createElement("option");
+
+        option.value = value;
+        option.textContent = value;
+
+        subjectsSelect.appendChild(option);
+
+    }
+
+
+    /* =========================
+       INTEREST SELECTION
+    ========================= */
+
+    document
+        .querySelectorAll(".interest")
+        .forEach(function (item) {
+
+            item.addEventListener("click", function () {
+
+                document
+                    .querySelectorAll(".interest")
+                    .forEach(function (i) {
+
+                        i.classList.remove("selected");
+
+                    });
+
+                this.classList.add("selected");
+
+                selectedInterest =
+                    this.dataset.interest;
+
+            });
+
+        });
+
+
+    /* =========================
+       FIND COURSES
+    ========================= */
+
+    async function findCourses() {
+
+        const stream =
+            streamSelect.value;
+
+        const subjects =
+            subjectsSelect.value;
+
+
+        if (!stream) {
+
+            alert("Please select your stream.");
+            return;
+
+        }
+
+
+        if (!subjects) {
+
+            alert("Please select your subject combination.");
+            return;
+
+        }
+
+
+        courseSection.style.display = "block";
+        detailsSection.style.display = "none";
+
+        courseResults.innerHTML =
+            '<div class="loading">🔄 Loading courses...</div>';
+
+        courseSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+
+        try {
+
+            const url =
+                `/api/career-courses/by-subjects?stream=${encodeURIComponent(stream)}&subjectCombination=${encodeURIComponent(subjects)}`;
+
+            const response =
+                await fetch(url);
+
+
+            if (!response.ok) {
+
+                throw new Error("Failed to load courses");
+
+            }
+
+
+            allCourses =
+                await response.json();
+
+
+            displayCourses(allCourses);
+
+        }
+
+        catch (error) {
+
+            console.error(error);
+
+            courseResults.innerHTML = `
+                <div class="empty">
+                    <h3>Unable to load database courses</h3>
+                    <br>
+                    <p>
+                        The course database may not contain entries
+                        for this combination yet.
+                    </p>
+                </div>
+            `;
+
+        }
+
+    }
+
+
+    /* =========================
+       DISPLAY COURSES
+    ========================= */
+
+    function displayCourses(courses) {
+
+        if (!courses || courses.length === 0) {
+
+            courseResults.innerHTML = `
+                <div class="empty">
+                    <h3>No database courses found</h3>
+                    <br>
+                    <p>
+                        Try another subject combination or explore
+                        the career areas below.
+                    </p>
+                </div>
+            `;
+
+            return;
+
+        }
+
+
+        let filteredCourses = courses;
+
+
+        if (selectedInterest) {
+
+            const keywordMap = {
+
+                Technology: [
+                    "computer",
+                    "technology",
+                    "software",
+                    "programming",
+                    "information"
+                ],
+
+                AI: [
+                    "ai",
+                    "data",
+                    "machine",
+                    "artificial"
+                ],
+
+                Cybersecurity: [
+                    "cyber",
+                    "security",
+                    "network"
+                ],
+
+                Medical: [
+                    "medical",
+                    "medicine",
+                    "nursing",
+                    "pharmacy",
+                    "biology",
+                    "health"
+                ],
+
+                Science: [
+                    "science",
+                    "physics",
+                    "mathematics",
+                    "chemistry"
+                ],
+
+                Business: [
+                    "business",
+                    "commerce",
+                    "management"
+                ],
+
+                Finance: [
+                    "finance",
+                    "account",
+                    "bank"
+                ],
+
+                Law: [
+                    "law",
+                    "legal"
+                ],
+
+                Design: [
+                    "design",
+                    "architecture"
+                ],
+
+                Media: [
+                    "media",
+                    "journalism",
+                    "communication"
+                ],
+
+                Government: [
+                    "government",
+                    "public",
+                    "civil"
+                ],
+
+                Research: [
+                    "research",
+                    "science"
+                ]
+
+            };
+
+
+            const keywords =
+                keywordMap[selectedInterest] || [];
+
+
+            const matching =
+                courses.filter(function (course) {
+
+                    const text = (
+
+                        (course.course || "") +
+                        " " +
+                        (course.description || "") +
+                        " " +
+                        (course.careerOptions || "") +
+                        " " +
+                        (course.jobRoles || "")
+
+                    ).toLowerCase();
+
+
+                    return keywords.some(function (keyword) {
+
+                        return text.includes(
+                            keyword.toLowerCase()
+                        );
+
+                    });
+
+                });
+
+
+            if (matching.length > 0) {
+
+                filteredCourses =
+                    matching;
+
+            }
+
+        }
+
+
+        let html =
+            '<div class="course-grid">';
+
+
+        filteredCourses.forEach(function (course) {
+
+            html += `
+
+                <div class="course-card">
+
+                    <div class="course-icon">
+                        📚
+                    </div>
+
+                    <h3>
+                        ${escapeHtml(course.course)}
+                    </h3>
+
+                    <p>
+                        <strong>Duration:</strong>
+                        ${escapeHtml(
+                            course.duration ||
+                            "Not specified"
+                        )}
+                    </p>
+
+                    <p>
+                        <strong>Eligibility:</strong>
+                        ${escapeHtml(
+                            course.eligibility ||
+                            "Not specified"
+                        )}
+                    </p>
+
+                    <p>
+                        <strong>Subjects:</strong>
+                        ${escapeHtml(
+                            course.requiredSubjects ||
+                            "Not specified"
+                        )}
+                    </p>
+
+                    <p>
+                        ${escapeHtml(
+                            course.description ||
+                            "Course information available."
+                        )}
+                    </p>
+
+                    <button
+                        class="primary-btn view-btn"
+                        onclick="showCourseDetails(${course.id})">
+
+                        📖 View Complete Information
+
+                    </button>
+
+                </div>
+
+            `;
+
+        });
+
+
+        html += "</div>";
+
+        courseResults.innerHTML = html;
+
+    }
+
+
+    /* =========================
+       COURSE DETAILS
+    ========================= */
+
+    function showCourseDetails(id) {
+
+        const course =
+            allCourses.find(function (c) {
+
+                return c.id === id;
+
+            });
+
+
+        if (!course) {
+            return;
+        }
+
+
+        detailsSection.style.display =
+            "block";
+
+
+        courseDetails.innerHTML = `
+
+            <div class="details-box">
+
+                <div class="details-header">
+
+                    <h2>
+                        ${escapeHtml(course.course)}
+                    </h2>
+
+                    <p>
+                        ${escapeHtml(
+                            course.duration ||
+                            "Duration not specified"
+                        )}
+                    </p>
+
+                </div>
+
+
+                <div class="details-content">
+
+                    ${detailItem(
+                        "📖 Course Overview",
+                        course.description
+                    )}
+
+                    ${detailItem(
+                        "⏱️ Duration",
+                        course.duration
+                    )}
+
+                    ${detailItem(
+                        "🎓 Eligibility",
+                        course.eligibility
+                    )}
+
+                    ${detailItem(
+                        "📚 Required Subjects",
+                        course.requiredSubjects
+                    )}
+
+                    ${detailItem(
+                        "📝 What You Study",
+                        course.mainSubjects
+                    )}
+
+                    ${detailItem(
+                        "💡 Skills Required",
+                        course.skillsRequired
+                    )}
+
+                    ${detailItem(
+                        "🏫 Admission Process",
+                        course.admissionProcess
+                    )}
+
+                    ${detailItem(
+                        "📝 Entrance Exams",
+                        course.entranceExams
+                    )}
+
+                    ${detailItem(
+                        "💼 Career Options",
+                        course.careerOptions
+                    )}
+
+                    ${detailItem(
+                        "👨‍💻 Job Roles",
+                        course.jobRoles
+                    )}
+
+                    ${detailItem(
+                        "🎓 Higher Studies",
+                        course.higherStudies
+                    )}
+
+                    ${detailItem(
+                        "💰 Salary Information",
+                        course.salaryInfo
+                    )}
+
+                    ${getRelatedCourses(course)}
+
+                    <div class="action-row">
+
+                        <button
+                            class="primary-btn"
+                            onclick="scrollToCourses()">
+
+                            ← Back to Courses
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        detailsSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+    /* =========================
+       DETAIL ITEM
+    ========================= */
+
+    function detailItem(title, value) {
+
+        return `
+
+            <div class="info-item">
+
+                <h3>
+                    ${title}
+                </h3>
+
+                <p>
+                    ${escapeHtml(
+                        value ||
+                        "Information not available."
+                    )}
+                </p>
+
+            </div>
+
+        `;
+
+    }
+
+
+    /* =========================
+       RELATED COURSES
+    ========================= */
+
+    function getRelatedCourses(currentCourse) {
+
+        const related =
+            allCourses.filter(function (course) {
+
+                return course.id !== currentCourse.id;
+
+            });
+
+
+        if (related.length === 0) {
+            return "";
+        }
+
+
+        const limited =
+            related.slice(0, 4);
+
+
+        let html = `
+
+            <div class="info-item">
+
+                <h3>
+                    🔗 Related Courses
+                </h3>
+
+                <div class="related-grid">
+
+        `;
+
+
+        limited.forEach(function (course) {
+
+            html += `
+
+                <div class="related-card">
+
+                    <h4>
+                        ${escapeHtml(course.course)}
+                    </h4>
+
+                    <p>
+                        ${escapeHtml(
+                            course.duration ||
+                            "Duration not specified"
+                        )}
+                    </p>
+
+                    <br>
+
+                    <button
+                        class="reset-btn"
+                        onclick="showCourseDetails(${course.id})">
+
+                        View Details
+
+                    </button>
+
+                </div>
+
+            `;
+
+        });
+
+
+        html += `
+
+                </div>
+
+            </div>
+
+        `;
+
+
+        return html;
+
+    }
+
+
+    /* =========================
+       BACK TO COURSES
+    ========================= */
+
+    function scrollToCourses() {
+
+        courseSection.scrollIntoView({
+            behavior: "smooth",
+            block: "start"
+        });
+
+    }
+
+
+    /* =========================
+       SEARCH CAREERS
+    ========================= */
+
+    function searchCareers() {
+
+        const query =
+            careerSearch.value
+                .trim()
+                .toLowerCase();
+
+
+        const cards =
+            document.querySelectorAll(".career-card");
+
+
+        if (!query) {
+
+            cards.forEach(function (card) {
+
+                card.style.display = "";
+
+            });
+
+            return;
+
+        }
+
+
+        let found = 0;
+
+
+        cards.forEach(function (card) {
+
+            const text =
+                card.innerText.toLowerCase();
+
+
+            if (text.includes(query)) {
+
+                card.style.display = "";
+                found++;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+
+        document
+            .getElementById("careerSection")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+    }
+
+
+    /* =========================
+       CATEGORY FILTER
+    ========================= */
+
+    function filterCareer(category) {
+
+        const cards =
+            document.querySelectorAll(".career-card");
+
+
+        cards.forEach(function (card) {
+
+            if (
+                category === "all" ||
+                card.dataset.category === category
+            ) {
+
+                card.style.display = "";
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+
+        document
+            .getElementById("careerSection")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+
+    }
+
+
+    /* =========================
+       RESET
+    ========================= */
+
+    function resetPage() {
+
+        document
+            .getElementById("educationLevel")
+            .value = "";
+
+
+        streamSelect.value = "";
+
+
+        subjectsSelect.innerHTML =
+            '<option value="">First select your stream</option>';
+
+
+        document
+            .querySelectorAll(".interest")
+            .forEach(function (item) {
+
+                item.classList.remove("selected");
+
+            });
+
+
+        selectedInterest = "";
+        allCourses = [];
+
+
+        courseSection.style.display =
+            "none";
+
+
+        detailsSection.style.display =
+            "none";
+
+
+        courseResults.innerHTML = "";
+        courseDetails.innerHTML = "";
+
+
+        careerSearch.value = "";
+
+
+        document
+            .querySelectorAll(".career-card")
+            .forEach(function (card) {
+
+                card.style.display = "";
+
+            });
+
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
+
+    }
+
+
+    /* =========================
+       FAQ
+    ========================= */
+
+    function toggleFaq(button) {
+
+        const item =
+            button.parentElement;
+
+
+        const isOpen =
+            item.classList.contains("open");
+
+
+        document
+            .querySelectorAll(".faq-item")
+            .forEach(function (faq) {
+
+                faq.classList.remove("open");
+
+                const span =
+                    faq.querySelector(".faq-question span");
+
+                if (span) {
+                    span.textContent = "+";
+                }
+
+            });
+
+
+        if (!isOpen) {
+
+            item.classList.add("open");
+
+            const span =
+                button.querySelector("span");
+
+            if (span) {
+                span.textContent = "−";
+            }
+
+        }
+
+    }
+
+
+    /* =========================
+       HTML ESCAPE
+    ========================= */
+
+    function escapeHtml(value) {
+
+        if (
+            value === null ||
+            value === undefined
+        ) {
+
+            return "";
+
+        }
+
+
+        return String(value)
+
+            .replace(/&/g, "&amp;")
+
+            .replace(/</g, "&lt;")
+
+            .replace(/>/g, "&gt;")
+
+            .replace(/"/g, "&quot;")
+
+            .replace(/'/g, "&#039;");
+
+    }
+
+</script>
+
+</body>
+
+</html>

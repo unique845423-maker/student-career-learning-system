@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Create Account | Student Career & Learning</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+
+            background:
+                radial-gradient(circle at 15% 15%, rgba(59,130,246,.35), transparent 30%),
+                radial-gradient(circle at 85% 85%, rgba(6,182,212,.30), transparent 30%),
+                linear-gradient(135deg, #020617, #082044, #062d4f);
+        }
+
+        .card {
+            width: 100%;
+            max-width: 450px;
+            padding: 40px;
+
+            background: rgba(255,255,255,.09);
+            border: 1px solid rgba(255,255,255,.18);
+            border-radius: 26px;
+
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+
+            box-shadow: 0 30px 70px rgba(0,0,0,.45);
+
+            color: white;
+        }
+
+        .logo {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            border-radius: 20px;
+
+            background: linear-gradient(135deg, #2563eb, #06b6d4);
+
+            font-size: 32px;
+
+            box-shadow: 0 12px 30px rgba(6,182,212,.25);
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #a9b8ce;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 28px;
+        }
+
+        .progress {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 28px;
+        }
+
+        .progress-step {
+            width: 55px;
+            height: 7px;
+            border-radius: 20px;
+            background: rgba(255,255,255,.12);
+        }
+
+        .progress-step.active {
+            background: linear-gradient(90deg, #3b82f6, #06b6d4);
+        }
+
+        .verified {
+            padding: 12px;
+            margin-bottom: 22px;
+
+            text-align: center;
+
+            background: rgba(34,197,94,.10);
+            border: 1px solid rgba(34,197,94,.25);
+
+            border-radius: 12px;
+
+            color: #86efac;
+            font-size: 13px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+
+            color: #dbeafe;
+            font-size: 13px;
+            font-weight: 650;
+        }
+
+        .input-box {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 17px;
+        }
+
+        input {
+            width: 100%;
+            height: 52px;
+
+            padding: 0 45px;
+
+            border: 1px solid rgba(255,255,255,.15);
+            border-radius: 13px;
+
+            outline: none;
+
+            background: rgba(255,255,255,.96);
+            color: #172033;
+
+            font-size: 15px;
+        }
+
+        input:focus {
+            border-color: #38bdf8;
+
+            box-shadow:
+                0 0 0 4px rgba(56,189,248,.13);
+        }
+
+        .password-info {
+            margin-top: 7px;
+
+            color: #8293aa;
+
+            font-size: 11px;
+        }
+
+        .create-btn {
+            width: 100%;
+            height: 54px;
+
+            margin-top: 5px;
+
+            border: none;
+            border-radius: 13px;
+
+            background:
+                linear-gradient(135deg, #2563eb, #06b6d4);
+
+            color: white;
+
+            font-size: 15px;
+            font-weight: 750;
+
+            cursor: pointer;
+
+            transition: .25s;
+        }
+
+        .create-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .create-btn:disabled {
+            opacity: .6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .back {
+            display: block;
+
+            margin-top: 20px;
+
+            text-align: center;
+
+            color: #9fb0c6;
+
+            font-size: 13px;
+
+            text-decoration: none;
+        }
+
+        .back:hover {
+            color: #67e8f9;
+        }
+
+        .security {
+            text-align: center;
+
+            margin-top: 22px;
+
+            color: #8495ad;
+
+            font-size: 12px;
+        }
+
+        @media (max-width: 500px) {
+
+            .card {
+                padding: 30px 22px;
+            }
+
+            h1 {
+                font-size: 25px;
+            }
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <div class="card">
+
+        <div class="logo">
+            🔐
+        </div>
+
+        <h1>
+            Create Your Account
+        </h1>
+
+        <p class="subtitle">
+            Choose your username and create a secure password.
+        </p>
+
+
+        <div class="progress">
+
+            <div class="progress-step active"></div>
+
+            <div class="progress-step active"></div>
+
+            <div class="progress-step active"></div>
+
+        </div>
+
+
+        <div class="verified">
+            ✅ Email verified successfully
+        </div>
+
+
+        <form id="accountForm">
+
+
+            <!-- Username -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Username
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        👤
+                    </span>
+
+                    <input
+                        type="text"
+                        id="username"
+                        placeholder="Choose your username"
+                        autocomplete="username"
+                        minlength="4"
+                        maxlength="30"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <!-- Password -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        🔑
+                    </span>
+
+                    <input
+                        type="password"
+                        id="password"
+                        placeholder="Create a password"
+                        autocomplete="new-password"
+                        minlength="8"
+                        required
+                    >
+
+                </div>
+
+                <div class="password-info">
+                    Use at least 8 characters.
+                </div>
+
+            </div>
+
+
+            <!-- Confirm Password -->
+
+            <div class="form-group">
+
+                <label for="confirmPassword">
+                    Confirm Password
+                </label>
+
+                <div class="input-box">
+
+                    <span class="input-icon">
+                        🔒
+                    </span>
+
+                    <input
+                        type="password"
+                        id="confirmPassword"
+                        placeholder="Re-enter your password"
+                        autocomplete="new-password"
+                        required
+                    >
+
+                </div>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="create-btn"
+                id="createBtn"
+            >
+                Create Account →
+            </button>
+
+        </form>
+
+
+        <a
+            href="register.html"
+            class="back"
+        >
+            ← Back to Registration
+        </a>
+
+
+        <div class="security">
+            🔒 Your password will be securely protected
+        </div>
+
+    </div>
+
+
+    <script>
+
+        /*
+         * Check whether email was verified
+         */
+
+        const verified =
+            sessionStorage.getItem(
+                "emailVerified"
+            );
+
+
+        if (verified !== "true") {
+
+            alert(
+                "Please verify your email first."
+            );
+
+            window.location.href =
+                "register.html";
+        }
+
+
+        /*
+         * Registration details
+         */
+
+        const name =
+            sessionStorage.getItem(
+                "registrationName"
+            );
+
+        const email =
+            sessionStorage.getItem(
+                "registrationEmail"
+            );
+
+        const phone =
+            sessionStorage.getItem(
+                "registrationPhone"
+            );
+
+
+        /*
+         * Account form
+         */
+
+        document
+            .getElementById("accountForm")
+            .addEventListener(
+                "submit",
+                async function(event) {
+
+                    event.preventDefault();
+
+
+                    const username =
+                        document
+                            .getElementById("username")
+                            .value
+                            .trim();
+
+
+                    const password =
+                        document
+                            .getElementById("password")
+                            .value;
+
+
+                    const confirmPassword =
+                        document
+                            .getElementById("confirmPassword")
+                            .value;
+
+
+                    /*
+                     * Username validation
+                     */
+
+                    if (!/^[A-Za-z0-9_]{4,30}$/.test(username)) {
+
+                        alert(
+                            "Username must contain 4-30 characters.\n\n" +
+                            "Use only letters, numbers and underscore."
+                        );
+
+                        return;
+                    }
+
+
+                    /*
+                     * Password validation
+                     */
+
+                    if (password.length < 8) {
+
+                        alert(
+                            "Password must contain at least 8 characters."
+                        );
+
+                        return;
+                    }
+
+
+                    /*
+                     * Confirm password
+                     */
+
+                    if (password !== confirmPassword) {
+
+                        alert(
+                            "Passwords do not match."
+                        );
+
+                        return;
+                    }
+
+
+                    /*
+                     * Check saved registration data
+                     */
+
+                    if (!name || !email || !phone) {
+
+                        alert(
+                            "Registration information is missing.\n\n" +
+                            "Please start registration again."
+                        );
+
+                        window.location.href =
+                            "register.html";
+
+                        return;
+                    }
+
+
+                    const button =
+                        document.getElementById(
+                            "createBtn"
+                        );
+
+
+                    button.disabled = true;
+
+                    button.innerText =
+                        "Creating Account...";
+
+
+                    /*
+                     * Student data
+                     */
+
+                    const student = {
+
+                        name: name,
+
+                        email: email,
+
+                        phone: phone,
+
+                        username: username,
+
+                        password: password
+                    };
+
+
+                    try {
+
+                        const response =
+                            await fetch(
+                                "/api/students/register",
+                                {
+                                    method: "POST",
+
+                                    headers: {
+                                        "Content-Type":
+                                            "application/json"
+                                    },
+
+                                    body:
+                                        JSON.stringify(
+                                            student
+                                        )
+                                }
+                            );
+
+
+                        if (response.ok) {
+
+                            alert(
+                                "Account created successfully! 🎉"
+                            );
+
+
+                            /*
+                             * Clear registration data
+                             */
+
+                            sessionStorage.removeItem(
+                                "registrationName"
+                            );
+
+                            sessionStorage.removeItem(
+                                "registrationEmail"
+                            );
+
+                            sessionStorage.removeItem(
+                                "registrationPhone"
+                            );
+
+                            sessionStorage.removeItem(
+                                "emailVerified"
+                            );
+
+
+                            /*
+                             * Login page will be added next
+                             */
+
+                             window.location.href = "/login.html";
+
+
+                        } else {
+
+                            const message =
+                                await response.text();
+
+                            alert(
+                                "Account creation failed.\n\n" +
+                                message
+                            );
+                        }
+
+
+                    } catch (error) {
+
+                        console.error(error);
+
+                        alert(
+                            "Server connection failed.\n\n" +
+                            "Please make sure Spring Boot is running."
+                        );
+
+                    } finally {
+
+                        button.disabled = false;
+
+                        button.innerText =
+                            "Create Account →";
+                    }
+
+                }
+            );
+
+    </script>
+
+</body>
+
+</html>

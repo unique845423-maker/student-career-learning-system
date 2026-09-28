@@ -1,0 +1,1234 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Progress | Student Career & Learning Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Inter, Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            color: #f8fafc;
+            background:
+                radial-gradient(circle at 10% 0%, rgba(37, 99, 235, 0.28), transparent 30%),
+                radial-gradient(circle at 90% 10%, rgba(124, 58, 237, 0.25), transparent 30%),
+                linear-gradient(135deg, #020617, #071426 55%, #0b1020);
+            overflow-x: hidden;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            height: 72px;
+            padding: 0 6%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            background: rgba(2, 6, 23, 0.78);
+            backdrop-filter: blur(18px);
+
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: 20px;
+            font-weight: 800;
+            letter-spacing: 0.3px;
+        }
+
+        .brand span {
+            color: #60a5fa;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status {
+            padding: 8px 13px;
+            border-radius: 30px;
+            background: rgba(34,197,94,0.1);
+            border: 1px solid rgba(34,197,94,0.25);
+            color: #86efac;
+            font-size: 13px;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 10px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.12);
+            transition: 0.3s;
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.16);
+            transform: translateY(-2px);
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: 88%;
+            max-width: 1250px;
+            margin: 45px auto;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 30px;
+            margin-bottom: 32px;
+        }
+
+        .hero-text h1 {
+            font-size: 42px;
+            line-height: 1.15;
+            margin-bottom: 12px;
+        }
+
+        .hero-text h1 span {
+            color: #60a5fa;
+        }
+
+        .hero-text p {
+            color: #94a3b8;
+            font-size: 16px;
+        }
+
+        .date-box {
+            padding: 15px 20px;
+            border-radius: 15px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+            color: #cbd5e1;
+        }
+
+        /* ================= MAIN PROGRESS ================= */
+
+        .main-progress {
+            padding: 30px;
+            border-radius: 24px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37,99,235,0.18),
+                    rgba(124,58,237,0.12)
+                );
+
+            border: 1px solid rgba(255,255,255,0.12);
+
+            backdrop-filter: blur(20px);
+
+            box-shadow: 0 25px 60px rgba(0,0,0,0.25);
+
+            margin-bottom: 25px;
+        }
+
+        .progress-heading {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .progress-heading h2 {
+            font-size: 21px;
+        }
+
+        .big-percent {
+            font-size: 38px;
+            font-weight: 800;
+            color: #60a5fa;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 18px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 30px;
+            overflow: hidden;
+        }
+
+        .progress-value {
+            width: 68%;
+            height: 100%;
+            border-radius: 30px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #2563eb,
+                    #7c3aed,
+                    #60a5fa
+                );
+
+            position: relative;
+        }
+
+        .progress-value::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.35),
+                transparent
+            );
+
+            animation: shine 2.5s infinite;
+        }
+
+        @keyframes shine {
+            from {
+                transform: translateX(-100%);
+            }
+
+            to {
+                transform: translateX(100%);
+            }
+        }
+
+        .progress-bottom {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 13px;
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            padding: 23px;
+            border-radius: 18px;
+
+            background: rgba(255,255,255,0.055);
+            border: 1px solid rgba(255,255,255,0.09);
+
+            transition: 0.3s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(96,165,250,0.35);
+            background: rgba(255,255,255,0.08);
+        }
+
+        .stat-icon {
+            font-size: 27px;
+            margin-bottom: 14px;
+        }
+
+        .stat-number {
+            font-size: 27px;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .stat-title {
+            color: #94a3b8;
+            font-size: 14px;
+        }
+
+        .stat-change {
+            margin-top: 12px;
+            color: #86efac;
+            font-size: 12px;
+        }
+
+        /* ================= GRID ================= */
+
+        .section-title {
+            font-size: 24px;
+            margin-bottom: 17px;
+        }
+
+        .two-column {
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr;
+            gap: 22px;
+            margin-bottom: 30px;
+        }
+
+        .card {
+            padding: 25px;
+            border-radius: 20px;
+
+            background: rgba(255,255,255,0.055);
+            border: 1px solid rgba(255,255,255,0.09);
+
+            backdrop-filter: blur(15px);
+        }
+
+        /* ================= COURSES ================= */
+
+        .course {
+            margin-bottom: 24px;
+        }
+
+        .course:last-child {
+            margin-bottom: 0;
+        }
+
+        .course-head {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 9px;
+        }
+
+        .course-name {
+            font-weight: 600;
+        }
+
+        .course-percent {
+            color: #60a5fa;
+            font-weight: 700;
+        }
+
+        .course-bar {
+            height: 9px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .course-fill {
+            height: 100%;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #2563eb, #8b5cf6);
+        }
+
+        .course-info {
+            margin-top: 8px;
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        /* ================= STREAK ================= */
+
+        .streak {
+            text-align: center;
+        }
+
+        .fire {
+            font-size: 55px;
+            margin-bottom: 8px;
+        }
+
+        .streak-number {
+            font-size: 40px;
+            font-weight: 800;
+            color: #fbbf24;
+        }
+
+        .streak p {
+            color: #94a3b8;
+            margin-top: 5px;
+        }
+
+        .week {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+
+        .day {
+            text-align: center;
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .day-circle {
+            width: 35px;
+            height: 35px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 6px;
+
+            border-radius: 50%;
+            background: rgba(255,255,255,0.07);
+        }
+
+        .day.active .day-circle {
+            background: #2563eb;
+            color: white;
+        }
+
+        /* ================= SKILLS ================= */
+
+        .skill-row {
+            margin-bottom: 20px;
+        }
+
+        .skill-head {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 7px;
+            font-size: 14px;
+        }
+
+        .skill-head span {
+            color: #60a5fa;
+        }
+
+        /* ================= ACTIVITY ================= */
+
+        .activity-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .activity-item {
+            display: flex;
+            gap: 13px;
+            align-items: center;
+
+            padding: 14px;
+
+            border-radius: 12px;
+            background: rgba(255,255,255,0.035);
+
+            color: #cbd5e1;
+            font-size: 14px;
+        }
+
+        .activity-icon {
+            width: 36px;
+            height: 36px;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            border-radius: 10px;
+            background: rgba(37,99,235,0.15);
+        }
+
+        /* ================= ACHIEVEMENTS ================= */
+
+        .achievements {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 16px;
+        }
+
+        .achievement {
+            padding: 22px;
+            text-align: center;
+
+            border-radius: 17px;
+
+            background: rgba(255,255,255,0.045);
+            border: 1px solid rgba(255,255,255,0.08);
+
+            transition: 0.3s;
+        }
+
+        .achievement:hover {
+            transform: translateY(-5px);
+        }
+
+        .badge {
+            font-size: 38px;
+            margin-bottom: 10px;
+        }
+
+        .achievement h3 {
+            font-size: 16px;
+            margin-bottom: 6px;
+        }
+
+        .achievement p {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        /* ================= CAREER ================= */
+
+        .career-card {
+            margin-top: 30px;
+            padding: 28px;
+
+            border-radius: 22px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    rgba(37,99,235,0.18),
+                    rgba(124,58,237,0.18)
+                );
+
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .career-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .career-score {
+            font-size: 28px;
+            font-weight: 800;
+            color: #60a5fa;
+        }
+
+        .career-card p {
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .goal-list {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .goal-item {
+            padding: 13px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.05);
+            color: #cbd5e1;
+            font-size: 13px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            text-align: center;
+            margin-top: 45px;
+            color: #475569;
+            font-size: 13px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 950px) {
+
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .two-column {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .goal-list {
+                grid-template-columns: 1fr;
+            }
+
+            .hero {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+
+        @media (max-width: 600px) {
+
+            .container {
+                width: 92%;
+            }
+
+            .navbar {
+                padding: 0 4%;
+            }
+
+            .status {
+                display: none;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .achievements {
+                grid-template-columns: 1fr;
+            }
+
+            .progress-heading {
+                align-items: flex-start;
+                gap: 10px;
+                flex-direction: column;
+            }
+
+            .nav-right {
+                gap: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+
+    <div class="brand">
+        Student <span>Career & Learning</span>
+    </div>
+
+    <div class="nav-right">
+
+        <div class="status">
+            ● Learning Active
+        </div>
+
+        <a href="dashboard.html" class="back-btn">
+            ← Dashboard
+        </a>
+
+    </div>
+
+</nav>
+
+
+<!-- ================= MAIN ================= -->
+
+<main class="container">
+
+
+    <!-- HERO -->
+
+    <section class="hero">
+
+        <div class="hero-text">
+
+            <h1>
+                Track Your <span>Progress</span> 🚀
+            </h1>
+
+            <p>
+                Monitor your learning journey, skills, achievements and career growth.
+            </p>
+
+        </div>
+
+        <div class="date-box">
+            📅 2026 Learning Journey
+        </div>
+
+    </section>
+
+
+    <!-- OVERALL PROGRESS -->
+
+    <section class="main-progress">
+
+        <div class="progress-heading">
+
+            <h2>
+                Overall Learning Progress
+            </h2>
+
+            <div class="big-percent">
+                68%
+            </div>
+
+        </div>
+
+        <div class="progress-track">
+
+            <div class="progress-value"></div>
+
+        </div>
+
+        <div class="progress-bottom">
+
+            <span>
+                68% completed
+            </span>
+
+            <span>
+                Keep going — you're making great progress!
+            </span>
+
+        </div>
+
+    </section>
+
+
+    <!-- STATISTICS -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+
+            <div class="stat-icon">📚</div>
+
+            <div class="stat-number">
+                12
+            </div>
+
+            <div class="stat-title">
+                Courses Started
+            </div>
+
+            <div class="stat-change">
+                ↑ 3 this month
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🎯</div>
+
+            <div class="stat-number">
+                7
+            </div>
+
+            <div class="stat-title">
+                Courses Completed
+            </div>
+
+            <div class="stat-change">
+                ↑ 2 this month
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">💡</div>
+
+            <div class="stat-number">
+                15
+            </div>
+
+            <div class="stat-title">
+                Skills Developed
+            </div>
+
+            <div class="stat-change">
+                ↑ 4 recently
+            </div>
+
+        </div>
+
+
+        <div class="stat-card">
+
+            <div class="stat-icon">🚀</div>
+
+            <div class="stat-number">
+                4
+            </div>
+
+            <div class="stat-title">
+                Projects Built
+            </div>
+
+            <div class="stat-change">
+                ↑ 1 this month
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- COURSES + STREAK -->
+
+    <div class="two-column">
+
+
+        <!-- COURSE PROGRESS -->
+
+        <section class="card">
+
+            <h2 class="section-title">
+                📚 Course Progress
+            </h2>
+
+
+            <div class="course">
+
+                <div class="course-head">
+
+                    <span class="course-name">
+                        Java Programming
+                    </span>
+
+                    <span class="course-percent">
+                        80%
+                    </span>
+
+                </div>
+
+                <div class="course-bar">
+                    <div class="course-fill" style="width:80%"></div>
+                </div>
+
+                <div class="course-info">
+                    8 of 10 modules completed
+                </div>
+
+            </div>
+
+
+            <div class="course">
+
+                <div class="course-head">
+
+                    <span class="course-name">
+                        Web Development
+                    </span>
+
+                    <span class="course-percent">
+                        72%
+                    </span>
+
+                </div>
+
+                <div class="course-bar">
+                    <div class="course-fill" style="width:72%"></div>
+                </div>
+
+                <div class="course-info">
+                    HTML • CSS • JavaScript
+                </div>
+
+            </div>
+
+
+            <div class="course">
+
+                <div class="course-head">
+
+                    <span class="course-name">
+                        Database Management
+                    </span>
+
+                    <span class="course-percent">
+                        64%
+                    </span>
+
+                </div>
+
+                <div class="course-bar">
+                    <div class="course-fill" style="width:64%"></div>
+                </div>
+
+                <div class="course-info">
+                    MySQL • SQL • Database Concepts
+                </div>
+
+            </div>
+
+
+            <div class="course">
+
+                <div class="course-head">
+
+                    <span class="course-name">
+                        Computer Networks
+                    </span>
+
+                    <span class="course-percent">
+                        45%
+                    </span>
+
+                </div>
+
+                <div class="course-bar">
+                    <div class="course-fill" style="width:45%"></div>
+                </div>
+
+                <div class="course-info">
+                    Networking • Protocols • Security
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- STREAK -->
+
+        <section class="card streak">
+
+            <h2 class="section-title">
+                🔥 Learning Streak
+            </h2>
+
+            <div class="fire">
+                🔥
+            </div>
+
+            <div class="streak-number">
+                12
+            </div>
+
+            <p>
+                Days continuous learning
+            </p>
+
+
+            <div class="week">
+
+                <div class="day active">
+                    <div class="day-circle">✓</div>
+                    Mon
+                </div>
+
+                <div class="day active">
+                    <div class="day-circle">✓</div>
+                    Tue
+                </div>
+
+                <div class="day active">
+                    <div class="day-circle">✓</div>
+                    Wed
+                </div>
+
+                <div class="day active">
+                    <div class="day-circle">✓</div>
+                    Thu
+                </div>
+
+                <div class="day active">
+                    <div class="day-circle">✓</div>
+                    Fri
+                </div>
+
+                <div class="day">
+                    <div class="day-circle">6</div>
+                    Sat
+                </div>
+
+                <div class="day">
+                    <div class="day-circle">7</div>
+                    Sun
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- SKILLS + ACTIVITY -->
+
+    <div class="two-column">
+
+
+        <!-- SKILLS -->
+
+        <section class="card">
+
+            <h2 class="section-title">
+                💡 Skill Development
+            </h2>
+
+
+            <div class="skill-row">
+
+                <div class="skill-head">
+                    <span>Java</span>
+                    <span>82%</span>
+                </div>
+
+                <div class="course-bar">
+                    <div class="course-fill" style="width:82%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill-row">
+
+                <div class="skill-head">
+                    <span>HTML & CSS</span>
+                    <span>88%</span>
+                </div>
+
+                <div class="course-bar">
+                    <div class="course-fill" style="width:88%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill-row">
+
+                <div class="skill-head">
+                    <span>JavaScript</span>
+                    <span>65%</span>
+                </div>
+
+                <div class="course-bar">
+                    <div class="course-fill" style="width:65%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill-row">
+
+                <div class="skill-head">
+                    <span>MySQL</span>
+                    <span>70%</span>
+                </div>
+
+                <div class="course-bar">
+                    <div class="course-fill" style="width:70%"></div>
+                </div>
+
+            </div>
+
+
+            <div class="skill-row">
+
+                <div class="skill-head">
+                    <span>Communication</span>
+                    <span>58%</span>
+                </div>
+
+                <div class="course-bar">
+                    <div class="course-fill" style="width:58%"></div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- RECENT ACTIVITY -->
+
+        <section class="card">
+
+            <h2 class="section-title">
+                ⚡ Recent Activity
+            </h2>
+
+
+            <div class="activity-list">
+
+                <div class="activity-item">
+
+                    <div class="activity-icon">
+                        ✅
+                    </div>
+
+                    <div>
+                        Completed Java OOP module
+                    </div>
+
+                </div>
+
+
+                <div class="activity-item">
+
+                    <div class="activity-icon">
+                        💡
+                    </div>
+
+                    <div>
+                        Added Java to My Skills
+                    </div>
+
+                </div>
+
+
+                <div class="activity-item">
+
+                    <div class="activity-icon">
+                        🚀
+                    </div>
+
+                    <div>
+                        Completed a mini project
+                    </div>
+
+                </div>
+
+
+                <div class="activity-item">
+
+                    <div class="activity-icon">
+                        📚
+                    </div>
+
+                    <div>
+                        Started Database Management
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </div>
+
+
+    <!-- ACHIEVEMENTS -->
+
+    <section class="card">
+
+        <h2 class="section-title">
+            🏆 Achievements
+        </h2>
+
+
+        <div class="achievements">
+
+
+            <div class="achievement">
+
+                <div class="badge">
+                    🏅
+                </div>
+
+                <h3>
+                    First Project
+                </h3>
+
+                <p>
+                    Built your first project
+                </p>
+
+            </div>
+
+
+            <div class="achievement">
+
+                <div class="badge">
+                    🔥
+                </div>
+
+                <h3>
+                    10 Day Streak
+                </h3>
+
+                <p>
+                    Learned for 10 continuous days
+                </p>
+
+            </div>
+
+
+            <div class="achievement">
+
+                <div class="badge">
+                    💻
+                </div>
+
+                <h3>
+                    Coding Explorer
+                </h3>
+
+                <p>
+                    Developed multiple coding skills
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- CAREER READINESS -->
+
+    <section class="career-card">
+
+        <div class="career-top">
+
+            <div>
+
+                <h2>
+                    🚀 Career Readiness
+                </h2>
+
+            </div>
+
+            <div class="career-score">
+                64%
+            </div>
+
+        </div>
+
+
+        <p>
+            Your learning journey is progressing well. Continue improving
+            technical skills, communication, projects and practical knowledge
+            to prepare for future academic and career opportunities.
+        </p>
+
+
+        <div class="goal-list">
+
+            <div class="goal-item">
+                🎯 Complete 2 more projects
+            </div>
+
+            <div class="goal-item">
+                💻 Improve JavaScript skills
+            </div>
+
+            <div class="goal-item">
+                🗣️ Practice communication
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+        © 2026 Student Career & Learning Management System
+    </footer>
+
+</main>
+
+</body>
+</html>
+```

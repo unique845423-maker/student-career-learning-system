@@ -1,0 +1,2755 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Resources | Student Career & Learning Management System</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #070b16;
+            --bg2: #0c1222;
+            --card: rgba(17, 25, 45, 0.82);
+            --card2: rgba(22, 32, 56, 0.9);
+            --border: rgba(255,255,255,0.09);
+            --text: #f5f7ff;
+            --muted: #9ca8c4;
+            --primary: #6c63ff;
+            --primary2: #8b5cf6;
+            --cyan: #22d3ee;
+            --green: #22c55e;
+            --yellow: #facc15;
+            --orange: #fb923c;
+            --red: #fb7185;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background:
+                radial-gradient(circle at 10% 10%, rgba(108,99,255,.18), transparent 28%),
+                radial-gradient(circle at 90% 20%, rgba(34,211,238,.12), transparent 25%),
+                radial-gradient(circle at 50% 90%, rgba(139,92,246,.12), transparent 30%),
+                var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        button,
+        input,
+        select {
+            font: inherit;
+        }
+
+        /* ================= NAVBAR ================= */
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(18px);
+            background: rgba(7,11,22,.82);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-inner {
+            width: min(1450px, 94%);
+            margin: auto;
+            min-height: 72px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 18px;
+            white-space: nowrap;
+        }
+
+        .brand-icon {
+            width: 42px;
+            height: 42px;
+            border-radius: 13px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--primary), var(--cyan));
+            box-shadow: 0 10px 35px rgba(108,99,255,.3);
+            font-size: 20px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 7px;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .nav-links a {
+            padding: 9px 13px;
+            color: var(--muted);
+            border-radius: 10px;
+            transition: .25s;
+            font-size: 14px;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: white;
+            background: rgba(255,255,255,.07);
+        }
+
+        .nav-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: var(--muted);
+            font-size: 13px;
+            white-space: nowrap;
+        }
+
+        .user-dot {
+            width: 10px;
+            height: 10px;
+            background: var(--green);
+            border-radius: 50%;
+            box-shadow: 0 0 12px rgba(34,197,94,.8);
+        }
+
+        /* ================= MAIN ================= */
+
+        .container {
+            width: min(1450px, 94%);
+            margin: auto;
+        }
+
+        .hero {
+            margin-top: 35px;
+            padding: 45px;
+            border: 1px solid var(--border);
+            border-radius: 28px;
+            background:
+                linear-gradient(135deg, rgba(108,99,255,.20), rgba(34,211,238,.07)),
+                rgba(12,18,34,.8);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            width: 320px;
+            height: 320px;
+            right: -120px;
+            top: -140px;
+            border-radius: 50%;
+            background: rgba(108,99,255,.18);
+            filter: blur(10px);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 850px;
+        }
+
+        .eyebrow {
+            display: inline-flex;
+            padding: 7px 13px;
+            border-radius: 30px;
+            border: 1px solid rgba(108,99,255,.35);
+            background: rgba(108,99,255,.1);
+            color: #c8c4ff;
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: .5px;
+            margin-bottom: 15px;
+        }
+
+        .hero h1 {
+            font-size: clamp(34px, 5vw, 62px);
+            line-height: 1.05;
+            margin-bottom: 17px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #8b5cf6, #22d3ee);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--muted);
+            font-size: 17px;
+            max-width: 760px;
+        }
+
+        .hero-actions {
+            margin-top: 25px;
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            border: 0;
+            cursor: pointer;
+            padding: 12px 18px;
+            border-radius: 12px;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            font-weight: 700;
+            transition: .25s;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(108,99,255,.25);
+        }
+
+        .btn.secondary {
+            background: rgba(255,255,255,.06);
+            border: 1px solid var(--border);
+        }
+
+        /* ================= STATS ================= */
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin: 25px 0;
+        }
+
+        .stat-card {
+            padding: 23px;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card);
+        }
+
+        .stat-icon {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .stat-number {
+            font-size: 28px;
+            font-weight: 800;
+        }
+
+        .stat-label {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ================= TOOLBAR ================= */
+
+        .toolbar {
+            margin: 25px 0;
+            padding: 18px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 20px;
+        }
+
+        .search-row {
+            display: grid;
+            grid-template-columns: 1fr 190px 150px;
+            gap: 12px;
+        }
+
+        .input,
+        .select {
+            width: 100%;
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.045);
+            color: white;
+            padding: 13px 15px;
+            border-radius: 12px;
+            outline: none;
+        }
+
+        .input:focus,
+        .select:focus {
+            border-color: rgba(108,99,255,.7);
+        }
+
+        .select option {
+            background: #101729;
+            color: white;
+        }
+
+        .filter-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 14px;
+        }
+
+        .filter-btn {
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.04);
+            color: var(--muted);
+            padding: 8px 13px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: .2s;
+            font-size: 13px;
+        }
+
+        .filter-btn:hover,
+        .filter-btn.active {
+            color: white;
+            background: rgba(108,99,255,.18);
+            border-color: rgba(108,99,255,.45);
+        }
+
+        /* ================= SECTION ================= */
+
+        .section {
+            margin-top: 42px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: end;
+            gap: 20px;
+            margin-bottom: 18px;
+        }
+
+        .section-title {
+            font-size: 26px;
+        }
+
+        .section-subtitle {
+            color: var(--muted);
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .result-count {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ================= FEATURED ================= */
+
+        .featured {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 18px;
+        }
+
+        .featured-card {
+            padding: 24px;
+            min-height: 235px;
+            border-radius: 22px;
+            border: 1px solid var(--border);
+            background:
+                linear-gradient(145deg, rgba(108,99,255,.13), rgba(255,255,255,.025)),
+                var(--card);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-card::after {
+            content: "";
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            right: -80px;
+            bottom: -70px;
+            background: rgba(34,211,238,.09);
+        }
+
+        .resource-icon {
+            width: 54px;
+            height: 54px;
+            display: grid;
+            place-items: center;
+            border-radius: 15px;
+            background: rgba(255,255,255,.07);
+            font-size: 26px;
+            margin-bottom: 15px;
+        }
+
+        .featured-card h3 {
+            margin-bottom: 7px;
+        }
+
+        .featured-card p {
+            color: var(--muted);
+            font-size: 13px;
+            min-height: 44px;
+        }
+
+        .resource-meta {
+            display: flex;
+            gap: 7px;
+            flex-wrap: wrap;
+            margin: 13px 0;
+        }
+
+        .tag {
+            padding: 5px 9px;
+            background: rgba(255,255,255,.06);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 11px;
+            color: var(--muted);
+        }
+
+        /* ================= RESOURCE GRID ================= */
+
+        .resource-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+        }
+
+        .resource-card {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 19px;
+            padding: 19px;
+            transition: .25s;
+            display: flex;
+            flex-direction: column;
+            min-height: 280px;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(108,99,255,.4);
+            box-shadow: 0 18px 45px rgba(0,0,0,.22);
+        }
+
+        .card-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .save-btn {
+            border: 1px solid var(--border);
+            background: rgba(255,255,255,.04);
+            color: var(--muted);
+            width: 34px;
+            height: 34px;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .save-btn.saved {
+            color: var(--yellow);
+            border-color: rgba(250,204,21,.3);
+            background: rgba(250,204,21,.08);
+        }
+
+        .resource-card h3 {
+            font-size: 17px;
+            margin: 10px 0 5px;
+        }
+
+        .resource-card p {
+            color: var(--muted);
+            font-size: 12.5px;
+            flex: 1;
+        }
+
+        .resource-bottom {
+            margin-top: 14px;
+        }
+
+        .resource-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            background: rgba(108,99,255,.14);
+            color: #d9d6ff;
+            font-size: 12px;
+            font-weight: 700;
+            transition: .2s;
+        }
+
+        .resource-link:hover {
+            background: rgba(108,99,255,.28);
+        }
+
+        .level {
+            display: inline-block;
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 20px;
+            margin-top: 8px;
+        }
+
+        .beginner {
+            background: rgba(34,197,94,.12);
+            color: #86efac;
+        }
+
+        .intermediate {
+            background: rgba(250,204,21,.12);
+            color: #fde68a;
+        }
+
+        .advanced {
+            background: rgba(251,113,133,.12);
+            color: #fda4af;
+        }
+
+        /* ================= ROADMAP ================= */
+
+        .roadmap {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+
+        .roadmap-step {
+            padding: 22px;
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            position: relative;
+        }
+
+        .step-number {
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
+            display: grid;
+            place-items: center;
+            background: linear-gradient(135deg, var(--primary), var(--primary2));
+            font-weight: 800;
+            margin-bottom: 14px;
+        }
+
+        .roadmap-step p {
+            color: var(--muted);
+            font-size: 13px;
+            margin-top: 6px;
+        }
+
+        .step-list {
+            margin-top: 13px;
+            padding-left: 17px;
+            color: var(--muted);
+            font-size: 12px;
+        }
+
+        .step-list li {
+            margin-bottom: 5px;
+        }
+
+        /* ================= PROGRESS ================= */
+
+        .progress-layout {
+            display: grid;
+            grid-template-columns: 1.4fr .8fr;
+            gap: 18px;
+        }
+
+        .progress-box,
+        .goal-box {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .progress-item {
+            margin: 18px 0;
+        }
+
+        .progress-head {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            margin-bottom: 8px;
+        }
+
+        .progress-head span:last-child {
+            color: var(--muted);
+        }
+
+        .progress-bar {
+            height: 9px;
+            background: rgba(255,255,255,.07);
+            border-radius: 20px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            border-radius: inherit;
+            background: linear-gradient(90deg, var(--primary), var(--cyan));
+        }
+
+        .goal-number {
+            font-size: 45px;
+            font-weight: 900;
+            margin: 10px 0;
+        }
+
+        .goal-box p {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        /* ================= VIDEO / PRACTICE ================= */
+
+        .learning-tools {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 17px;
+        }
+
+        .tool-card {
+            border: 1px solid var(--border);
+            background: var(--card);
+            border-radius: 20px;
+            padding: 24px;
+        }
+
+        .tool-icon {
+            font-size: 34px;
+            margin-bottom: 12px;
+        }
+
+        .tool-card p {
+            color: var(--muted);
+            font-size: 13px;
+            margin: 7px 0 17px;
+        }
+
+        /* ================= CATEGORY CARDS ================= */
+
+        .categories {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 12px;
+        }
+
+        .category {
+            padding: 18px 12px;
+            text-align: center;
+            border-radius: 17px;
+            border: 1px solid var(--border);
+            background: var(--card);
+            cursor: pointer;
+            transition: .25s;
+        }
+
+        .category:hover {
+            transform: translateY(-3px);
+            border-color: rgba(108,99,255,.4);
+        }
+
+        .category-icon {
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .category-name {
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        .category-count {
+            font-size: 10px;
+            color: var(--muted);
+        }
+
+        /* ================= EMPTY ================= */
+
+        .empty-state {
+            display: none;
+            text-align: center;
+            padding: 60px 20px;
+            color: var(--muted);
+            border: 1px dashed var(--border);
+            border-radius: 20px;
+        }
+
+        .empty-state .big {
+            font-size: 45px;
+            margin-bottom: 10px;
+        }
+
+        /* ================= FOOTER ================= */
+
+        footer {
+            margin-top: 60px;
+            padding: 35px 0;
+            border-top: 1px solid var(--border);
+            color: var(--muted);
+            text-align: center;
+            font-size: 13px;
+        }
+
+        /* ================= TOAST ================= */
+
+        .toast {
+            position: fixed;
+            right: 22px;
+            bottom: 22px;
+            padding: 13px 17px;
+            border-radius: 12px;
+            background: #151d31;
+            border: 1px solid var(--border);
+            color: white;
+            transform: translateY(100px);
+            opacity: 0;
+            pointer-events: none;
+            transition: .3s;
+            z-index: 5000;
+            box-shadow: 0 15px 35px rgba(0,0,0,.3);
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        /* ================= RESPONSIVE ================= */
+
+        @media (max-width: 1150px) {
+            .resource-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .categories {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .roadmap {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 900px) {
+            .stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .featured {
+                grid-template-columns: 1fr;
+            }
+
+            .resource-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .progress-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .learning-tools {
+                grid-template-columns: 1fr;
+            }
+
+            .search-row {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-user {
+                display: none;
+            }
+        }
+
+        @media (max-width: 650px) {
+            .nav-inner {
+                padding: 10px 0;
+                flex-direction: column;
+            }
+
+            .nav-links {
+                width: 100%;
+            }
+
+            .hero {
+                padding: 28px 20px;
+            }
+
+            .stats,
+            .resource-grid,
+            .roadmap,
+            .categories {
+                grid-template-columns: 1fr;
+            }
+
+            .section-header {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+
+            .container {
+                width: 92%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<nav class="navbar">
+    <div class="nav-inner">
+
+        <a href="dashboard.html" class="brand">
+            <div class="brand-icon">🎓</div>
+            <span>Student Career & Learning</span>
+        </a>
+
+        <div class="nav-links">
+            <a href="dashboard.html">Dashboard</a>
+            <a href="skills.html">Skills</a>
+            <a href="progress.html">Progress</a>
+            <a href="resume.html">Resume</a>
+            <a href="learning-resources.html" class="active">Resources</a>
+        </div>
+
+        <div class="nav-user">
+            <span class="user-dot"></span>
+            Learning Hub
+        </div>
+
+    </div>
+</nav>
+
+
+<main class="container">
+
+    <!-- ================= HERO ================= -->
+
+    <section class="hero">
+
+        <div class="hero-content">
+
+            <div class="eyebrow">
+                📚 STUDENT LEARNING HUB
+            </div>
+
+            <h1>
+                Learn. Practice.
+                <span class="gradient-text">Build Your Future.</span>
+            </h1>
+
+            <p>
+                Explore programming, web development, Data Structures,
+                Artificial Intelligence, Cyber Security, databases,
+                operating systems, networking, cloud technologies,
+                communication skills and career preparation — all from
+                one organized learning space.
+            </p>
+
+            <div class="hero-actions">
+                <button class="btn" onclick="scrollToResources()">
+                    🚀 Explore Resources
+                </button>
+
+                <button class="btn secondary" onclick="showSaved()">
+                    ⭐ My Saved Resources
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= STATS ================= -->
+
+    <section class="stats">
+
+        <div class="stat-card">
+            <div class="stat-icon">📚</div>
+            <div class="stat-number" id="resourceStat">30+</div>
+            <div class="stat-label">Learning Resources</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🗂️</div>
+            <div class="stat-number">17</div>
+            <div class="stat-label">Learning Categories</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-number" id="savedStat">0</div>
+            <div class="stat-label">Saved Resources</div>
+        </div>
+
+        <div class="stat-card">
+            <div class="stat-icon">🎯</div>
+            <div class="stat-number">4</div>
+            <div class="stat-label">Learning Levels</div>
+        </div>
+
+    </section>
+
+
+    <!-- ================= SEARCH ================= -->
+
+    <section class="toolbar" id="resourceArea">
+
+        <div class="search-row">
+
+            <input
+                type="text"
+                id="searchInput"
+                class="input"
+                placeholder="🔍 Search Java, Python, DSA, AI, SQL, Git..."
+            >
+
+            <select id="levelFilter" class="select">
+                <option value="all">All Levels</option>
+                <option value="beginner">Beginner</option>
+                <option value="intermediate">Intermediate</option>
+                <option value="advanced">Advanced</option>
+            </select>
+
+            <button class="btn" onclick="clearFilters()">
+                Reset Filters
+            </button>
+
+        </div>
+
+        <div class="filter-row">
+
+            <button class="filter-btn active" data-category="all">
+                All
+            </button>
+
+            <button class="filter-btn" data-category="programming">
+                💻 Programming
+            </button>
+
+            <button class="filter-btn" data-category="web">
+                🌐 Web
+            </button>
+
+            <button class="filter-btn" data-category="dsa">
+                🧠 DSA
+            </button>
+
+            <button class="filter-btn" data-category="ai">
+                🤖 AI & ML
+            </button>
+
+            <button class="filter-btn" data-category="cyber">
+                🔐 Cyber Security
+            </button>
+
+            <button class="filter-btn" data-category="database">
+                🗄️ DBMS & SQL
+            </button>
+
+            <button class="filter-btn" data-category="system">
+                💿 OS
+            </button>
+
+            <button class="filter-btn" data-category="network">
+                🌐 Networking
+            </button>
+
+            <button class="filter-btn" data-category="career">
+                🎯 Career
+            </button>
+
+            <button class="filter-btn" data-category="soft">
+                🗣️ Soft Skills
+            </button>
+
+            <button class="filter-btn" data-category="cloud">
+                ☁️ Cloud
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= CATEGORIES ================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+            <div>
+                <h2 class="section-title">Explore Learning Categories</h2>
+                <p class="section-subtitle">
+                    Choose a subject and start learning step by step.
+                </p>
+            </div>
+        </div>
+
+        <div class="categories">
+
+            <div class="category" onclick="selectCategory('programming')">
+                <div class="category-icon">💻</div>
+                <div class="category-name">Programming</div>
+                <div class="category-count">Java • Python • C</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('web')">
+                <div class="category-icon">🌐</div>
+                <div class="category-name">Web Development</div>
+                <div class="category-count">HTML • CSS • JS</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('dsa')">
+                <div class="category-icon">🧠</div>
+                <div class="category-name">DSA</div>
+                <div class="category-count">Logic • Algorithms</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('ai')">
+                <div class="category-icon">🤖</div>
+                <div class="category-name">AI & ML</div>
+                <div class="category-count">ML • AI • Data</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('cyber')">
+                <div class="category-icon">🔐</div>
+                <div class="category-name">Cyber Security</div>
+                <div class="category-count">Security • Linux</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('database')">
+                <div class="category-icon">🗄️</div>
+                <div class="category-name">DBMS & SQL</div>
+                <div class="category-count">Database • Queries</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('system')">
+                <div class="category-icon">💿</div>
+                <div class="category-name">Operating System</div>
+                <div class="category-count">OS • Linux</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('network')">
+                <div class="category-icon">🌐</div>
+                <div class="category-name">Networking</div>
+                <div class="category-count">Networks • Protocols</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('cloud')">
+                <div class="category-icon">☁️</div>
+                <div class="category-name">Cloud & DevOps</div>
+                <div class="category-count">Cloud • CI/CD</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('career')">
+                <div class="category-icon">🎯</div>
+                <div class="category-name">Career</div>
+                <div class="category-count">Resume • Interview</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('soft')">
+                <div class="category-icon">🗣️</div>
+                <div class="category-name">Soft Skills</div>
+                <div class="category-count">English • Communication</div>
+            </div>
+
+            <div class="category" onclick="selectCategory('creative')">
+                <div class="category-icon">🎨</div>
+                <div class="category-name">Creative Skills</div>
+                <div class="category-count">Design • Content</div>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FEATURED ================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <h2 class="section-title">🔥 Featured Learning Paths</h2>
+                <p class="section-subtitle">
+                    Structured starting points for students.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="featured">
+
+            <div class="featured-card">
+                <div class="resource-icon">💻</div>
+
+                <h3>Programming Foundation</h3>
+
+                <p>
+                    Build strong programming fundamentals before moving
+                    into advanced development and problem solving.
+                </p>
+
+                <div class="resource-meta">
+                    <span class="tag">C</span>
+                    <span class="tag">Java</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">Logic</span>
+                </div>
+
+                <button class="btn" onclick="filterFeatured('programming')">
+                    Start Path →
+                </button>
+            </div>
+
+
+            <div class="featured-card">
+                <div class="resource-icon">🌐</div>
+
+                <h3>Web Development</h3>
+
+                <p>
+                    Learn how websites are structured, styled and made
+                    interactive using modern web technologies.
+                </p>
+
+                <div class="resource-meta">
+                    <span class="tag">HTML</span>
+                    <span class="tag">CSS</span>
+                    <span class="tag">JavaScript</span>
+                </div>
+
+                <button class="btn" onclick="filterFeatured('web')">
+                    Start Path →
+                </button>
+            </div>
+
+
+            <div class="featured-card">
+                <div class="resource-icon">🤖</div>
+
+                <h3>AI & Machine Learning</h3>
+
+                <p>
+                    Understand the foundation of data, machine learning,
+                    artificial intelligence and practical projects.
+                </p>
+
+                <div class="resource-meta">
+                    <span class="tag">Python</span>
+                    <span class="tag">ML</span>
+                    <span class="tag">AI</span>
+                </div>
+
+                <button class="btn" onclick="filterFeatured('ai')">
+                    Start Path →
+                </button>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= ALL RESOURCES ================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <h2 class="section-title">📚 All Learning Resources</h2>
+                <p class="section-subtitle">
+                    Learn from beginner concepts to advanced topics.
+                </p>
+            </div>
+
+            <div class="result-count" id="resultCount">
+                Showing resources
+            </div>
+
+        </div>
+
+
+        <div class="resource-grid" id="resourceGrid">
+
+            <!-- JAVA -->
+
+            <article class="resource-card"
+                data-title="Java Programming"
+                data-category="programming"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">☕</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Java Programming')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Java Programming</h3>
+
+                <p>
+                    Learn variables, data types, operators, OOP,
+                    inheritance, interfaces, exceptions and collections.
+                </p>
+
+                <span class="level beginner">Beginner → Advanced</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://dev.java/learn/"
+                       target="_blank">
+                        Open Learning →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- PYTHON -->
+
+            <article class="resource-card"
+                data-title="Python Programming"
+                data-category="programming ai"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">🐍</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Python Programming')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Python Programming</h3>
+
+                <p>
+                    Learn Python syntax, functions, collections,
+                    modules, OOP and practical programming.
+                </p>
+
+                <span class="level beginner">Beginner</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://docs.python.org/3/tutorial/"
+                       target="_blank">
+                        Python Tutorial →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- C -->
+
+            <article class="resource-card"
+                data-title="C Programming"
+                data-category="programming"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">©️</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'C Programming')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>C Programming</h3>
+
+                <p>
+                    Build programming fundamentals with variables,
+                    functions, arrays, pointers and structures.
+                </p>
+
+                <span class="level beginner">Beginner</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://www.learn-c.org/"
+                       target="_blank">
+                        Learn C →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- HTML -->
+
+            <article class="resource-card"
+                data-title="HTML"
+                data-category="web"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">🌐</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'HTML')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>HTML</h3>
+
+                <p>
+                    Learn page structure, semantic elements,
+                    forms, tables, media and accessibility basics.
+                </p>
+
+                <span class="level beginner">Beginner</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://developer.mozilla.org/en-US/docs/Web/HTML"
+                       target="_blank">
+                        Learn HTML →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- CSS -->
+
+            <article class="resource-card"
+                data-title="CSS"
+                data-category="web"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">🎨</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'CSS')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>CSS</h3>
+
+                <p>
+                    Learn layouts, Flexbox, Grid, responsive design,
+                    animations and modern styling.
+                </p>
+
+                <span class="level beginner">Beginner → Intermediate</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://developer.mozilla.org/en-US/docs/Web/CSS"
+                       target="_blank">
+                        Learn CSS →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- JAVASCRIPT -->
+
+            <article class="resource-card"
+                data-title="JavaScript"
+                data-category="web programming"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">⚡</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'JavaScript')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>JavaScript</h3>
+
+                <p>
+                    Learn variables, functions, arrays, objects,
+                    DOM, events, APIs and modern JavaScript.
+                </p>
+
+                <span class="level intermediate">Intermediate</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://developer.mozilla.org/en-US/docs/Web/JavaScript"
+                       target="_blank">
+                        Learn JavaScript →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- DSA -->
+
+            <article class="resource-card"
+                data-title="Data Structures Algorithms DSA"
+                data-category="dsa programming"
+                data-level="intermediate">
+
+                <div class="card-top">
+                    <div class="resource-icon">🧠</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Data Structures & Algorithms')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Data Structures & Algorithms</h3>
+
+                <p>
+                    Arrays, strings, linked lists, stacks, queues,
+                    trees, graphs, sorting and searching.
+                </p>
+
+                <span class="level intermediate">Intermediate</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://www.geeksforgeeks.org/dsa/"
+                       target="_blank">
+                        Practice DSA →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- AI -->
+
+            <article class="resource-card"
+                data-title="Artificial Intelligence Machine Learning AI ML"
+                data-category="ai"
+                data-level="intermediate">
+
+                <div class="card-top">
+                    <div class="resource-icon">🤖</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Artificial Intelligence & Machine Learning')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>AI & Machine Learning</h3>
+
+                <p>
+                    Explore machine learning concepts, models,
+                    data preparation, evaluation and AI foundations.
+                </p>
+
+                <span class="level intermediate">Intermediate</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://developers.google.com/machine-learning"
+                       target="_blank">
+                        Learn AI/ML →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- CYBER -->
+
+            <article class="resource-card"
+                data-title="Cyber Security"
+                data-category="cyber"
+                data-level="intermediate">
+
+                <div class="card-top">
+                    <div class="resource-icon">🔐</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Cyber Security')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Cyber Security</h3>
+
+                <p>
+                    Learn security fundamentals, authentication,
+                    network security, web security and safe practices.
+                </p>
+
+                <span class="level intermediate">Intermediate</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://www.cisa.gov/topics/cybersecurity-best-practices"
+                       target="_blank">
+                        Security Learning →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- DBMS -->
+
+            <article class="resource-card"
+                data-title="Database DBMS SQL MySQL"
+                data-category="database"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">🗄️</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'DBMS & SQL')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>DBMS & SQL</h3>
+
+                <p>
+                    Learn relational databases, tables, keys,
+                    joins, normalization and SQL queries.
+                </p>
+
+                <span class="level beginner">Beginner → Advanced</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://dev.mysql.com/doc/"
+                       target="_blank">
+                        MySQL Resources →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- OS -->
+
+            <article class="resource-card"
+                data-title="Operating System OS Linux"
+                data-category="system cyber"
+                data-level="intermediate">
+
+                <div class="card-top">
+                    <div class="resource-icon">💿</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Operating Systems')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Operating Systems</h3>
+
+                <p>
+                    Study processes, threads, memory management,
+                    file systems, scheduling and Linux basics.
+                </p>
+
+                <span class="level intermediate">Intermediate</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://www.kernel.org/doc/html/latest/"
+                       target="_blank">
+                        Linux Resources →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- NETWORK -->
+
+            <article class="resource-card"
+                data-title="Computer Networking Network"
+                data-category="network cyber"
+                data-level="intermediate">
+
+                <div class="card-top">
+                    <div class="resource-icon">🌐</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Computer Networking')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Computer Networking</h3>
+
+                <p>
+                    Learn OSI model, TCP/IP, IP addressing,
+                    DNS, HTTP, routing and network fundamentals.
+                </p>
+
+                <span class="level intermediate">Intermediate</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://www.cloudflare.com/learning/network-layer/"
+                       target="_blank">
+                        Networking Guide →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- CLOUD -->
+
+            <article class="resource-card"
+                data-title="Cloud Computing DevOps"
+                data-category="cloud"
+                data-level="advanced">
+
+                <div class="card-top">
+                    <div class="resource-icon">☁️</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Cloud & DevOps')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Cloud & DevOps</h3>
+
+                <p>
+                    Learn cloud concepts, containers, deployment,
+                    CI/CD and modern software delivery.
+                </p>
+
+                <span class="level advanced">Advanced</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://aws.amazon.com/training/"
+                       target="_blank">
+                        Cloud Training →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- GIT -->
+
+            <article class="resource-card"
+                data-title="Git GitHub Version Control"
+                data-category="programming career"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">🐙</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Git & GitHub')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Git & GitHub</h3>
+
+                <p>
+                    Learn repositories, commits, branches,
+                    pull requests and collaborative development.
+                </p>
+
+                <span class="level beginner">Beginner</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://docs.github.com/en/get-started"
+                       target="_blank">
+                        GitHub Guide →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- COMMUNICATION -->
+
+            <article class="resource-card"
+                data-title="Communication English Soft Skills"
+                data-category="soft"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">🗣️</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Communication Skills')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Communication Skills</h3>
+
+                <p>
+                    Improve speaking, writing, presentation,
+                    teamwork and professional communication.
+                </p>
+
+                <span class="level beginner">Beginner</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="https://learnenglish.britishcouncil.org/"
+                       target="_blank">
+                        Practice English →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- CAREER -->
+
+            <article class="resource-card"
+                data-title="Career Resume Interview Job"
+                data-category="career"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">🎯</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Career & Interview Preparation')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Career & Interview Preparation</h3>
+
+                <p>
+                    Learn resume preparation, interview basics,
+                    projects, internships and professional readiness.
+                </p>
+
+                <span class="level beginner">Beginner → Advanced</span>
+
+                <div class="resource-bottom">
+                    <a class="resource-link"
+                       href="resume.html">
+                        Open Resume Builder →
+                    </a>
+                </div>
+
+            </article>
+
+
+            <!-- ACADEMIC -->
+
+            <article class="resource-card"
+                data-title="Academic Study Learning"
+                data-category="career soft"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">📖</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Academic Learning')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Academic Learning</h3>
+
+                <p>
+                    Organize subjects, notes, revision, concepts,
+                    assignments and exam preparation.
+                </p>
+
+                <span class="level beginner">All Levels</span>
+
+                <div class="resource-bottom">
+                    <button class="resource-link" onclick="showToast('Academic learning section selected')">
+                        Start Learning →
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PROJECTS -->
+
+            <article class="resource-card"
+                data-title="Projects Portfolio Development"
+                data-category="programming web career"
+                data-level="intermediate">
+
+                <div class="card-top">
+                    <div class="resource-icon">🚀</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Project Development')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Project Development</h3>
+
+                <p>
+                    Learn how to turn concepts into real projects,
+                    build portfolios and document your work.
+                </p>
+
+                <span class="level intermediate">Intermediate</span>
+
+                <div class="resource-bottom">
+                    <button class="resource-link"
+                            onclick="showToast('Project learning path selected')">
+                        Build Projects →
+                    </button>
+                </div>
+
+            </article>
+
+
+            <!-- PROBLEM SOLVING -->
+
+            <article class="resource-card"
+                data-title="Problem Solving Logical Thinking"
+                data-category="dsa programming soft"
+                data-level="beginner">
+
+                <div class="card-top">
+                    <div class="resource-icon">🧩</div>
+
+                    <button class="save-btn"
+                        onclick="toggleSave(this,'Problem Solving')">
+                        ☆
+                    </button>
+                </div>
+
+                <h3>Problem Solving</h3>
+
+                <p>
+                    Improve logical thinking, computational thinking
+                    and structured problem-solving skills.
+                </p>
+
+                <span class="level beginner">Beginner</span>
+
+                <div class="resource-bottom">
+                    <button class="resource-link"
+                            onclick="showToast('Problem solving practice selected')">
+                        Practice →
+                    </button>
+                </div>
+
+            </article>
+
+        </div>
+
+        <div class="empty-state" id="emptyState">
+            <div class="big">🔎</div>
+            <h3>No resources found</h3>
+            <p>
+                Try another keyword, category or learning level.
+            </p>
+        </div>
+
+    </section>
+
+
+    <!-- ================= LEARNING ROADMAP ================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <h2 class="section-title">🛣️ Student Learning Roadmap</h2>
+                <p class="section-subtitle">
+                    A simple progression from foundation to career readiness.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="roadmap">
+
+            <div class="roadmap-step">
+
+                <div class="step-number">01</div>
+
+                <h3>Foundation</h3>
+
+                <p>
+                    Build your basic academic and computer knowledge.
+                </p>
+
+                <ul class="step-list">
+                    <li>Computer fundamentals</li>
+                    <li>English communication</li>
+                    <li>Programming basics</li>
+                    <li>Logical thinking</li>
+                </ul>
+
+            </div>
+
+
+            <div class="roadmap-step">
+
+                <div class="step-number">02</div>
+
+                <h3>Core Skills</h3>
+
+                <p>
+                    Choose your technical direction and strengthen fundamentals.
+                </p>
+
+                <ul class="step-list">
+                    <li>Java / Python / C</li>
+                    <li>HTML / CSS / JavaScript</li>
+                    <li>DBMS & SQL</li>
+                    <li>Operating Systems</li>
+                </ul>
+
+            </div>
+
+
+            <div class="roadmap-step">
+
+                <div class="step-number">03</div>
+
+                <h3>Specialization</h3>
+
+                <p>
+                    Start developing skills in your chosen career area.
+                </p>
+
+                <ul class="step-list">
+                    <li>AI & ML</li>
+                    <li>Cyber Security</li>
+                    <li>Cloud & DevOps</li>
+                    <li>Data / Software Development</li>
+                </ul>
+
+            </div>
+
+
+            <div class="roadmap-step">
+
+                <div class="step-number">04</div>
+
+                <h3>Career Ready</h3>
+
+                <p>
+                    Convert your knowledge into projects and professional skills.
+                </p>
+
+                <ul class="step-list">
+                    <li>Projects</li>
+                    <li>GitHub portfolio</li>
+                    <li>Resume</li>
+                    <li>Interview preparation</li>
+                </ul>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= PROGRESS ================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <h2 class="section-title">📈 Learning Progress</h2>
+                <p class="section-subtitle">
+                    Track your learning direction and build consistency.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="progress-layout">
+
+            <div class="progress-box">
+
+                <div class="progress-item">
+
+                    <div class="progress-head">
+                        <span>Programming Fundamentals</span>
+                        <span>70%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:70%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <div class="progress-head">
+                        <span>Web Development</span>
+                        <span>55%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:55%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <div class="progress-head">
+                        <span>Database & SQL</span>
+                        <span>45%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:45%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <div class="progress-head">
+                        <span>Problem Solving</span>
+                        <span>40%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:40%"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="progress-item">
+
+                    <div class="progress-head">
+                        <span>Career Preparation</span>
+                        <span>30%</span>
+                    </div>
+
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width:30%"></div>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="goal-box">
+
+                <div class="resource-icon">🎯</div>
+
+                <h3>Learning Goal</h3>
+
+                <div class="goal-number">5</div>
+
+                <p>
+                    Focus on learning at least 5 meaningful concepts
+                    each week and convert important concepts into
+                    practical exercises or projects.
+                </p>
+
+                <br>
+
+                <button class="btn"
+                        onclick="showToast('Keep learning consistently! 🚀')">
+                    Continue Learning
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= LEARNING TOOLS ================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <h2 class="section-title">🧰 Learning Tools</h2>
+                <p class="section-subtitle">
+                    Use different learning methods to understand concepts better.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="learning-tools">
+
+            <div class="tool-card">
+
+                <div class="tool-icon">🎥</div>
+
+                <h3>Video Learning</h3>
+
+                <p>
+                    Use structured video lessons to understand difficult
+                    concepts visually and step by step.
+                </p>
+
+                <button class="btn"
+                        onclick="openVideoLearning()">
+                    Explore Videos →
+                </button>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">💻</div>
+
+                <h3>Coding Practice</h3>
+
+                <p>
+                    Practice programming problems regularly to improve
+                    logic, coding speed and problem-solving.
+                </p>
+
+                <button class="btn"
+                        onclick="openCodingPractice()">
+                    Practice Coding →
+                </button>
+
+            </div>
+
+
+            <div class="tool-card">
+
+                <div class="tool-icon">📝</div>
+
+                <h3>Notes & Revision</h3>
+
+                <p>
+                    Create short notes, revise important concepts and
+                    keep track of topics that need more practice.
+                </p>
+
+                <button class="btn"
+                        onclick="showToast('Notes & revision workspace selected')">
+                    Start Revision →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= QUICK LEARNING GUIDE ================= -->
+
+    <section class="section">
+
+        <div class="section-header">
+
+            <div>
+                <h2 class="section-title">⚡ Quick Learning Guide</h2>
+                <p class="section-subtitle">
+                    Choose your current goal and follow a suitable direction.
+                </p>
+            </div>
+
+        </div>
+
+        <div class="featured">
+
+            <div class="featured-card">
+
+                <div class="resource-icon">🌱</div>
+
+                <h3>I'm a Beginner</h3>
+
+                <p>
+                    Start with computer basics, one programming language,
+                    HTML/CSS, communication and logical thinking.
+                </p>
+
+                <div class="resource-meta">
+                    <span class="tag">Basics</span>
+                    <span class="tag">Programming</span>
+                    <span class="tag">Web</span>
+                </div>
+
+                <button class="btn"
+                        onclick="setLevel('beginner')">
+                    Beginner Resources →
+                </button>
+
+            </div>
+
+
+            <div class="featured-card">
+
+                <div class="resource-icon">🔥</div>
+
+                <h3>I Know the Basics</h3>
+
+                <p>
+                    Move towards DSA, databases, projects, Git,
+                    problem solving and a technical specialization.
+                </p>
+
+                <div class="resource-meta">
+                    <span class="tag">DSA</span>
+                    <span class="tag">DBMS</span>
+                    <span class="tag">Projects</span>
+                </div>
+
+                <button class="btn"
+                        onclick="setLevel('intermediate')">
+                    Intermediate Resources →
+                </button>
+
+            </div>
+
+
+            <div class="featured-card">
+
+                <div class="resource-icon">🚀</div>
+
+                <h3>I'm Career Focused</h3>
+
+                <p>
+                    Focus on specialization, portfolio projects,
+                    resume, interviews and professional communication.
+                </p>
+
+                <div class="resource-meta">
+                    <span class="tag">Projects</span>
+                    <span class="tag">Resume</span>
+                    <span class="tag">Career</span>
+                </div>
+
+                <button class="btn"
+                        onclick="selectCategory('career')">
+                    Career Resources →
+                </button>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- ================= FOOTER ================= -->
+
+    <footer>
+
+        <strong>Student Career & Learning Management System</strong>
+
+        <br>
+
+        Learn • Practice • Build • Grow
+
+        <br><br>
+
+        <span>
+            Learning Resources Hub
+        </span>
+
+    </footer>
+
+</main>
+
+
+<div class="toast" id="toast"></div>
+
+
+<script>
+
+    /* =====================================================
+       LEARNING RESOURCES JAVASCRIPT
+    ===================================================== */
+
+    const cards = Array.from(
+        document.querySelectorAll(".resource-card")
+    );
+
+    const searchInput =
+        document.getElementById("searchInput");
+
+    const levelFilter =
+        document.getElementById("levelFilter");
+
+    const resultCount =
+        document.getElementById("resultCount");
+
+    const emptyState =
+        document.getElementById("emptyState");
+
+    let currentCategory = "all";
+
+    /* ================= FILTER ================= */
+
+    function filterResources() {
+
+        const search =
+            searchInput.value.toLowerCase().trim();
+
+        const level =
+            levelFilter.value;
+
+        let visible = 0;
+
+        cards.forEach(card => {
+
+            const title =
+                card.dataset.title.toLowerCase();
+
+            const category =
+                card.dataset.category.toLowerCase();
+
+            const cardLevel =
+                card.dataset.level.toLowerCase();
+
+            const searchMatch =
+                title.includes(search) ||
+                category.includes(search);
+
+            const categoryMatch =
+                currentCategory === "all" ||
+                category.includes(currentCategory);
+
+            const levelMatch =
+                level === "all" ||
+                cardLevel === level;
+
+            if (
+                searchMatch &&
+                categoryMatch &&
+                levelMatch
+            ) {
+
+                card.style.display = "flex";
+                visible++;
+
+            } else {
+
+                card.style.display = "none";
+
+            }
+
+        });
+
+        resultCount.textContent =
+            `Showing ${visible} resource${visible !== 1 ? "s" : ""}`;
+
+        emptyState.style.display =
+            visible === 0 ? "block" : "none";
+    }
+
+
+    searchInput.addEventListener(
+        "input",
+        filterResources
+    );
+
+    levelFilter.addEventListener(
+        "change",
+        filterResources
+    );
+
+
+    /* ================= CATEGORY BUTTONS ================= */
+
+    document
+        .querySelectorAll(".filter-btn")
+        .forEach(button => {
+
+            button.addEventListener(
+                "click",
+                () => {
+
+                    document
+                        .querySelectorAll(".filter-btn")
+                        .forEach(btn =>
+                            btn.classList.remove("active")
+                        );
+
+                    button.classList.add("active");
+
+                    currentCategory =
+                        button.dataset.category;
+
+                    filterResources();
+
+                }
+            );
+
+        });
+
+
+    function selectCategory(category) {
+
+        currentCategory = category;
+
+        document
+            .querySelectorAll(".filter-btn")
+            .forEach(btn => {
+
+                btn.classList.toggle(
+                    "active",
+                    btn.dataset.category === category
+                );
+
+            });
+
+        filterResources();
+
+        document
+            .getElementById("resourceArea")
+            .scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+    }
+
+
+    function filterFeatured(category) {
+
+        selectCategory(category);
+
+    }
+
+
+    function setLevel(level) {
+
+        levelFilter.value = level;
+
+        currentCategory = "all";
+
+        document
+            .querySelectorAll(".filter-btn")
+            .forEach(btn => {
+
+                btn.classList.toggle(
+                    "active",
+                    btn.dataset.category === "all"
+                );
+
+            });
+
+        filterResources();
+
+        document
+            .getElementById("resourceArea")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    function clearFilters() {
+
+        searchInput.value = "";
+
+        levelFilter.value = "all";
+
+        currentCategory = "all";
+
+        document
+            .querySelectorAll(".filter-btn")
+            .forEach(btn => {
+
+                btn.classList.toggle(
+                    "active",
+                    btn.dataset.category === "all"
+                );
+
+            });
+
+        filterResources();
+
+    }
+
+
+    /* ================= SAVE RESOURCES ================= */
+
+    function getSavedResources() {
+
+        return JSON.parse(
+            localStorage.getItem(
+                "learningResourcesSaved"
+            ) || "[]"
+        );
+
+    }
+
+
+    function saveResources(data) {
+
+        localStorage.setItem(
+            "learningResourcesSaved",
+            JSON.stringify(data)
+        );
+
+    }
+
+
+    function toggleSave(button, resourceName) {
+
+        let saved =
+            getSavedResources();
+
+        if (saved.includes(resourceName)) {
+
+            saved =
+                saved.filter(
+                    item => item !== resourceName
+                );
+
+            button.classList.remove("saved");
+            button.textContent = "☆";
+
+            showToast(
+                `${resourceName} removed from saved resources`
+            );
+
+        } else {
+
+            saved.push(resourceName);
+
+            button.classList.add("saved");
+            button.textContent = "★";
+
+            showToast(
+                `${resourceName} saved ⭐`
+            );
+
+        }
+
+        saveResources(saved);
+
+        updateSavedCount();
+
+    }
+
+
+    function updateSavedCount() {
+
+        const saved =
+            getSavedResources();
+
+        document.getElementById(
+            "savedStat"
+        ).textContent = saved.length;
+
+    }
+
+
+    function restoreSavedButtons() {
+
+        const saved =
+            getSavedResources();
+
+        document
+            .querySelectorAll(".save-btn")
+            .forEach(button => {
+
+                const onclick =
+                    button.getAttribute("onclick");
+
+                if (!onclick) return;
+
+                const match =
+                    onclick.match(
+                        /'([^']+)'/
+                    );
+
+                if (!match) return;
+
+                const name =
+                    match[1];
+
+                if (saved.includes(name)) {
+
+                    button.classList.add("saved");
+                    button.textContent = "★";
+
+                }
+
+            });
+
+    }
+
+
+    function showSaved() {
+
+        const saved =
+            getSavedResources();
+
+        if (saved.length === 0) {
+
+            showToast(
+                "No resources saved yet ⭐"
+            );
+
+            return;
+
+        }
+
+        searchInput.value = "";
+
+        levelFilter.value = "all";
+
+        currentCategory = "all";
+
+        cards.forEach(card => {
+
+            const title =
+                card.dataset.title;
+
+            const isSaved =
+                saved.some(item =>
+                    title.toLowerCase()
+                        .includes(
+                            item.toLowerCase().split(" ")[0]
+                        )
+                );
+
+            card.style.display =
+                isSaved ? "flex" : "none";
+
+        });
+
+        document
+            .querySelectorAll(".filter-btn")
+            .forEach(btn =>
+                btn.classList.remove("active")
+            );
+
+        resultCount.textContent =
+            `Showing ${saved.length} saved resource${saved.length !== 1 ? "s" : ""}`;
+
+        emptyState.style.display =
+            "none";
+
+        document
+            .getElementById("resourceArea")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    /* ================= UTILITIES ================= */
+
+    function scrollToResources() {
+
+        document
+            .getElementById("resourceArea")
+            .scrollIntoView({
+                behavior: "smooth"
+            });
+
+    }
+
+
+    function showToast(message) {
+
+        const toast =
+            document.getElementById("toast");
+
+        toast.textContent = message;
+
+        toast.classList.add("show");
+
+        clearTimeout(window.toastTimer);
+
+        window.toastTimer =
+            setTimeout(() => {
+
+                toast.classList.remove("show");
+
+            }, 2600);
+
+    }
+
+
+    function openVideoLearning() {
+
+        window.open(
+            "https://www.youtube.com/",
+            "_blank"
+        );
+
+    }
+
+
+    function openCodingPractice() {
+
+        window.open(
+            "https://www.hackerrank.com/",
+            "_blank"
+        );
+
+    }
+
+
+    /* ================= INITIAL LOAD ================= */
+
+    updateSavedCount();
+
+    restoreSavedButtons();
+
+    filterResources();
+
+</script>
+
+</body>
+</html>
