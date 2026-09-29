@@ -5,13 +5,10 @@ WORKDIR /app
 COPY . .
 
 RUN chmod +x gradlew
+RUN ./gradlew clean bootJar -x test --no-daemon
 
-RUN ./gradlew clean bootJar -x test --no-daemon --stacktrace
-
-RUN echo "===== BUILD LIBS =====" && ls -la build/libs
-
-RUN cp build/libs/careerlearning-0.0.1-SNAPSHOT.jar /app/app.jar
+RUN JAR=$(find build/libs -name "*.jar" ! -name "*plain.jar" | head -n 1) && cp "$JAR" /app/app.jar
 
 EXPOSE 10000
 
-CMD ["java", "-jar", "/app/app.jar"]
+CMD ["sh", "-c", "java -jar /app/app.jar --server.port=${PORT:-10000}"]
