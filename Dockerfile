@@ -6,7 +6,9 @@ COPY . .
 
 RUN chmod +x gradlew
 
-RUN ./gradlew clean bootJar -x test
+RUN ./gradlew clean bootJar -x test --no-daemon --stacktrace
+
+RUN echo "===== BUILD LIBS =====" && ls -la build/libs
 
 RUN cp build/libs/careerlearning-0.0.1-SNAPSHOT.jar /app/app.jar
 
